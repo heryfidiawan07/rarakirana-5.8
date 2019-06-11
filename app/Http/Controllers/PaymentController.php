@@ -23,7 +23,7 @@ class PaymentController extends Controller
     public function payment(Request $request, $token){
         $this->validate($request, [
             'pengirim' => 'required|min:3',
-            'image_resi' => 'mimes:jpeg,bmp,png',
+            'image_resi' => 'mimes:jpeg,jpg,bmp,png',
         ]);
         $validate = Order::where('slug_token', $token)->first();
         $order    = Order::where('private_token', $validate->private_token)->first();
@@ -58,6 +58,7 @@ class PaymentController extends Controller
     public function paymentEdit(Request $request, $token){
         $this->validate($request, [
             'pengirim' => 'required|min:3',
+            'image_resi' => 'mimes:jpeg,jpg,bmp,png',
         ]);
         $validate = Order::where('slug_token', $token)->first();
         $order    = Order::where('private_token', $validate->private_token)->first();
