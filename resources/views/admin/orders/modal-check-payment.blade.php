@@ -11,12 +11,14 @@
             </div>
             <div class="modal-body">
                 <div class="text-center">
-                    <img src="/payment/{{$order->payment->image_resi}}" style="max-width: 100%;">
+                    <img src="/payment/{{$order->payment->image_resi}}">
                     <h3>Pengirim : {{$order->payment->pengirim}}</h3>
-                    <div class="alert alert-info">{{$order->payment->keterangan}}</div>
+                    @if ($order->payment->status == 2)
+                        <div class="alert alert-info">{{$order->payment->keterangan}}</div>
+                    @endif
                 </div>
                 <hr>
-                <a href="/admin/payment/{{$order->slug_token}}/accept" class="btn btn-success btn-sm">Approve !</a>
+                <a class="btn btn-success btn-sm" @if($order->status == 3) disabled @else href="/admin/payment/{{$order->slug_token}}/accept" @endif>Approve !</a>
                 <hr>
                 <div class="alert alert-warning">
                     <form method="POST" action="/admin/payment/{{$order->slug_token}}/reject">
@@ -26,11 +28,11 @@
                             <textarea rows="3" class="form-control" name="keterangan" required></textarea>
                         </div>
                         <div class="form-group">
-                            <input type="submit" value="Reject" class="btn btn-warning btn-sm">
+                            <input type="submit" value="Reject" class="btn btn-warning btn-sm" @if($order->status == 3) disabled @endif>
                         </div>
                     </form>
                 </div>
-                <a href="/admin/payment/{{$order->slug_token}}/delete" class="btn btn-danger btn-sm">Delete !</a>
+                <a class="btn btn-danger btn-sm" @if($order->status == 3) disabled @else href="/admin/payment/{{$order->slug_token}}/delete" @endif>Delete !</a>
                 @if ($order->status == 2)
                     <a href="/admin/order/{{$order->slug_token}}/arrived" class="btn btn-success btn-sm">Arrived !</a>
                 @endif
