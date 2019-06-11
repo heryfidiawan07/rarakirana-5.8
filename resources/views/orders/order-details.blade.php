@@ -105,11 +105,11 @@
                                 <h5>STATUS</h5>
                                 @if ($order->payment)
                                     <div class="alert alert-warning">
-                                        <p class="success">
+                                        <p class="text-success">
                                             {{$userPayStatus[$order->payment->status]}}
                                         </p>
                                         @if ($order->payment->status == 1)
-                                            <p @if ($order->status == 3) class="success" @endif>
+                                            <p @if ($order->status == 3) class="text-success" @endif>
                                                 {{$userOrderStatus[$order->status]}}
                                             </p>
                                         @endif

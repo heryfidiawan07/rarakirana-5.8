@@ -13,16 +13,13 @@
                 <form method="POST" action="/order/{{Auth::user()->slug}}/arrived/{{$order->slug_token}}/create">
                     @csrf
                     @foreach ($details as $detail)
-                        @foreach ($products->where('id',$detail->product_id) as $product)
-                            <div class="form-group">
-                                <label>Review Product</label>
-                                <div class="text-center">
-                                    <img src="/products/thumb/{{$product->pictures[0]->img}}" height="50" class="rounded mx-auto d-block">
-                                    {{$product->slug}}
-                                </div>
-                                <textarea class="form-control" rows="3" name="review[]">{{old('review')}}</textarea>
+                        <div class="form-group media">
+                            <div class="product-frame">
+                                <img src="/products/thumb/{{$detail->product->pictures[0]->img}}" height="150" class="rounded mx-auto d-block product-img-index">
+                                {{$detail->product->title}}
+                                <textarea class="form-control" rows="3" name="review[]" placeholder="Review product">{{old('review')}}</textarea>
                             </div>
-                        @endforeach
+                        </div>
                     @endforeach
                     <div class="form-group">
                         <input type="submit" value="Save" class="btn btn-primary btn-sm">
