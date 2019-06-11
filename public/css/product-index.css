@@ -1,0 +1,22 @@
+.product-frame {
+    /*background-color: #a18cd1;*/
+    border: 1px solid #a18cd1;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 50px;
+    margin-top: 10%;
+    /*perspective: 100px;
+    perspective-origin: 60% 10%;*/
+}
+.product-img-index {
+    max-width: 100%;
+    margin-top: -20%;
+    vertical-align: bottom;
+    /*transform: translateZ(-15px) rotateX(10deg);*/
+    /*-ms-transform: rotate(-5deg);
+    -webkit-transform: rotate(-5deg);
+    transform: rotate(-5deg);*/
+    /*-ms-transform: skewY(-5deg);
+    -webkit-transform: skewY(-5deg);
+    transform: skewY(-5deg);*/
+}

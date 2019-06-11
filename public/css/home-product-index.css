@@ -1,0 +1,17 @@
+/*Products Scroll*/
+.products-scroll-frame {
+    overflow-x: scroll;
+    white-space: nowrap;
+}
+.products-scroll {
+    display: inline-block;
+    padding: 5px 5px 5px 5px;
+    width: 250px;
+}
+.product-frame {
+    margin-bottom: 10px !important;
+}
+.product-title .link-product-title {
+    white-space: pre-line;
+    font-size: 0.8em;
+}

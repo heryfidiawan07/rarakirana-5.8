@@ -1,0 +1,22 @@
+.preview-images-zone {
+    border: 1px solid #ddd;
+    overflow: auto;
+    white-space: nowrap;
+    min-height: 180px;
+}
+.preview-images-zone > .preview-image {
+    display: inline-block;
+    padding: 10px 10px;
+}
+.preview-images-zone > .preview-image > .image-zone > img {
+    width: 150px;
+    height: 100px;
+}
+.preview-images-zone > .preview-image > .image-cancel {
+    margin-top: 10px;
+}
+.preview-image:hover > .image-zone {
+    cursor: move;
+    opacity: .5;
+}
+

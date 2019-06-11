@@ -1,0 +1,18 @@
+#input-name {
+    display: none;
+}
+#btn-user-name-save {
+    display: none;
+}
+#btn-user-name-cancel {
+    display: none;
+}
+#btn-user-desc-save {
+    display: none;
+}
+#btn-user-desc-cancel {
+    display: none;
+}
+#textarea-user-description {
+    display: none;
+}

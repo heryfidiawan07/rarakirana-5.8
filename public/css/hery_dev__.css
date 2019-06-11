@@ -1,0 +1,150 @@
+/*Header*/
+#app {
+    background-color: white;
+    font-family: Nunito, Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+#app-name a {
+    font-family: "Tangerine";
+    font-weight: bold;
+    font-size: 3em;
+    font-style: italic;
+    color: #a18cd1;
+}
+/*============================= Navigation*/
+.fa-bars {
+    color: white;
+}
+.navbar {
+    position: sticky;
+}
+.content {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    min-height: 402px;
+    /*background-color: red;*/
+}
+/*============================ End Navigation*/
+/*============================ End Header*/
+
+.parent-color {
+    color: #a18cd1;
+}
+.bg-parent-color {
+    background-color: #a18cd1;
+}
+.btn {
+    /*color: white;*/
+    font-weight: bold;
+}
+.btn-xs {
+    padding: 1px 10px;
+    border-radius: 5px;
+}
+.btn-warning {
+    color: grey;
+}
+.btn i {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.btn-info {
+    color: white;
+}
+.bold {
+    font-weight: bold;
+}
+.italic {
+    font-style: italic;
+}
+.text-link:hover {
+    text-decoration: none;
+}
+.text-orange {
+    color: orange;
+}
+img {
+    max-width: 100%;
+}
+iframe {
+    max-width: 100%;
+}
+.sticky {
+    color: green !important;
+}
+.img-circle-xs {
+    height: 25px;
+    width: 30px;
+    border-radius: 50%;
+}
+.cart-success {
+    position: fixed;
+    left: 30vw;
+    top: 50%;
+}
+.text-size-10 {
+    font-size: 1em;
+}
+.text-size-15 {
+    font-size: 1.5em;
+}
+.text-size-20 {
+    font-size: 2em;
+}
+.text-size-25 {
+    font-size: 2.5em;
+}
+.text-size-30 {
+    font-size: 3em;
+}
+.block {
+    display: block;
+}
+.inline-block {
+    display: inline-block;
+}
+.width-48 {
+    width: 48%;
+}
+.hover-bold:hover {
+    font-weight: bold;
+}
+.hover-unbold:hover {
+    font-weight: unset;
+}
+.bg-silver {
+    background-color: silver;
+}
+.bg-gainsboro {
+    background-color: gainsboro;
+}
+.text-unbold {
+    font-weight: unset !important;
+}
+.frame-text-3em {
+    height: 3em;
+    overflow: hidden;
+}
+.btn-search {
+    border: 0.5px solid silver !important;
+}
+.min-width-100px {
+    min-width: 100px;
+}
+.tags {
+    padding: 1px 10px;
+    background-color: #a18cd1;
+    display: block;
+    color: white;
+    margin-bottom: 1px;
+    text-align: center;
+}
+.tags:hover {
+    background-color: blue;
+    color: white;
+    text-decoration: none;
+}
+.text-sale {
+    color: red;
+    font-weight: bold;
+    font-style: italic;
+}

@@ -1,0 +1,182 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use File;
+use Auth;
+use Image;
+use Purifier;
+use App\User;
+use App\Order;
+use App\Review;
+use App\Account;
+use App\Product;
+use App\OrderDetail;
+use Illuminate\Http\Request;
+
+class UserController extends Controller
+{   
+
+    public function __construct(){
+        return $this->middleware('auth', ['except' => 'slug']);
+    }
+    
+    public function slug($slug){
+        $user = User::whereSlug($slug)->first();
+        if ($user) {
+            $threads = $user->threads()->paginate(10);
+            return view('users.index', compact('user','threads'));
+        }else{
+            return redirect('/');
+        }
+    }
+    
+    public function orderDetails($slug, $token){
+        $user = User::whereSlug($slug)->first();
+        if ($user) {
+            $validate = Order::where('slug_token', $token)->first();
+            if ($validate) {
+                $order    = Order::where('private_token', $validate->private_token)->first();
+                if ($order) {
+                    if (Auth::user()->id === $order->user_id) {
+                        $details         = $order->details;
+                        $accounts        = Account::all();
+                        $status          = new Order;
+                        $userOrderStatus = $status->userOrderStatus();
+                        $userPayStatus   = $status->userPayStatus();
+                        return view('orders.order-details', compact('order','accounts','userOrderStatus','userPayStatus','details'));
+                    }else {
+                        return view('errors.404');
+                    }
+                }else {
+                    return view('errors.404');
+                }
+            }else {
+                return view('errors.404');
+            }
+        }else {
+            return view('errors.404');
+        }
+    }
+
+    public function arrivedOrder(Request $request, $slug, $token){
+        $user = User::whereSlug($slug)->first();
+        if ($user) {
+            $validate = Order::where('slug_token', $token)->first();
+            $order    = Order::where('private_token', $validate->private_token)->first();
+            if ($order) {
+                if (Auth::user()->id === $order->user_id) {
+                    $status          = new Order;
+                    $userOrderStatus = $status->userOrderStatus();
+                    $userPayStatus   = $status->userPayStatus();
+                    $products        = Product::all();
+                    $details         = OrderDetail::where('order_id',$order->id)->get();
+
+                    $order->update([
+                        'status' => 3,
+                    ]);
+                    $reviews = $request->review;
+                    $i = 0;
+                    foreach ($details as $detail) {
+                        $review = new Review;
+                        $review->review = Purifier::clean($reviews[$i]);
+                        $review->user_id = Auth::user()->id;
+                        $review->order_id = $order->id;
+                        $review->product_id = $detail->product_id;
+                        $review->save();
+                        $i++;
+                    }
+                    return redirect("/order/{$user->slug}/details/{$order->slug_token}");
+                }else {
+                    return view('errors.404');
+                }
+            }else {
+                return view('errors.404');
+            }
+        }else {
+            return view('errors.404');
+        }
+    }
+    
+    public function uploadImg(Request $request, $slug){
+        $data = request()->validate([
+            'img' => 'required|mimes:jpeg,jpg,bmp,png',
+        ]);
+        $user = User::whereSlug($slug)->first();
+        $img = $request->file('img');
+        if ($user) {
+            if (!empty($img)) {
+                $extends = $img->getClientOriginalExtension();
+                $imgName = $user->slug.'-'.date("YmdHis").'.'.$extends;
+                $path    = $img->getRealPath();
+                
+                if ($user->img != 'profile.jpg') {
+                    $oldImg   = public_path("users/".$user->img);
+                    if (file_exists($oldImg)) {
+                        File::delete($oldImg);
+                    }
+                }
+                $user->update([
+                    'img' => $imgName,
+                ]);
+                
+                $img     = Image::make($path)->resize(null, 630, function ($constraint) {
+                                $constraint->aspectRatio();
+                            });
+                $img->save(public_path("users/". $imgName));
+            }
+            return back();
+        }
+        return view('errors.404');
+    }
+
+    public function createDesc(Request $request, $slug){
+        $data = request()->validate([
+            'description' => 'required',
+        ]);
+        $user = User::whereSlug($slug)->first();
+        if ($user) {
+            $user->biodata()->create([
+                'description' => Purifier::clean($request->description),
+            ]);
+            return back();
+        }
+        return view('errors.404');
+    }
+    
+    public function updateDesc(Request $request, $slug){
+        $data = request()->validate([
+            'description' => 'required',
+        ]);
+        $user = User::whereSlug($slug)->first();
+        if ($user) {
+            $user->biodata()->update([
+                'description' => Purifier::clean($request->description),
+            ]);
+            return back();
+        }
+        return view('errors.404');
+    }
+    
+    public function updateNme(Request $request, $slug){
+        $data = request()->validate([
+            'name' => 'required|min:3|max:50',
+        ]);
+        $user = User::whereSlug($slug)->first();
+        if ($user) {
+            $cekSlug = User::where('slug',str_slug($request->name))->first();
+            if ($cekSlug) {
+                $slug = str_slug($request->name).date('His');
+            }else {
+                $slug = str_slug($request->name);
+            }
+            $user->update([
+                'name' => $request->name,
+                'slug' => $slug,
+            ]);
+            return redirect("/user/{$user->slug}");
+        }
+        return view('errors.404');
+    }
+        
+}

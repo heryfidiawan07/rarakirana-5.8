@@ -1,0 +1,33 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Follow;
+use App\Share;
+use Illuminate\Http\Request;
+
+class AdminController extends Controller
+{
+    public function __construct(){
+        return $this->middleware('admin');
+    }
+
+    public function dashboard(){
+        return view('admin.dashboard');
+    }
+    
+    public function socialMedia(){
+        $adminFollow      = new Follow;
+        $adminFollowClass = $adminFollow->roles();
+
+        $adminShare      = new Share;
+        $adminShareClass = $adminShare->shares();
+        $adminShareUrls  = $adminShare->urls();
+
+        $follows = Follow::all();
+        $shares  = Share::all();
+        return view('admin.social-media.index', compact('follows','shares','adminFollowClass','adminShareClass','adminShareUrls'));
+    }
+    
+    
+}

@@ -1,0 +1,25 @@
+#frame-img-product-show {
+    background-color: lightgrey;
+    /*padding: 10px 10px;*/
+    height: 40vh;
+    margin-bottom: 20px;
+}
+.carousel-product-img {
+    height: 100%;
+}
+.carousel-indicators-product-img {
+    
+}
+.carousel-inner-product-img {
+    
+}
+.carousel-item-product-img {   
+
+}
+.product-img {
+    height: 40vh;
+    max-height: 100%;
+}
+.indicator-img {
+
+}
