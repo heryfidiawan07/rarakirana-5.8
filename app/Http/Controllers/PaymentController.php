@@ -13,13 +13,7 @@ class PaymentController extends Controller
     public function __construct(){
         return $this->middleware('auth');
     }
-    /**
-        use PDF;
-        
-        $datas = Sembako::get();
-        $pdf = PDF::loadView('sembako', compact('datas'));
-        return $pdf->download('laporan_sembako_'.date('Y-m-d_H-i-s').'.pdf');
-    **/
+    
     public function payment(Request $request, $token){
         $this->validate($request, [
             'pengirim' => 'required|min:3',

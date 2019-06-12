@@ -35,6 +35,7 @@
                     @foreach ($threads as $thread)
                         @include('threads.content-index')
                     @endforeach
+                    <div class="col-md-12">{{$threads->links()}}</div>
                 </div>
             </div>
             <div class="col-md-4">

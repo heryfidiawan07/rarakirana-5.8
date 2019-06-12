@@ -15,6 +15,7 @@
                     <h3>Pengirim : {{$order->payment->pengirim}}</h3>
                     @if ($order->payment->status == 2)
                         <div class="alert alert-info">{{$order->payment->keterangan}}</div>
+                        <div class="alert alert-warning">Menunggu revisi dari pembeli.</div>
                     @endif
                 </div>
                 <hr>

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use File;
 use Auth;
 use App\User;
 use App\Order;
+use App\Address;
 use Illuminate\Http\Request;
 
 class AdminOrder extends Controller
@@ -115,6 +117,21 @@ class AdminOrder extends Controller
         }else {
             return view('errors.404');
         }
+    }
+
+    public function downloadAddress($token){
+        $validate = Order::where('slug_token', $token)->first();
+        $order    = Order::where('private_token', $validate->private_token)->first();
+        $pdf      = PDF::loadView('admin.orders.download-address', compact('order'));
+        return $pdf->download("{$order->no_order}".date('Y-m-d_H-i-s').'.pdf');
+    }
+
+    public function streamAddress($token){
+        $validate = Order::where('slug_token', $token)->first();
+        $order    = Order::where('private_token', $validate->private_token)->first();
+        $addAdmin = Address::where('origin',1)->first();
+        $pdf      = PDF::loadView('admin.orders.stream-address', compact('order','addAdmin'));
+        return $pdf->stream();
     }
 
 }

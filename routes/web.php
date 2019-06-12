@@ -93,6 +93,9 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/order/{token}/arrived', 'AdminOrder@arrived');
     // ==== Order manualUpdate
     Route::post('/admin/order/{token}/manual-update', 'AdminOrder@manualUpdate');
+    // Admin Download & Print Address
+    Route::get('/admin/order/{token}/download', 'AdminOrder@downloadAddress');
+    Route::get('/admin/order/{token}/stream', 'AdminOrder@streamAddress');
     // Inbox
     Route::get('/admin/inbox', 'InboxController@index');
     Route::get('/admin/inbox/{id}/delete', 'InboxController@delete');
@@ -158,7 +161,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/user/{slug}/upload/img', 'UserController@uploadImg');
     Route::post('/user/{slug}/create/description', 'UserController@createDesc');
     Route::post('/user/{slug}/update/description', 'UserController@updateDesc');
-    Route::post('/user/{slug}/edit/name', 'UserController@updateNme');
+    Route::post('/user/{slug}/edit/name', 'UserController@updateName');
 });
 //Home
 Route::get('/', 'HomeController@index');

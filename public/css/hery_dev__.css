@@ -10,6 +10,13 @@
     font-style: italic;
     color: #a18cd1;
 }
+.app-name {
+    font-family: "Tangerine";
+    font-weight: bold;
+    font-size: 3em;
+    font-style: italic;
+    color: #a18cd1;
+}
 /*============================= Navigation*/
 .fa-bars {
     color: white;

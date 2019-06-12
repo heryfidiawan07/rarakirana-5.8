@@ -158,7 +158,7 @@ class UserController extends Controller
         return view('errors.404');
     }
     
-    public function updateNme(Request $request, $slug){
+    public function updateName(Request $request, $slug){
         $data = request()->validate([
             'name' => 'required|min:3|max:50',
         ]);
