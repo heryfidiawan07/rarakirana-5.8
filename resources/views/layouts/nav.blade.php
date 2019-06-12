@@ -7,7 +7,7 @@
                 <p id="app-name">{{$app->title}}</p>
             @endif
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
             <div class="input-group input-group-sm">
                 <input type="text" class="form-control" placeholder="Search..." name="search">
                 <div class="input-group-append">
@@ -17,7 +17,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-7">
+        <div class="col-md-8">
             @if ($follows->count())
                 <p class="float-right mt-2">
                     <b>Follow: </b>

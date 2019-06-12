@@ -16,6 +16,7 @@
 }
 .navbar {
     position: sticky;
+    margin-top: 15px;
 }
 .content {
     padding-top: 50px;
@@ -34,7 +35,7 @@
 }
 .btn {
     /*color: white;*/
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
 .btn-xs {
     padding: 1px 10px;
