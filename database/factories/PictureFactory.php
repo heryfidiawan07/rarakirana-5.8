@@ -19,7 +19,7 @@ $factory->define(Picture::class, function (Faker $faker) {
     $product_id = App\Product::pluck('id');
     return [
         'product_id' => $product_id->random(),
-        'img' => 'band-merek-jjvjbjbvv-cuci-gudang-201906080229370.jpeg',
+        'img' => 'no-image.png',
         'main' => 0,
     ];
 });

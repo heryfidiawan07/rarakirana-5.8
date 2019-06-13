@@ -17,7 +17,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Post::class, function (Faker $faker) {
     $user_id = App\User::pluck('id');
-    $menu_id = App\Menu::pluck('id');
+    $menu_id = App\Menu::where('id',1)->pluck('id');//Pilih id dengan menu post
     return [
         'user_id' => $user_id->random(),
         'menu_id' => $menu_id->random(),

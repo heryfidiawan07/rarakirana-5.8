@@ -16,19 +16,21 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(Product::class, function (Faker $faker) {
-    $user_id = App\User::pluck('id');
-    $etalase_id = App\Etalase::pluck('id');
+    $user_id     = App\User::where('role',1)->first();
+    $etalase_id  = App\Etalase::pluck('id');
+    $first_price = $faker->randomNumber(5);
+    $discount    = $faker->randomNumber(3);
     return [
-        'user_id' => $user_id->random(),
+        'user_id' => $user_id->id,
         'etalase_id' => $etalase_id->random(),
         'title' => $faker->sentence(10),
         'slug' => str_slug($faker->sentence(10)),
-        'first_price' => $faker->randomNumber(5),
-        'discount' => $faker->randomNumber(3),
-        'price' => $faker->randomNumber(3),
+        'first_price' => $first_price,
+        'discount' => $discount,
+        'price' => $first_price-$discount,
         'weight' => $faker->randomNumber(3),
-        'description' => $faker->sentence(150),
-        'type' => 1,
+        'description' => $faker->sentence(100),
+        'type' => 0,
         'comment' => 1,
         'status' => 1,
         'sticky' => 0,

@@ -17,11 +17,11 @@
                         <input name="name" type="text" class="form-control" id="name" placeholder="Name" value="{{old('name')}}" required>
                     </div>
                     <div class="form-group">
-                        <label for="title">Title <small class="success"><i>search engine optimization</i></small></label>
+                        <label for="title">Title <small class="text-success"><i>search engine optimization</i></small></label>
                         <input name="title" type="text" class="form-control" id="title" placeholder="Title" value="{{old('title')}}">
                     </div>
                     <div class="form-group">
-                        <label for="description">Description <small class="success"><i>search engine optimization</i></small></label>
+                        <label for="description">Description <small class="text-success"><i>search engine optimization</i></small></label>
                         <textarea name="description" id="description" class="form-control" rows="3" placeholder="Description">{{old('description')}}</textarea>
                     </div>
                     <div class="form-group">
@@ -29,7 +29,7 @@
                         <input name="icon" type="text" class="form-control" id="icon" placeholder="ex: fas fas-envelope" value="{{old('icon')}}">
                     </div>
                     <div class="form-group">
-                        <label for="menu_id">Menu Parent</label>
+                        <label for="menu_id">Menu Parent <span class="text-danger">*</span></label>
                         <select class="custom-select" name="menu_id" id="menu-parent">
                             <option value="0" class="from-control">Select !</option>
                             @foreach ($menus as $menu)
