@@ -215,7 +215,7 @@ class ProductController extends Controller
     public function etalase($slug){
         $etalase = Etalase::whereSlug($slug)->first();
         if ($etalase->status==1) {
-            $products = $etalase->products()->orderBy('sticky','DESC')->latest()->paginate(10);
+            $products = $etalase->products()->orderBy('sticky','DESC')->latest()->paginate(9);
             $etalases = Etalase::where('menu_id',$etalase->menu->id)->where('parent_id',0)->get();
             return view('products.etalase', compact('products','etalases','etalase'));
         }

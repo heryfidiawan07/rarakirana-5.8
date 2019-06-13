@@ -1,4 +1,4 @@
-<a class="btn btn-primary btn-sm" href="" data-toggle="modal" data-target=".create-category"><i class="fas fa-plus"></i> Add Category</a>
+<a class="btn btn-primary btn-sm" @if (!$mainmenus->where('setting',2)->count()) disabled @else href="" data-toggle="modal" data-target=".create-category" @endif><i class="fas fa-plus"></i> Add Category</a>
 
 <div class="modal fade create-category" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

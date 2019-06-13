@@ -16,6 +16,9 @@
             <div class="card">
                 <div class="card-header">
                     @include('admin.categories.modal-create')
+                    @if (!$mainmenus->where('setting',2)->count())
+                        <div class="alert alert-danger mt-1">Please setup menu for forum !</div>
+                    @endif
                 </div>
 				@if($menus->count())
 					<div class="table-responsive">
@@ -33,7 +36,7 @@
                                     </td>
                                     <td>{{$menu->forums->count()}}</td>
                                     <td>{{$menu->title}}</td>
-                                    <td>{{$menu->description}}</td>
+                                    <td>{{strip_tags($menu->description)}}</td>
                                     <td><small>{{ date('d F, Y', strtotime($menu->created_at))}}</small></td>
                                     <td><small><i class="fas fa-user"></i> {{$menu->user->name}}</small></td>
                                     <td>
@@ -51,7 +54,7 @@
                                         </td>
                                         <td>{{$parent->forums->count()}}</td>
                                         <td>{{$parent->title}}</td>
-                                        <td>{{$parent->description}}</td>
+                                        <td>{{strip_tags($parent->description)}}</td>
                                         <td><small>{{ date('d F, Y', strtotime($parent->created_at))}}</small></td>
                                         <td><small><i class="fas fa-user"></i> {{$parent->user->name}}</small></td>
                                         <td>@include('admin.categories.modal-delete')</td>
@@ -67,7 +70,7 @@
                                                     </td>
                                                     <td>{{$child->forums->count()}}</td>
                                                     <td>{{$child->title}}</td>
-                                                    <td>{{$child->description}}</td>
+                                                    <td>{{strip_tags($child->description)}}</td>
                                                     <td><small>{{ date('d F, Y', strtotime($child->created_at))}}</small></td>
                                                     <td><small><i class="fas fa-user"></i> {{$child->user->name}}</small></td>
                                                     <td>@include('admin.categories.child-modal-delete')</td>

@@ -31,7 +31,7 @@
                         <input name="iconEdit" type="text" class="form-control" id="icon" placeholder="ex: fas fas-envelope" value="{{$child->icon}}">
                     </div>
                     <div class="form-group">
-                        <label for="menu_edit">Menu Parent</label>
+                        <label for="menu_edit">Menu Parent <span class="text-danger">*</span></label>
                         <select class="custom-select" name="menu_edit">
                             <option value="{{$child->menu->id}}">{{$child->menu->name}}</option>
                             @foreach ($menus as $menu)
