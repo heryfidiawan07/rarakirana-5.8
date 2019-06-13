@@ -20,6 +20,9 @@
                 <li class="nav-item">
                     <a class="nav-link @if ($order->status < 2) disabled @endif" id="delivery-tab" data-toggle="tab" href="#delivery" role="tab" aria-controls="delivery" aria-selected="false">Delivery</a>
                 </li>
+                <li>
+                    <a class="nav-link" href="/user/{{$order->user->slug}}/invoice/{{$order->slug_token}}" target="_blank">Print / Download Invoice</a>
+                </li>
             </ul>
         </div>
 

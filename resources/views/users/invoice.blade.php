@@ -10,54 +10,39 @@
     </head>
     <body>
 
-        <h3 class="text-success bold">{{$app ? $app->name : 'Rarakirana'}}</h3>
+        <h2 class="text-center text-success"><b>{{$app ? $app->name : 'Rarakirana'}}</b></h2>
         <small>
-            <table class="table">
-                <tr>
-                    <th colspan="2">{{$order->no_order}}</th>
-                    <th><i><b>{{strtoupper($order->kurir)}}</b> {{$order->services}}</i></th>
+            <p>Tanggal: {{ date('d F, Y', strtotime($order->created_at))}}</p>
+            <table class="table table-sm table-bordered">
+                <tr class="table-active">
+                    <td colspan="2"><b>Ringkasan Pembayaran</b></td>
                 </tr>
                 <tr>
-                    <th colspan="2">Kepada</th>
-                    <th class="text-success">Pengirim</th>
+                    <td>
+                        Total Belanja
+                        @if ($order->payment)
+                            {{$order->payment->no_invoice}}
+                        @else
+                            {{$order->no_order}}
+                        @endif
+                    </td>
+                    <td><b>Rp {{number_format($order->total_price)}}</b></td>
                 </tr>
-                <tr>
-                    <td>Nama</td>
-                    <td>{{$order->address->penerima}}</td>
-                    <td class="text-success">{{$app ? $app->name : 'Rarakirana'}}</td>
-                </tr>
-                <tr>
-                    <td>ALamat</td>
-                    <td>{{strip_tags($order->address->address)}} {{$order->address->kecamatan}} {{$order->address->kabupaten}} {{$order->address->provinsi}} {{$order->address->postal_code}} - {{$order->address->phone}} </td>
-                    <td class="text-success">{{strip_tags($addAdmin->address)}} {{$addAdmin->kecamatan}} {{$addAdmin->kabupaten}} {{$addAdmin->provinsi}} {{$addAdmin->postal_code}} - {{$addAdmin->phone}} </td>
-                </tr>
-            </table>
-        </small>
-        <small>
-            <table class="table table-bordered">
-                <tr>
-                    <th>Nama Barang</th>
-                    <th>Qty</th>
-                </tr>
-                @foreach ($order->details as $detail)
-                    <tr>
-                        <td>{{str_limit($detail->product->title, 20)}}</td>
-                        <td>{{$detail->qty}}</td>
-                    </tr>
-                @endforeach
-                <tr>
-                    <td colspan="2">Catatan : {{$order->note}}</td>
+                <tr class="table-secondary">
+                    <td>Subtotal Belanja</td>
+                    <td><b>Rp {{number_format($order->total_price)}}</b></td>
                 </tr>
             </table>
         </small>
 
-        <hr>
-        
-        <h3 class="text-success bold">{{$app ? $app->name : 'Rarakirana'}}</h3>
+        <hr style="border-top: dotted 1px; margin-top: 50px;" />
+        <hr style="border-top: dotted 1px; margin-bottom: 50px;" />
+
+        <h5 class="text-success">{{$app ? $app->name : 'Rarakirana'}}</h5>
         <small>
-            <table class="table">
+            <table class="table table-sm">
                 <tr>
-                    <th colspan="2">{{$order->no_order}}</th>
+                    <th colspan="2">{{$order->payment->no_invoice}}</th>
                     <th><i><b>{{strtoupper($order->kurir)}}</b> {{$order->services}}</i></th>
                 </tr>
                 <tr>
@@ -76,20 +61,43 @@
                 </tr>
             </table>
         </small>
+        
+        <small>Tanggal: {{ date('d F, Y', strtotime($order->payment->created_at))}}</small>
         <small>
-            <table class="table table-bordered">
-                <tr>
+            <table class="table table-sm table-bordered">
+                <tr class="table-success">
                     <th>Nama Barang</th>
                     <th>Qty</th>
+                    <th>Berat</th>
+                    <th>Harga Barang</th>
+                    <th>Subtotal</th>
                 </tr>
                 @foreach ($order->details as $detail)
                     <tr>
                         <td>{{str_limit($detail->product->title, 20)}}</td>
-                        <td>{{$detail->qty}}</td>
+                        <td>{{number_format($detail->qty)}}</td>
+                        <td>{{number_format($detail->product->weight)}} gr</td>
+                        <td>{{number_format($detail->product->price)}}</td>
+                        <td>{{number_format($subtotal = $detail->product->price*$detail->qty)}}</td>
                     </tr>
                 @endforeach
                 <tr>
-                    <td colspan="2">Catatan : {{$order->note}}</td>
+                    <td colspan="5">Catatan : {{$order->note}}</td>
+                </tr>
+                <tr class="table-active">
+                    <td colspan="1"></td>
+                    <td colspan="3"><b>Subtotal Harga Produk</b></td>
+                    <td><b>Rp {{number_format($order->total_price-$order->ongkir)}}</b></td>
+                </tr>
+                <tr>
+                    <td colspan="1"></td>
+                    <td colspan="3"><i><b>{{strtoupper($order->kurir)}}</b> {{$order->services}}</i></td>
+                    <td>Rp {{number_format($order->ongkir)}}</td>
+                </tr>
+                <tr class="table-secondary">
+                    <td colspan="1"></td>
+                    <td colspan="3"><b>Total Pembayaran</b></td>
+                    <td><b>Rp {{number_format($order->total_price)}}</b></td>
                 </tr>
             </table>
         </small>

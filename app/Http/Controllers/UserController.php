@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use File;
 use Auth;
 use Image;
@@ -10,6 +11,7 @@ use App\User;
 use App\Order;
 use App\Review;
 use App\Account;
+use App\Address;
 use App\Product;
 use App\OrderDetail;
 use Illuminate\Http\Request;
@@ -178,5 +180,17 @@ class UserController extends Controller
         }
         return view('errors.404');
     }
-        
+    
+    public function streamInvoice($slug, $token){
+        $user     = User::whereSlug($slug)->first();
+        $validate = Order::where('slug_token', $token)->first();
+        $order    = Order::where('private_token', $validate->private_token)->first();
+        if ($user && $order) {
+            $addAdmin = Address::where('origin',1)->first();
+            $pdf      = PDF::loadView('users.invoice', compact('order','addAdmin'));
+            return $pdf->stream();
+        }
+        return back();
+    }
+
 }
