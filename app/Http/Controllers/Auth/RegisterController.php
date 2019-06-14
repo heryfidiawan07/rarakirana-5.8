@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
+use Illuminate\Http\Request;
+use App\Mail\Register;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Auth\Events\Registered;
+
 class RegisterController extends Controller
 {
     /*
@@ -62,6 +67,14 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
+    public function register(Request $request)
+    {           
+        $this->validator($request->all())->validate();
+        event(new Registered($user = $this->create($request->all())));
+        return $this->registered($request, $user)
+            ?: redirect('/login')->with('warning', 'Buka email anda untuk verifikasi akun !');
+    }
+    
     protected function create(array $data)
     {   
         $cekSlug = User::where('slug', str_slug($data['name']))->first();
@@ -70,7 +83,7 @@ class RegisterController extends Controller
         }else{
             $slug = str_slug($data['name']);
         }
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'slug' => $slug,
             'email' => $data['email'],
@@ -80,5 +93,23 @@ class RegisterController extends Controller
             'role' => 0,
             'status' => 0,
         ]);
+        // Send Email
+        Mail::to($user->email)->send(new Register($user));
+    }
+
+    // Email Verify
+    public function email_verify($token, $id){
+        $user = User::find($id);
+        if (!$user) {
+            return redirect('/login')->with('warning', 'How are you ?');
+        }
+        if ($user->token != $token) {
+            return redirect('/login')->with('warning', 'What are you doing ?');
+        }
+        $user->status = 1;
+        $user->save();
+
+        $this->guard()->login($user);
+        return redirect('/');
     }
 }

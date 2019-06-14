@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use File;
 use Auth;
+use App\User;
 use App\Order;
 use App\Payment;
 use Illuminate\Http\Request;
+
+use App\Mail\newOrder;
+use Illuminate\Support\Facades\Mail;
 
 class PaymentController extends Controller
 {
@@ -39,7 +43,9 @@ class PaymentController extends Controller
                 // orderStatus() ==> [ 0 => 'Baru Saja Order', 1 => 'Proses Packing', 2 => 'Delivery', 3 => 'Arrived / Barang Telah Sampai Tujuan']
                 // ===========================================
                 // payStatus()==> [0 => 'Baru Saja Transfer', 1 => 'Approved', 2 => 'Payment Rejected']
-                // Kirim email ke admin bahwa barusaja ada yg melakukan pembayaran
+                // Send Email
+                $admin = User::where('role',1)->first();
+                Mail::to($admin->email)->send(new newOrder($order));
                 return back();
             }else {
                 return view('errors.404');

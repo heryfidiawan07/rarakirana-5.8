@@ -16,6 +16,9 @@ Route::post('/add-min-qty-cart/{slug}', "CartController@minQty");
 
 Route::get('/address/get-city/by-province/{provId}', 'AddressController@searchCity');
 
+//Verify Email
+Route::get('/verify/{token}/{id}', 'Auth\RegisterController@email_verify');
+
 Auth::routes();
 
 Route::middleware(['admin'])->group(function () {
@@ -89,10 +92,9 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/admin/payment/{token}/reject', 'AdminOrder@reject');
     // ==== Admin Order Resi
     Route::post('/admin/order/{token}/resi', 'AdminOrder@resi');
-    // ==== Order Arrivied
     Route::get('/admin/order/{token}/arrived', 'AdminOrder@arrived');
-    // ==== Order manualUpdate
     Route::post('/admin/order/{token}/manual-update', 'AdminOrder@manualUpdate');
+    Route::get('/admin/order/{token}/details', 'AdminOrder@details');
     // Admin Download & Print Address
     Route::get('/admin/order/{token}/download', 'AdminOrder@downloadInvoice');
     Route::get('/admin/order/{token}/stream', 'AdminOrder@streamInvoice');

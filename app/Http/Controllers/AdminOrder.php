@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use PDF;
 use File;
 use Auth;
-use App\User;
 use App\Order;
 use App\Address;
 use Illuminate\Http\Request;
+
+use App\Mail\Accept;
+use App\Mail\Reject;
+use App\Mail\receiptNumber;
+use Illuminate\Support\Facades\Mail;
 
 class AdminOrder extends Controller
 {
@@ -35,7 +39,8 @@ class AdminOrder extends Controller
             $order->update([
                 'status' => 1,
             ]);
-            // Kirim Email ke user bahwa pesanan sedang di proses
+            // Kirim Email ke user bahwa pesanan sedang telah di setujui
+            Mail::to($order->user->email)->send(new Accept($order));
             return back();
         }else {
             return view('errors.404');
@@ -50,7 +55,8 @@ class AdminOrder extends Controller
                 'resi_kurir' => $request->resi_kurir,
                 'status' => 2,
             ]);
-            // Kirim email ke user bahwa pasanan dalam pengiriman kurir dan nomor resi
+            // Kirim email ke user bahwa pesanan dalam perjalanan oleh kurir
+            Mail::to($order->user->email)->send(new receiptNumber($order));
             return back();
         }else {
             return view('errors.404');
@@ -96,6 +102,7 @@ class AdminOrder extends Controller
                 'keterangan' => $request->keterangan,
             ]);
             // kirim email bahwa pembayaran anda di tolak dengan keterangan ....
+            Mail::to($order->user->email)->send(new Reject($order));
             return back();
         }else {
             return view('errors.404');
@@ -117,6 +124,10 @@ class AdminOrder extends Controller
         }else {
             return view('errors.404');
         }
+    }
+
+    public function details(){
+        
     }
 
     public function downloadInvoice($token){
