@@ -3,10 +3,6 @@
 @section('title'){{$thread->title}}@endsection
 @section('description'){{strip_tags(str_limit($thread->description, 145))}}@endsection
 
-@section('css')
-    <link rel="stylesheet" type="text/css" href="/css/threads/show.css">
-@endsection
-
 @section('content')
 <div class="container">
 

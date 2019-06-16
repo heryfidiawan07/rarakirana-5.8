@@ -57,7 +57,7 @@ class LoginController extends Controller
             }
             if (Auth::user()->status == 0) {
                 Auth::logout();
-                return redirect('/login')->with('warning', 'Akun belum terferifikasi, cek email anda untuk verikasi akun !');
+                return redirect('/login')->with('warning', 'Akun belum diverifikasi, buka email anda untuk verikasi akun !');
             }
             return $this->sendLoginResponse($request);
         }

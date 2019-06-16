@@ -37,10 +37,6 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/admin/post/{id}/update', 'PostController@update');
     Route::get('/admin/post/{id}/delete', 'PostController@delete');
     Route::post('/admin/post/{id}/quict-edit', 'PostController@quickEdit');
-    // Admin Post Tag
-    // Route::post('/admin/tag/ajax/store', 'TagController@storeAjax');
-    // Route::post('/admin/tag/ajax/update/{id}', 'TagController@updateAjax');
-    // Route::get('/admin/tag/ajax/delete/{id}', 'TagController@deleteAjax');
     // Admin Tag
     Route::get('/admin/tags', 'TagController@index');
     Route::post('/admin/tag/store', 'TagController@store');
@@ -152,13 +148,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/order/{slug}/details/{token}', 'UserController@orderDetails');
     // User Order Arrived
     Route::post('/order/{slug}/arrived/{token}/create', 'UserController@arrivedOrder');
-    // Product Message
-    // Route::post('/send/message/product/{prodSlug}/store' ,'MessageController@productStore');
-    // Route::post('/send/message/user/{userSlug}/store' ,'MessageController@userStore');
-    // Message Update
-    // Route::post('/message/{id}/update' ,'MessageController@update');
-    // User Delete
-    // Route::get('/message/{id}/delete' ,'MessageController@userDelete');
     // ======== User Profile
     Route::post('/user/{slug}/upload/img', 'UserController@uploadImg');
     Route::post('/user/{slug}/create/description', 'UserController@createDesc');

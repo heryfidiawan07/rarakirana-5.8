@@ -45,7 +45,6 @@ class OrderController extends Controller
             'no_order' => 'IRA-'.date("YmdHis"),
             'address_id' => $request->address_id,
             'total_price' => $cart->totalPrice+$cost[0]['costs'][$request->services]['cost'][0]['value'],
-            //Total price error jika beda kurir, karena beda struktur json
             'note' => $request->note,
             'kurir' => $request->kurir,
             'services' => $cost[0]['costs'][$request->services]['service'],

@@ -65,11 +65,11 @@
                 </div>
             @endforeach
         @endif
-        @if (Auth::user())
+        @auth
             <div class="collapse" id="reply_{{$comment->id}}">
                 <div class="alert bg-gainsboro ml-5">
                     <form method="POST" action="/comment/{{$comment->id}}/store">
-                    {{csrf_field()}}
+                        @csrf
                         <div class="form-group">
                             <textarea class="form-control" name="descriptionParent" rows="2" placeholder="Reply" required>{{old('descriptionParent')}}</textarea>
                         </div>
@@ -86,9 +86,9 @@
 <form method="POST" action="/thread/{{$thread->slug}}/comment/store">
     @auth @csrf @endif
     <div class="form-group">
-        <textarea rows="5" name="description" class="form-control" placeholder="Reply" required @if (!Auth::user()) disabled @endif>{{old('description')}}</textarea>
+        <textarea rows="5" name="description" class="form-control" placeholder="Reply" required @guest disabled @endif>{{old('description')}}</textarea>
     </div>
     <div class="form-group">
-        <button class="btn btn-primary btn-sm"><i class="fas fa-paper-plane" @if (!Auth::user()) disabled @endif></i></button>
+        <button class="btn btn-primary btn-sm" @guest disabled @endif><i class="fas fa-paper-plane"></i></button>
     </div>
 </form>

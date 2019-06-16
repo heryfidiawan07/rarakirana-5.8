@@ -56,25 +56,6 @@ class TagController extends Controller
         ]);
         return back();
     }
-
-    public function storeAjax(Request $request){
-        $tags = Tag::create([
-            'name' => $request->name,
-            'slug' => str_slug($request->name),
-            'user_id' => Auth::user()->id,
-        ]);
-        return response($tags);
-    }
-
-    public function updateAjax(Request $request, $id){
-        $tag = Tag::find($id);
-        $tag->update([
-            'name' => $request->nameEdit,
-            'slug' => str_slug($request->nameEdit),
-            'user_id' => Auth::user()->id,
-        ]);
-        return response($tag);
-    }
     
     public function deleteAjax($id){
         $tag = Tag::find($id);
