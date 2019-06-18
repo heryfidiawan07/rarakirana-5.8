@@ -2,7 +2,11 @@
 //Socialite
 Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
 Route::get('/callback/{provider}', 'SocialController@callback');
-
+//Search
+Route::get('/search', 'GlobalController@search');
+Route::get('/search/post/{key}', 'GlobalController@searchPosts');
+Route::get('/search/product/{key}', 'GlobalController@searchProducts');
+Route::get('/search/thread/{key}', 'GlobalController@searchThreads');
 //======= Product Cart / CartController
 Route::get('/product/carts', "CartController@carts");
 Route::get('/add-to-cart/{slug}', "CartController@addToCart");

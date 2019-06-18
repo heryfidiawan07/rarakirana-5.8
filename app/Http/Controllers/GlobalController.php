@@ -6,6 +6,9 @@ use Purifier;
 use App\Tag;
 use App\Menu;
 use App\Inbox;
+use App\Post;
+use App\Forum;
+use App\Product;
 use Illuminate\Http\Request;
 
 class GlobalController extends Controller
@@ -62,4 +65,27 @@ class GlobalController extends Controller
         return back()->with('status', 'Pesan terkirim.');
     }
     
+    public function search(Request $request){
+        $posts    = Post::where('title','like','%'.$request->search.'%')->paginate(6);
+        $products = Product::where('title','like','%'.$request->search.'%')->paginate(5);
+        $threads  = Forum::where('title','like','%'.$request->search.'%')->paginate(6);
+        $key      = $request->search;
+        return view('search.global', compact('products','posts','threads','key'));
+    }
+
+    public function searchPosts($key){
+        $posts = Post::where('title','like','%'.$key.'%')->paginate(20);
+        return view('search.posts', compact('posts'));
+    }
+
+    public function searchProducts($key){
+        $products = Product::where('title','like','%'.$key.'%')->paginate(20);
+        return view('search.products', compact('products'));
+    }
+    
+    public function searchThreads($key){
+        $threads = Forum::where('title','like','%'.$key.'%')->paginate(20);
+        return view('search.threads', compact('threads'));
+    }
+
 }

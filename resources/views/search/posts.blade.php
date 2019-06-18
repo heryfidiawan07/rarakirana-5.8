@@ -7,15 +7,10 @@
 @endif
 
 @section('css')
-    <link rel="stylesheet" type="text/css" href="/css/home-product-index.css">
-    <link rel="stylesheet" type="text/css" href="/css/product-index.css">
     <link rel="stylesheet" type="text/css" href="/css/post-index.css">
-    <link rel="stylesheet" type="text/css" href="/css/thread-index.css">
 @endsection
 
 @section('content')
-
-@include('home.products')
 
 <div class="container">
     @if ($posts->count())
@@ -26,15 +21,7 @@
                     @include('posts.content-index')
                 </div>
             @endforeach
-        </div>
-    @endif
-
-    @if ($threads->count())
-        <h2 class="parent-color bold mt-5">Threads</h2>
-        <div class="row">
-            @foreach ($threads->where('category.status',1)->where('status',1) as $thread)
-                @include('threads.content-index')
-            @endforeach
+            {{$posts->links()}}
         </div>
     @endif
 </div>

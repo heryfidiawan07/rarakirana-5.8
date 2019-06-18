@@ -8,14 +8,16 @@
             @endif
         </div>
         <div class="col-md-4">
-            <div class="input-group input-group-sm">
-                <input type="text" class="form-control" placeholder="Search..." name="search">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary btn-search" type="button" id="button-addon2">
-                        <i class="fas fa-search"></i>
-                    </button>
+            <form action="/search" method="GET">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" placeholder="Search..." name="search" required>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary btn-search">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
         <div class="col-md-8">
             @if ($follows->count())
