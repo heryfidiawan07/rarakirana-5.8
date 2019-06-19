@@ -15,15 +15,24 @@
 
 @section('content')
 
-@include('home.products')
-
-@if ($products->count() > 5)
-    <div class="col-md-12 text-center">
-        <a class="btn btn-info btn-sm mt-2" href="/search/post/{{$key}}">View more ... </a>
-    </div>
-@endif
-
 <div class="container">
+
+    <div class="col-md-9">
+        <div class="row">
+            @if ($products->count())
+                @foreach ($products->where('etalase.status',1) as $product)
+                    @include('products.thumb-content')
+                @endforeach
+
+                @if ($products->count() > 6)
+                    <div class="col-md-12 text-center">
+                        <a class="btn btn-info btn-sm mt-2" href="/search/product/{{$key}}">View more ... </a>
+                    </div>
+                @endif
+            @endif
+        </div>
+    </div>
+
     @if ($posts->count())
         <h2 class="parent-color bold mt-3">News</h2>
         <div class="row">

@@ -15,10 +15,10 @@
                     </p>
                     <div class="text-center">
                         @if ($product->type == 0)
-                            <a class="btn-addToCart btn btn-sm bg-parent-color text-white width-48 hover-unbold" href="/add-to-cart/{{$product->slug}}">AddToCart</a>
-                            <a class="btn btn-sm bg-parent-color text-white width-48 hover-unbold" href="/buy-product/{{$product->slug}}">Buy</a>
+                            <a class="btn-addToCart btn btn-sm bg-parent-color text-white width-48 hover-bold" href="/add-to-cart/{{$product->slug}}">AddToCart</a>
+                            <a class="btn btn-sm bg-parent-color text-white width-48 hover-bold" href="/buy-product/{{$product->slug}}">Buy</a>
                         @else
-                            <a class="btn btn-sm bg-parent-color text-white width-48 hover-unbold" href="/show/product/{{$product->slug}}">Read More</a>
+                            <a class="btn btn-sm bg-parent-color text-white width-48 hover-bold" href="/show/product/{{$product->slug}}">Read More</a>
                         @endif
                     </div>
                 </div>
