@@ -16,9 +16,11 @@
                 @foreach ($posts->where('status',1) as $post)
                     @include('posts.content-index')
                 @endforeach
-                <div class="col-md-12 mt-3">
+
+                <div class="col-md-12 col-lg-12">
                     {{$posts->links()}}
                 </div>
+
                 @if ($menu->contact==1)
                     @include('parts.global-form')
                 @endif

@@ -42,7 +42,7 @@
                     <li class="nav-item">
                         <a href="/product/carts" class="nav-link text-white bold hover-unbold">
                             <i class="fas fa-shopping-cart"></i>
-                            Cart <span class="itemCart">{{Session::has('cart') ? Session::get('cart')->totalQty : '0'}}</span>
+                            Cart <span class="badge badge-secondary itemCart">{{Session::has('cart') ? Session::get('cart')->totalQty : '0'}}</span>
                         </a>
                     </li>
                 @endif
