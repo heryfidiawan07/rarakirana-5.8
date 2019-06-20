@@ -13,9 +13,20 @@
         <h2 class="text-center text-success"><b>{{$app ? $app->name : 'Rarakirana'}}</b></h2>
         <small>
             <p>Tanggal: {{ date('d F, Y', strtotime($order->created_at))}}</p>
-            <table class="table table-sm table-bordered">
+            <table class="table table-bordered">
                 <tr class="table-active">
-                    <td colspan="2"><b>Ringkasan Pembayaran</b></td>
+                    <td colspan="2">
+                        <b>Ringkasan Order</b>
+                        @if ($order->payment)
+                            @if ($order->payment->status == 1)
+                                <small class="text-success ml-3 italic">LUNAS</small>
+                            @else
+                                <small class="text-warning ml-3 italic">{{$userPayStatus[$order->payment->status]}}</small>
+                            @endif
+                        @else
+                            <small class="text-warning ml-3 italic">{{$userOrderStatus[$order->status]}}</small>
+                        @endif
+                    </td>
                 </tr>
                 <tr>
                     <td>
@@ -42,7 +53,13 @@
         <small>
             <table class="table table-sm">
                 <tr>
-                    <th colspan="2">{{$order->payment->no_invoice}}</th>
+                    <th colspan="2">
+                        @if ($order->payment)
+                            {{$order->payment->no_invoice}}
+                        @else
+                            {{$order->no_order}}
+                        @endif
+                    </th>
                     <th><i><b>{{strtoupper($order->kurir)}}</b> {{$order->services}}</i></th>
                 </tr>
                 <tr>
@@ -62,7 +79,14 @@
             </table>
         </small>
         
-        <small>Tanggal: {{ date('d F, Y', strtotime($order->payment->created_at))}}</small>
+        <small>
+            Tanggal: 
+            @if ($order->payment)
+                {{ date('d F, Y', strtotime($order->payment->created_at))}}
+            @else
+                {{ date('d F, Y', strtotime($order->created_at))}}
+            @endif
+        </small>
         <small>
             <table class="table table-sm table-bordered">
                 <tr class="table-success">

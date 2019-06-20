@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Follow;
+use App\User;
 use App\Share;
+use App\Follow;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -29,5 +30,9 @@ class AdminController extends Controller
         return view('admin.social-media.index', compact('follows','shares','adminFollowClass','adminShareClass','adminShareUrls'));
     }
     
+    public function users(){
+        $users = User::paginate(50);
+        return view('admin.users.index', compact('users'));
+    }
     
 }

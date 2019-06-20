@@ -26,6 +26,6 @@ $factory->define(User::class, function (Faker $faker) {
         'token' => str_random(50),
         'img' => 'profile.jpg',
         'role' => 0,
-        'status' => 0,
+        'status' => 1,
     ];
 });

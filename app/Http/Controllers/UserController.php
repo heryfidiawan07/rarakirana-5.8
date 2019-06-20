@@ -35,11 +35,11 @@ class UserController extends Controller
     
     public function orderDetails($slug, $token){
         $user = User::whereSlug($slug)->first();
-        if ($user) {
+        if (Auth::user()->id == $user->id) {
             $validate = Order::where('slug_token', $token)->first();
             if ($validate) {
                 $order    = Order::where('private_token', $validate->private_token)->first();
-                if ($order) {
+                if (Auth::user()->id == $order->user->id) {
                     if (Auth::user()->id === $order->user_id) {
                         $details         = $order->details;
                         $accounts        = Account::all();
@@ -63,10 +63,10 @@ class UserController extends Controller
 
     public function arrivedOrder(Request $request, $slug, $token){
         $user = User::whereSlug($slug)->first();
-        if ($user) {
+        if (Auth::user()->id == $user->id) {
             $validate = Order::where('slug_token', $token)->first();
             $order    = Order::where('private_token', $validate->private_token)->first();
-            if ($order) {
+            if (Auth::user()->id == $order->user->id) {
                 if (Auth::user()->id === $order->user_id) {
                     $status          = new Order;
                     $userOrderStatus = $status->userOrderStatus();
@@ -106,7 +106,7 @@ class UserController extends Controller
         ]);
         $user = User::whereSlug($slug)->first();
         $img = $request->file('img');
-        if ($user) {
+        if (Auth::user()->id == $user->id) {
             if (!empty($img)) {
                 $extends = $img->getClientOriginalExtension();
                 $imgName = $user->slug.'-'.date("YmdHis").'.'.$extends;
@@ -137,7 +137,7 @@ class UserController extends Controller
             'description' => 'required',
         ]);
         $user = User::whereSlug($slug)->first();
-        if ($user) {
+        if (Auth::user()->id == $user->id) {
             $user->biodata()->create([
                 'description' => Purifier::clean($request->description),
             ]);
@@ -151,7 +151,7 @@ class UserController extends Controller
             'description' => 'required',
         ]);
         $user = User::whereSlug($slug)->first();
-        if ($user) {
+        if (Auth::user()->id == $user->id) {
             $user->biodata()->update([
                 'description' => Purifier::clean($request->description),
             ]);
@@ -165,7 +165,7 @@ class UserController extends Controller
             'name' => 'required|min:3|max:50',
         ]);
         $user = User::whereSlug($slug)->first();
-        if ($user) {
+        if (Auth::user()->id == $user->id) {
             $cekSlug = User::where('slug',str_slug($request->name))->first();
             if ($cekSlug) {
                 $slug = str_slug($request->name).date('His');
@@ -185,10 +185,16 @@ class UserController extends Controller
         $user     = User::whereSlug($slug)->first();
         $validate = Order::where('slug_token', $token)->first();
         $order    = Order::where('private_token', $validate->private_token)->first();
-        if ($user && $order) {
-            $addAdmin = Address::where('origin',1)->first();
-            $pdf      = PDF::loadView('users.invoice', compact('order','addAdmin'));
-            return $pdf->stream();
+        if (Auth::user()->id == $user->id) {
+            if (Auth::user()->id == $order->user->id) {
+                $status          = new Order;
+                $userOrderStatus = $status->userOrderStatus();
+                $userPayStatus   = $status->userPayStatus();
+                $addAdmin = Address::where('origin',1)->first();
+                $pdf      = PDF::loadView('users.invoice', compact('order','addAdmin', 'userOrderStatus', 'userPayStatus'));
+                return $pdf->stream();
+            }
+            return back();
         }
         return back();
     }

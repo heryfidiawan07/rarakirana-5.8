@@ -28,7 +28,7 @@
                     <input type="text" name="no_rek" class="form-control" value="{{old('no_rek')}}" required>
                 </div>
                 <div class="form-group">
-                    <label>Nomor Rekening</label>
+                    <label>Status</label>
                     <select name="status" class="form-control" required>
                         <option value="1">Active</option>
                         <option value="0">No Active</option>

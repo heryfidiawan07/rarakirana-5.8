@@ -54,7 +54,7 @@ class GlobalController extends Controller
             'email' => 'required',
             'phone' => 'required',
             'description' => 'required|max:10000',
-            //'g-recaptcha-response' => 'required|captcha',
+            'g-recaptcha-response' => 'required|captcha',
         ]);
         Inbox::create([
             'title' => Purifier::clean($request->title),

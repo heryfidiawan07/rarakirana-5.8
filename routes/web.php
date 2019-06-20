@@ -119,6 +119,8 @@ Route::middleware(['admin'])->group(function () {
     // Sosmed
     Route::post('/admin/share/store', 'ShareController@store');
     Route::get('/admin/share/{id}/delete', 'ShareController@delete');
+    // Users
+    Route::get('/admin/users', 'AdminController@users');
     //MCE
     Route::get('/admin/filemanager', '\UniSharp\LaravelFilemanager\Controllers\LfmController@show');
     Route::post('/admin/filemanager/upload', '\UniSharp\LaravelFilemanager\Controllers\UploadController@upload');

@@ -24,7 +24,7 @@
                                     <div class="frame-text-3em">
                                         <span class="text-orange bold">Rp {{number_format($product['item']['price'])}}</span>
                                         @if ($product['item']['discount'] > 0)
-                                            <small class="text-danger bold text-size-15">SALE</small>
+                                            <small class="text-danger bold text-size-10 italic">SALE</small>
                                         @endif
                                     </div>
                                     <div class="text-center">
@@ -72,20 +72,11 @@
                             @include('products.form-login')
                         @else
                             @if ($addresses)
-                                @foreach ($addresses as $address)
-                                    <div class="alert alert-success">
-                                        <label>
-                                            <input class="radioSelect address-select" type="radio" name="address_id" value="{{$address->id}}">
-                                            <a class="dropdown-toggle" data-toggle="collapse" href="#listAddress_{{$address->id}}" role="button" aria-expanded="false" aria-controls="collapseExample"> <b>{{$address->name}}</b></a>
-                                            @include('products.modal-address-edit')
-                                            <div class="collapse" id="listAddress_{{$address->id}}">
-                                                <p>Penerima: {{$address->penerima}}</p> 
-                                                <p>{!! $address->address !!}, {{$address->kecamatan}} - {{$address->kabupaten}}, {{$address->provinsi}} {{$address->postal_code}}</p> 
-                                                <p>Telp/Hp: {{$address->phone}}</p>
-                                            </div>
-                                        </label>
-                                    </div>
-                                @endforeach
+                                <div style="max-height: 250px; overflow-x: scroll;">
+                                    @foreach ($addresses as $address)
+                                        @include('products.cart-address-details')
+                                    @endforeach
+                                </div>
                                 <form method="POST" action="/cart/checkout">
                                     @csrf
                                     <input type="hidden" id="address_id" name="address_id" value="">
@@ -95,10 +86,10 @@
                                     </div>
                                     <div class="form-group">
                                         <select name="kurir" id="kurir" class="form-control" disabled>
-                                            <option value="0">Kurir</option>
-                                            <option value="jne">JNE</option>
-                                            <option value="tiki">TIKI</option>
-                                            <option value="pos">POS</option>
+                                            <option class="kurir" value="0">Kurir</option>
+                                            <option class="kurir" value="jne">JNE</option>
+                                            <option class="kurir" value="tiki">TIKI</option>
+                                            <option class="kurir" value="pos">POS</option>
                                         </select>
                                     </div>
                                     <div class="form-group">

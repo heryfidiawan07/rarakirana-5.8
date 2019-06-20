@@ -16,10 +16,10 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(Post::class, function (Faker $faker) {
-    $user_id = App\User::pluck('id');
+    $user_id = App\User::where('role',1)->first();
     $menu_id = App\Menu::where('id',1)->pluck('id');//Pilih id dengan menu post
     return [
-        'user_id' => $user_id->random(),
+        'user_id' => $user_id->id,
         'menu_id' => $menu_id->random(),
         'title' => $faker->sentence(10),
         'slug' => str_slug($faker->sentence(10)),

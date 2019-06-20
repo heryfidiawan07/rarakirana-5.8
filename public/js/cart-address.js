@@ -141,6 +141,12 @@ $(document).ready(function(){
         }
     });
     
+    if ($('#kurir').val()==0 || $('.address-select').prop("checked")) {
+        $('#services').attr('disabled',true);
+    }else{
+        $('#services').attr('disabled',false);
+    }
+
     $('#kurir').change(function(){
         if ($('#kurir').val()==0) {
             $('#services').attr('disabled',true);
@@ -189,6 +195,11 @@ $(document).ready(function(){
 
     $('.address-select').click(function(){
         $('#address_id').val($(this).val());
+        $('.kurir').remove();
+        $('#kurir').append('<option class="kurir" value="0">Kurir</option><option class="kurir" value="jne">JNE</option><option class="kurir" value="tiki">TIKI</option><option value="pos">POS</option>');
+        $('#services').attr('disabled',true);
+        $('.option_services').remove();
+        $('#btn-checkout').attr('disabled',true);
     });
 
 });
