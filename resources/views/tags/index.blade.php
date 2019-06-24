@@ -3,10 +3,6 @@
 @section('title'){{$tag->title}}@endsection
 @section('description'){{$tag->description}}@endsection
 
-@section('css')
-    <link rel="stylesheet" type="text/css" href="/css/post-index.css">
-@endsection
-
 @section('content')
 <div class="container">
         <h2 class="parent-color bold">{{$tag->name}}</h2>

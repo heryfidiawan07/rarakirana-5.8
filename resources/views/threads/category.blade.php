@@ -3,10 +3,6 @@
 @section('title'){{$category->title}}@endsection
 @section('description'){{$category->description}}@endsection
 
-@section('css')
-    <link rel="stylesheet" type="text/css" href="/css/thread-index.css">
-@endsection
-
 @section('content')
 <div class="container">
     <h2 id="page-name">{{$category->name}}</h2>

@@ -8,7 +8,6 @@
 
 @section('css')
     <link rel="stylesheet" type="text/css" href="/css/user-profile.css">
-    <link rel="stylesheet" type="text/css" href="/css/thread-index.css">
 @endsection
 
 @section('content')

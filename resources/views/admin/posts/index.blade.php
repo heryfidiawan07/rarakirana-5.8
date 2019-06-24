@@ -26,10 +26,10 @@
                             <th>Img</th><th>Title</th><th>Parent Menu</th><th>Tags</th><th>Comment</th><th>Created</th><th>User</th><th>Status</th><th>Edit</th><th>Delete</th>
                             @foreach($posts as $post)
                                 <tr class="table-warning">
-                                    <td class="text-center bg-light" rowspan="2">
-                                        <img src="@if ($post->img == null)/parts/no-image.png @else /posts/thumb/{{$post->img}} @endif" class="min-width-100px">
+                                    <td class="text-center bg-light">
+                                        <img src="@if ($post->img == null)/parts/no-image.png @else /posts/thumb/{{$post->img}} @endif" class="dashboard-img">
                                     </td>
-                                    <td>
+                                    <td class="td-250">
                                         <a class="text-link @if ($post->sticky==1) text-success @endif" href="/read/post/{{$post->slug}}">{{$post->title}}</a>
                                     </td>
                                     <td>{{$post->menu->name}}</td>
@@ -65,9 +65,7 @@
                                     <td>@include('admin.posts.delete')</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="9">
-                                        @include('admin.posts.quick-edit')
-                                    </td>
+                                    @include('admin.posts.quick-edit')
                                 </tr>
                             @endforeach
                         </table>

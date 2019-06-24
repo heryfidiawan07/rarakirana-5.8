@@ -178,11 +178,11 @@ class ProductController extends Controller
     public function quickEdit(Request $request, $id){
         $product = Product::find($id);
         $product->update([
-            'comment' => $request->comment,
             'status'  => $request->status,
             'etalase_id' => $request->etalase_id,
             'first_price' => $request->first_price,
             'discount'    => $request->discount,
+            'sticky'      => $request->sticky,
         ]);
         return redirect('/admin/products');
     }

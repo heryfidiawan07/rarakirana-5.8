@@ -6,10 +6,6 @@
     @section('description'){{$app->description}}@endsection
 @endif
 
-@section('css')
-    <link rel="stylesheet" type="text/css" href="/css/thread-index.css">
-@endsection
-
 @section('content')
     @if ($threads->count())
         <h2 class="parent-color bold mt-5">Threads</h2>

@@ -6,10 +6,6 @@
     @section('description'){{$app->description}}@endsection
 @endif
 
-@section('css')
-    <link rel="stylesheet" type="text/css" href="/css/post-index.css">
-@endsection
-
 @section('content')
 
 <div class="container">

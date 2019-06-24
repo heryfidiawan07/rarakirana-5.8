@@ -135,9 +135,6 @@ iframe {
 .btn-search {
     border: 0.5px solid lightgrey !important;
 }
-.min-width-100px {
-    min-width: 100px;
-}
 .tags {
     padding: 1px 10px;
     background-color: #a18cd1;
@@ -152,7 +149,18 @@ iframe {
     text-decoration: none;
 }
 .text-sale {
+    font-family: 'Satisfy', cursive;
+    font-size: 1.5em;
     color: red;
     font-weight: bold;
     font-style: italic;
+}
+.td-250 {
+    min-width: 250px !important;
+}
+.dashboard-img {
+    max-height: 100px;
+    min-height: 100px;
+    max-width: 100px;
+    min-width: 100px;
 }

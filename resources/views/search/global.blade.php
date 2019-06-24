@@ -9,8 +9,6 @@
 @section('css')
     <link rel="stylesheet" type="text/css" href="/css/home-product-index.css">
     <link rel="stylesheet" type="text/css" href="/css/product-index.css">
-    <link rel="stylesheet" type="text/css" href="/css/post-index.css">
-    <link rel="stylesheet" type="text/css" href="/css/thread-index.css">
 @endsection
 
 @section('content')

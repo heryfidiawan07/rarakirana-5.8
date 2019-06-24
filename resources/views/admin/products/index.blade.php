@@ -32,16 +32,16 @@
                             <th>Img</th><th>Title</th><th>Price</th><th>Etalase</th><th>Type</th><th>Discus</th><th>Created</th><th>User</th><th>Status</th><th>Edit</th><th>Delete</th>
                             @foreach($products as $product)
                                 <tr class="table-success">
-                                    <td class="text-center bg-light" rowspan="2">
-                                        <img @if ($product->pictures->count()) src="/products/thumb/{{$product->pictures[0]->img}}" @else src="/parts/no-image-icon.png" @endif class="product-img">
+                                    <td class="text-center bg-light">
+                                        <img @if ($product->pictures->count()) src="/products/thumb/{{$product->pictures[0]->img}}" @else src="/parts/no-image-icon.png" @endif class="dashboard-img">
                                     </td>
-                                    <td class="td-long">
-                                        <a class="product-title" href="/show/product/{{$product->slug}}">{{$product->title}}</a>
+                                    <td class="td-250">
+                                        <a class="text-link" href="/show/product/{{$product->slug}}">{{$product->title}}</a>
                                         @if ($product->sticky==1)
-                                            <small class="success">__Sticky product.</small>
+                                            <small class="text-success">__Sticky product.</small>
                                         @endif
                                     </td>
-                                    <td class="td-long">Rp {{number_format($product->price)}}</td>
+                                    <td>Rp {{number_format($product->price)}}</td>
                                     <td>{{$product->etalase->name}}</td>
                                     <td>
                                         @if ($product->type==0)
@@ -55,18 +55,16 @@
                                     <td><small><i class="fas fa-user"></i> {{$product->user->name}}</small></td>
                                     <td>
                                         @if ($product->status==1)
-                                            <p class="success">Active</p>
+                                            <p class="text-success">Active</p>
                                         @else
-                                            <p class="danger">Draft</p>
+                                            <p class="text-danger">Draft</p>
                                         @endif
                                     </td>
                                     <td><a href="/admin/product/{{$product->id}}/edit" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a></td>
                                     <td>@include('admin.products.delete')</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="9">
-                                        @include('admin.products.quick-edit')
-                                    </td>
+                                    @include('admin.products.quick-edit')
                                 </tr>
                             @endforeach
                         </table>
