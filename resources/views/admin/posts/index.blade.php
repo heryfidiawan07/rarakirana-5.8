@@ -23,10 +23,10 @@
                 @if($posts->count())
                     <div class="table-responsive">
                         <table class="table table-hover">
-                            <th>Img</th><th>Title</th><th>Parent Menu</th><th>Tags</th><th>Comment</th><th>Created</th><th>User</th><th>Status</th><th>Edit</th><th>Delete</th>
+                            <th>Img</th><th>Title</th><th>Menu</th><th>Tags</th><th>Comment</th><th>Created</th><th>User</th><th>Status</th><th>Edit</th><th>Delete</th>
                             @foreach($posts as $post)
                                 <tr class="table-warning">
-                                    <td class="text-center bg-light">
+                                    <td class="text-center bg-light" rowspan="2" style="vertical-align: middle;">
                                         <img src="@if ($post->img == null)/parts/no-image.png @else /posts/thumb/{{$post->img}} @endif" class="dashboard-img">
                                     </td>
                                     <td class="td-250">
@@ -50,10 +50,12 @@
                                         @else
                                             No
                                         @endif
-                                        {{$post->comments->count()}}
+                                        , {{$post->comments->count()}}
                                     </td>
                                     <td><small>{{ date('d F, Y', strtotime($post->created_at))}}</small></td>
-                                    <td><small><i class="fas fa-user"></i> {{$post->user->name}}</small></td>
+                                    <td class="td-150">
+                                        <small><i class="fas fa-user"></i> {{$post->user->name}}</small>
+                                    </td>
                                     <td>
                                         @if ($post->status==1)
                                             <p class="text-success">Publish</p>

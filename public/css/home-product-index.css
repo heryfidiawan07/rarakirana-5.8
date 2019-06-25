@@ -5,8 +5,8 @@
 }
 .products-scroll {
     display: inline-block;
-    padding: 5px 5px 5px 5px;
-    width: 250px;
+    margin-left: 10px;
+    width: 19%;
 }
 .product-frame {
     margin-bottom: 10px !important;

@@ -17,13 +17,13 @@
                 <div class="card-header">
                     <a class="btn btn-primary btn-sm" @if ($mainmenus->where('setting',1)->count() == 0 || !$adminAdd || !$etalases->count()) disabled @else href="/admin/product/create" @endif><i class="fas fa-plus"></i> Create Product </a>
                     @if ($mainmenus->where('setting',1)->count() == 0)
-                        <div class="alert alert-danger mt-1">Please setup menu product !</div>
+                        <p class="text-danger">Please setup menu product !</p>
                     @endif
                     @if (!$adminAdd)
-                        <div class="alert alert-danger mt-1">Please setup admin address !</div>
+                        <p class="text-danger">Please setup admin address !</p>
                     @endif
                     @if (!$etalases->count())
-                        <div class="alert alert-danger mt-1">Please setup product etalase !</div>
+                        <p class="text-danger">Please setup product etalase !</p>
                     @endif
                 </div>
                 @if($products->count())
@@ -32,8 +32,8 @@
                             <th>Img</th><th>Title</th><th>Price</th><th>Etalase</th><th>Type</th><th>Discus</th><th>Created</th><th>User</th><th>Status</th><th>Edit</th><th>Delete</th>
                             @foreach($products as $product)
                                 <tr class="table-success">
-                                    <td class="text-center bg-light">
-                                        <img @if ($product->pictures->count()) src="/products/thumb/{{$product->pictures[0]->img}}" @else src="/parts/no-image-icon.png" @endif class="dashboard-img">
+                                    <td class="text-center bg-light" rowspan="2" style="vertical-align: middle;">
+                                        <img @if ($product->pictures->count()) src="/products/thumb/{{$product->pictures[0]->img}}" @else src="/parts/no-image.png" @endif class="dashboard-img">
                                     </td>
                                     <td class="td-250">
                                         <a class="text-link" href="/show/product/{{$product->slug}}">{{$product->title}}</a>
@@ -52,7 +52,9 @@
                                     </td>
                                     <td>{{$product->comments->count()}}</td>
                                     <td><small>{{ date('d F, Y', strtotime($product->created_at))}}</small></td>
-                                    <td><small><i class="fas fa-user"></i> {{$product->user->name}}</small></td>
+                                    <td class="td-150">
+                                        <small><i class="fas fa-user"></i> {{$product->user->name}}</small>
+                                    </td>
                                     <td>
                                         @if ($product->status==1)
                                             <p class="text-success">Active</p>
