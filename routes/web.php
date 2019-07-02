@@ -104,12 +104,12 @@ Route::middleware(['admin'])->group(function () {
     // Product Offline
     Route::get('/admin/product/offline', 'OfflineController@index');
     Route::get('/admin/product/offline/{id}/delete', 'OfflineController@delete');
-    // Aplication
-    Route::get('/admin/aplication', 'AplicationController@index');
-    Route::post('/admin/aplication/store', 'AplicationController@store');
-    Route::get('/admin/aplication/{id}/edit', 'AplicationController@edit');
-    Route::post('/admin/aplication/{id}/update', 'AplicationController@update');
-    Route::get('/admin/aplication/{id}/delete', 'AplicationController@delete');
+    // application
+    Route::get('/admin/application', 'ApplicationController@index');
+    Route::post('/admin/application/store', 'ApplicationController@store');
+    Route::get('/admin/application/{id}/edit', 'ApplicationController@edit');
+    Route::post('/admin/application/{id}/update', 'ApplicationController@update');
+    Route::get('/admin/application/{id}/delete', 'ApplicationController@delete');
     // ======== Social Media
     Route::get('/admin/social-media', 'AdminController@socialMedia');
     // Follow
