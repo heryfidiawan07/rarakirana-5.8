@@ -14,7 +14,7 @@
         @endif
     </div>
     <div class="form-group">
-        <label>Title <small class="success"><i>search engine optimization</i></small></label>
+        <label>Title <small class="text-success"><i>search engine optimization</i></small></label>
         <input type="text" name="title" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" value="{{old('title')}}">
         @if ($errors->has('title'))
         <span class="invalid-feedback" role="alert">
@@ -23,7 +23,7 @@
         @endif
     </div>
     <div class="form-group">
-        <label>Description <small class="success"><i>search engine optimization</i></small></label>
+        <label>Description <small class="text-success"><i>search engine optimization</i></small></label>
         <textarea name="description" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" rows="5">{{old('description')}}</textarea>
         @if ($errors->has('description'))
         <span class="invalid-feedback" role="alert">
