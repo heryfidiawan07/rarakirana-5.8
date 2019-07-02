@@ -21,7 +21,7 @@ class EtalaseController extends Controller
     }
 
     public function store(Request $request){
-        $data = request()->validate([
+        $request->validate([
             'name' => 'required|unique:etalases',
             'menu_id' => 'required',
             'parent_id' => 'required',
@@ -40,7 +40,7 @@ class EtalaseController extends Controller
     }
 
     public function update(Request $request, $id){
-        $data = request()->validate([
+        $request->validate([
             'nameEdit' => 'required',
             'menu_edit' => 'required',
             'parent_edit' => 'required',

@@ -6,18 +6,18 @@ use Auth;
 use File;
 use Image;
 use Purifier;
-use App\Aplication;
+use App\Application;
 use Illuminate\Http\Request;
 
-class AplicationController extends Controller
+class ApplicationController extends Controller
 {
     public function __construct(){
         return $this->middleware('admin');
     }
     
     public function index(){
-        $aplication = Aplication::first();
-        return view('admin.aplication.index', compact('aplication'));
+        $application = Application::first();
+        return view('admin.application.index', compact('application'));
     }
     
     public function store(Request $request){
@@ -32,12 +32,12 @@ class AplicationController extends Controller
             $thumb    = Image::make($path)->resize(null, 300, function ($constraint) {
                             $constraint->aspectRatio();
                         });
-            $thumb->save(public_path("aplication/thumb/". $imgName));
-            $img->save(public_path("aplication/img/". $imgName));
+            $thumb->save(public_path("application/thumb/". $imgName));
+            $img->save(public_path("application/img/". $imgName));
         }else {
             $imgName = 'no-image.png';
         }
-        Aplication::create([
+        Application::create([
             'img' => $imgName,
             'name' => $request->name,
             'title' => $request->title,
@@ -54,17 +54,17 @@ class AplicationController extends Controller
     }
     
     public function edit($id){
-        $aplication = Aplication::find($id);
-        return view('admin.aplication.edit', compact('aplication'));
+        $application = Application::find($id);
+        return view('admin.application.edit', compact('application'));
     }
     
     public function update(Request $request, $id){
-        $aplication = Aplication::find($id);
+        $application = Application::find($id);
         $img  = $request->file('img');
         if (!empty($img)) {
-            if ($aplication->img != 'no-image.png') {
-                $oldImg   = public_path("aplication/img/".$aplication->img);
-                $oldThumb = public_path("aplication/thumb/".$aplication->img);
+            if ($application->img != 'no-image.png') {
+                $oldImg   = public_path("application/img/".$application->img);
+                $oldThumb = public_path("application/thumb/".$application->img);
                 if (file_exists($oldImg)) {
                     File::delete($oldImg);
                     File::delete($oldThumb);
@@ -79,12 +79,12 @@ class AplicationController extends Controller
             $thumb    = Image::make($path)->resize(null, 300, function ($constraint) {
                             $constraint->aspectRatio();
                         });
-            $thumb->save(public_path("aplication/thumb/". $imgName));
-            $img->save(public_path("aplication/img/". $imgName));
+            $thumb->save(public_path("application/thumb/". $imgName));
+            $img->save(public_path("application/img/". $imgName));
         }else {
-            $imgName = $aplication->img;
+            $imgName = $application->img;
         }
-        $aplication->update([
+        $application->update([
             'img' => $imgName,
             'name' => $request->name,
             'title' => $request->title,
@@ -97,7 +97,7 @@ class AplicationController extends Controller
             'company' => $request->company,
             'user_id' => Auth::user()->id,
         ]);
-        return redirect('/admin/aplication');
+        return redirect('/admin/application');
     }
     
 }
