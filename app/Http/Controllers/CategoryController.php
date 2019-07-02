@@ -21,7 +21,7 @@ class CategoryController extends Controller
     }
 
     public function store(Request $request){
-        $data = request()->validate([
+        $request->validate([
             'name' => 'required|unique:categories',
             'menu_id' => 'required',
             'parent_id' => 'required',
@@ -40,12 +40,17 @@ class CategoryController extends Controller
     }
 
     public function update(Request $request, $id){
-        $data = request()->validate([
+        $category = Category::find($id);
+        // $cekSlug = Category::where('slug', str_slug($request->nameEdit))->first();
+        // dd($cekSlug->count());
+        // if ($cekSlug) {
+        //     return back()->withErrors('Category name already exists !');
+        // }
+        $request->validate([
             'nameEdit' => 'required',
             'menu_edit' => 'required',
             'parent_edit' => 'required',
         ]);
-        $category = Category::find($id);
         $category->update([
             'name' => $request->nameEdit,
             'slug' => str_slug($request->nameEdit),

@@ -1,5 +1,11 @@
 <a class="btn btn-primary btn-sm" @if (!$mainmenus->where('setting',2)->count()) disabled @else href="" data-toggle="modal" data-target=".create-category" @endif><i class="fas fa-plus"></i> Add Category</a>
 
+@if ($errors->any())
+    @foreach ($errors->all() as $error)
+        <p class="text-danger">{{ $error }}</p>
+    @endforeach
+@endif
+
 <div class="modal fade create-category" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Aplication;
+use App\Application;
 use App\Follow;
 use App\Share;
 use App\Menu;
@@ -35,8 +35,8 @@ class AppServiceProvider extends ServiceProvider
         $maintags  = Tag::where('status_menu',1)->get();
         $follows   = Follow::all();
         $shares    = Share::all();
-        $app       = Aplication::first();
-        $baseUrl   = 'http://localhost:8000';
+        $app       = Application::first();
+        $baseUrl   = 'http://rarakirana.com';
         View::share([
                      'mainmenus' => $mainmenus,
                      'maintags'  => $maintags,
