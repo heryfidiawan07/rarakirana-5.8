@@ -1,4 +1,4 @@
-<form method="POST" action="/admin/aplication/store" enctype="multipart/form-data">
+<form method="POST" action="/admin/application/store" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
         <label>Img</label>
