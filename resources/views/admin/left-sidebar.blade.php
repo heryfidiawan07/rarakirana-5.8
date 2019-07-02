@@ -26,7 +26,7 @@
                         <a href="/admin/accounts">Account <i>(Bank)</i></a>
                         <a href="/admin/forums">Forum</a>
                         <a href="/admin/inbox">Inbox</a>
-                        <a href="/admin/aplication">App Setting</a>
+                        <a href="/admin/application">App Setting</a>
                         <a href="/admin/social-media">Social Media</a>
                         <a href="/admin/users">Users</a>
                     </div>
