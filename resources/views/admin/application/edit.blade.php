@@ -17,7 +17,7 @@
         @endif
     </div>
     <div class="form-group">
-        <label>Title <small class="success"><i>search engine optimization</i></small></label>
+        <label>Title <small class="text-success"><i>search engine optimization</i></small></label>
         <input type="text" name="title" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" value="{{$application->title}}">
         @if ($errors->has('title'))
             <span class="invalid-feedback" role="alert">
@@ -26,7 +26,7 @@
         @endif
     </div>
     <div class="form-group">
-        <label>Description <small class="success"><i>search engine optimization</i></small></label>
+        <label>Description <small class="text-success"><i>search engine optimization</i></small></label>
         <textarea class="form-control" name="description{{ $errors->has('description') ? ' is-invalid' : '' }}" rows="5">{{strip_tags($application->description)}}</textarea>
         @if ($errors->has('description'))
             <span class="invalid-feedback" role="alert">
