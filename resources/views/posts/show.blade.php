@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('image'){{$baseUrl}}/posts/img/{{$post->img}}@endsection
+@section('image'){{ config('app.url') }}/posts/img/{{$post->img}}@endsection
 @section('title'){{$post->title}}@endsection
 @section('description'){{strip_tags(str_limit($post->description, 145))}}@endsection
 

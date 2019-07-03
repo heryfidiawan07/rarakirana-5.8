@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('image'){{$baseUrl}}/products/img/{{$product->pictures[0]->img}}@endsection
+@section('image'){{ config('app.url') }}/products/img/{{$product->pictures[0]->img}}@endsection
 @section('title'){{$product->title}}@endsection
 @section('description'){{strip_tags(str_limit($product->description, 145))}}@endsection
 
