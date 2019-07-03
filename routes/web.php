@@ -120,7 +120,8 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/admin/share/store', 'ShareController@store');
     Route::get('/admin/share/{id}/delete', 'ShareController@delete');
     // Users
-    Route::get('/admin/users', 'AdminController@users');
+    Route::get('/admin/users', 'AdminUserController@users');
+    Route::get('/admin/getusers', 'AdminUserController@getUsers')->name('get.users');
     //MCE
     Route::get('/admin/filemanager', '\UniSharp\LaravelFilemanager\Controllers\LfmController@show');
     Route::post('/admin/filemanager/upload', '\UniSharp\LaravelFilemanager\Controllers\UploadController@upload');
