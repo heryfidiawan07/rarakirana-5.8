@@ -36,14 +36,12 @@ class AppServiceProvider extends ServiceProvider
         $follows   = Follow::all();
         $shares    = Share::all();
         $app       = Application::first();
-        $baseUrl   = 'http://rarakirana.com';
         View::share([
                      'mainmenus' => $mainmenus,
                      'maintags'  => $maintags,
                      'follows'   => $follows,
                      'shares'    => $shares, 
                      'app'       => $app,
-                     'baseUrl'   => $baseUrl,
                  ]);
     }
 }

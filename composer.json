@@ -18,7 +18,8 @@
         "laravel/tinker": "^1.0",
         "mews/purifier": "~2.0",
         "rizalafani/rajaongkirlaravel": "^1.0",
-        "unisharp/laravel-filemanager": "~1.8"
+        "unisharp/laravel-filemanager": "~1.8",
+        "yajra/laravel-datatables": "^1.0"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

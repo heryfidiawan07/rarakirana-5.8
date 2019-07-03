@@ -26,7 +26,7 @@
     <meta name="google-signin-client_id" content="524555026329-duc32e6en3f62mhdak03hi5scguviu9f.apps.googleusercontent.com">
     <meta name="google-site-verification" content="rK6CP-v6mdxCyRsKxtxqVLId-j6lyrtkFSZ5xPRB3jI" />
 
-    <link href="<?php if($app) echo $baseUrl.'/aplication/thumb/'.$app->img ?>" rel='shortcut icon'>
+    <link href="@if($app){{ config('app.url') }}/application/thumb/{{$app->img}}@endif" rel='shortcut icon'>
 
     <!-- Scripts -->
     {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
@@ -41,8 +41,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.1/animate.min.css">
 
     <!-- Styles -->
-    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
-    <link href="/css/app.css" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{-- <link href="/css/app.css" rel="stylesheet"> --}}
     <link href="/css/social-media.css" rel="stylesheet">
     <link href="/css/hery_dev__.css" rel="stylesheet">
     @yield('css')
@@ -73,8 +73,8 @@
             @include('layouts.footer')
         </div>
     </div>
-    {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
-    <script src="/js/app.js"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    {{-- <script src="/js/app.js"></script> --}}
     {{-- <script src="/js/bootstrap.js"></script> --}}
     <script src="/js/share.js"></script>
     <script src="/js/addToCart.js"></script>
