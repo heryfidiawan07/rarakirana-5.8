@@ -17,14 +17,19 @@ class AdminUserController extends Controller
     public function getUsers()
     {   
         $users = User::select(['id', 'name', 'email', 'created_at', 'status']);
-        $status = ['No Active', 'Active', 'Banned !'];
 
         return Datatables::of($users)
+        ->addIndexColumn()
         ->setRowClass(function ($user) {
             return $user->status % 2 == 0 ? 'alert-danger' : 'alert-success';
         })
         ->editColumn('created_at', function ($user) {
-            return $user->created_at->format('Y/m/d');
+            return date('d-F-Y', strtotime($user->created_at));
+        })
+        ->editColumn('status', function ($user) {
+            if ($user->status == 0) return 'No Active';
+            if ($user->status == 1) return 'Active';
+            if ($user->status == 2) return 'Banned !';
         })
         ->make(true);
     }
