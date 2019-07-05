@@ -35,6 +35,8 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/menu/{id}/delete', 'MenuController@delete');
     // Admin Post
     Route::get('/admin/posts', 'PostController@index');
+    Route::get('/admin/getposts', 'PostController@getPosts')->name('get.posts');
+
     Route::get('/admin/post/create', 'PostController@create');
     Route::post('/admin/post/store', 'PostController@store');
     Route::get('/admin/post/{id}/edit', 'PostController@edit');
@@ -62,6 +64,8 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/category/parent-menu/{id}', 'CategoryController@getChildMenu');
     // Admin Product
     Route::get('/admin/products', 'ProductController@index');
+    Route::get('/admin/getproducts', 'ProductController@getProducts')->name('get.products');
+
     Route::get('/admin/product/create', 'ProductController@create');
     Route::post('/admin/product/store', 'ProductController@store');
     Route::get('/admin/product/{id}/edit', 'ProductController@edit');

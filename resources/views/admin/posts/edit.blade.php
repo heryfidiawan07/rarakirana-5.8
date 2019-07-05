@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-<div class="container-fluid">
+<div class="container">
     
     <span class="parent-color bold text-size-15">Edit Post</i></span>
     @include('admin.left-sidebar')

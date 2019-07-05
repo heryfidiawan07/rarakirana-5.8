@@ -6,7 +6,7 @@ $factory->define(App\User::class, function (Faker $faker) {
     return [
     	'name' => $faker->name,
     	'slug' => str_slug($faker->name),
-    	'email' => Str::random(10).'@gmail.com',
+    	'email' => strtolower(Str::random(10)).'@gmail.com',
     	'provider' => null,
     	'provider_id' => null,
     	'img' => 'profile.jpg',
