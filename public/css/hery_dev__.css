@@ -79,6 +79,9 @@ iframe {
 .sticky {
     color: green !important;
 }
+.sticky:hover {
+    color: #a18cd1 !important;
+}
 .img-circle-xs {
     height: 25px;
     width: 30px;

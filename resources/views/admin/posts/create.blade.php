@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-<div class="container-fluid">
+<div class="container">
     
     <span class="parent-color bold text-size-15">Create Post</i></span>
     @include('admin.left-sidebar')
@@ -15,7 +15,7 @@
 
         <form method="POST" action="/admin/post/store" enctype="multipart/form-data">
             <div class="row">
-                {{csrf_field()}}
+                @csrf
                 <div class="col-md-9">
                     <div class="form-group">
                         <label for="title">Title</label>

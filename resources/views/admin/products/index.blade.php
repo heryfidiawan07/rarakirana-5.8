@@ -2,6 +2,7 @@
 
 @section('css')
     <link rel="stylesheet" type="text/css" href="/css/left-right-modal.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 @endsection
 
 @section('content')
@@ -26,58 +27,53 @@
                         <p class="text-danger">Please setup product etalase !</p>
                     @endif
                 </div>
-                @if($products->count())
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <th>Img</th><th>Title</th><th>Price</th><th>Etalase</th><th>Type</th><th>Discus</th><th>Created</th><th>User</th><th>Status</th><th>Edit</th><th>Delete</th>
-                            @foreach($products as $product)
-                                <tr class="table-success">
-                                    <td class="text-center bg-light" rowspan="2" style="vertical-align: middle;">
-                                        <img @if ($product->pictures->count()) src="/products/thumb/{{$product->pictures[0]->img}}" @else src="/parts/no-image.png" @endif class="dashboard-img">
-                                    </td>
-                                    <td class="td-250">
-                                        <a class="text-link" href="/show/product/{{$product->slug}}">{{$product->title}}</a>
-                                        @if ($product->sticky==1)
-                                            <small class="text-success">__Sticky product.</small>
-                                        @endif
-                                    </td>
-                                    <td>Rp {{number_format($product->price)}}</td>
-                                    <td>{{$product->etalase->name}}</td>
-                                    <td>
-                                        @if ($product->type==0)
-                                            Online
-                                        @else
-                                            Offline
-                                        @endif
-                                    </td>
-                                    <td>{{$product->comments->count()}}</td>
-                                    <td><small>{{ date('d F, Y', strtotime($product->created_at))}}</small></td>
-                                    <td class="td-150">
-                                        <small><i class="fas fa-user"></i> {{$product->user->name}}</small>
-                                    </td>
-                                    <td>
-                                        @if ($product->status==1)
-                                            <p class="text-success">Active</p>
-                                        @else
-                                            <p class="text-danger">Draft</p>
-                                        @endif
-                                    </td>
-                                    <td><a href="/admin/product/{{$product->id}}/edit" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a></td>
-                                    <td>@include('admin.products.delete')</td>
-                                </tr>
-                                <tr>
-                                    @include('admin.products.quick-edit')
-                                </tr>
-                            @endforeach
-                        </table>
-                    </div>
-                @endif
-                <div class="card-footer">
-                    {{$products->links()}}
+                <div class="table-responsive">
+                    <table class="table table-hover" id="product-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Price</th>
+                                <th>Etalase</th>
+                                <th>Type</th>
+                                <th>Discus</th>
+                                <th>Created</th>
+                                <th>Author</th>
+                                <th>Status</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
             </div>
         </div>
 
     </div>
 </div>
+@endsection
+
+@section('js')
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready( function () {
+            $('#product-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{!! route('get.products') !!}',
+                columns: [
+                        { data: 'title', name: 'title' },
+                        { data: 'price', name: 'price' },
+                        { data: 'etalase.name', name: 'etalase.name' },
+                        { data: 'type', name: 'type' },
+                        { data: 'comment', name: 'comment' },
+                        { data: 'created_at', name: 'created_at' },
+                        { data: 'user.name', name: 'user.name'},
+                        { data: 'status', name: 'status' },
+                        { data: 'edit', name: 'edit', orderable: false, searchable: false},
+                        { data: 'delete', name: 'delete', orderable: false, searchable: false},
+                    ]
+                });
+        });
+    </script>
 @endsection

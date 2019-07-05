@@ -12,6 +12,7 @@ use App\Product;
 use App\Picture;
 use App\Address;
 use App\OrderDetail;
+use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -21,10 +22,62 @@ class ProductController extends Controller
     }
     
     public function index(){
-        $products = Product::latest()->paginate(20);
         $adminAdd = Address::where('origin',1)->first();
         $etalases = Etalase::all();
-        return view('admin.products.index', compact('products','adminAdd','etalases'));
+        return view('admin.products.index', compact('adminAdd','etalases'));
+    }
+    
+    public function getProducts(){
+        $products = Product::latest()->with('user')->with('etalase')->get();
+
+        return Datatables::of($products)
+        ->editColumn('title', function ($product) {
+            if ($product->sticky==0) {
+                return '<a href="/show/product/'.$product->slug.'" class="text-link">'.$product->title.'</a>';
+            }
+            if ($product->sticky==1) {
+                return '<a href="/show/product/'.$product->slug.'" class="text-link text-success">'.$product->title.'</a>';
+            }
+        })
+        ->editColumn('created_at', function ($product) {
+            return date('d-F-Y', strtotime($product->created_at));
+        })
+        ->addColumn('edit', function ($product) {
+            return '<a href="/admin/product/'.$product->id.'/edit" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>';
+        })
+        ->addColumn('delete', function ($product) {
+            return '<a class="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target=".delete-product-'.$product->id.'"><i class="fas fa-trash"></i></a>
+
+                <div class="modal fade delete-product-'.$product->id.'" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5>Delete Product '.$product->title.' ?</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            </div>
+                            <div class="modal-body">
+                                <a class="btn btn-danger btn-sm" href="/admin/product/'.$product->id.'/delete">Delete !</a>
+                                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>';
+        })
+        ->editColumn('price', 'Rp {{number_format($price)}}')
+        ->editColumn('status', function ($product) {
+            if ($product->status == 0) return '<span class="text-danger">Draft</span>';
+            if ($product->status == 1) return '<span class="text-success">Publish</span>';
+        })
+        ->editColumn('comment', function ($product) {
+            if ($product->comment == 0) return '<i class="fas fa-times text-danger"></i>';
+            if ($product->comment == 1) return '<i class="fas fa-check text-success"></i>';
+        })
+        ->editColumn('type', function ($product) {
+            if ($product->status == 0) return '<span class="text-info">Online</span>';
+            if ($product->status == 1) return '<span class="text-secondary">Offline</span>';
+        })
+        ->rawColumns(['title','status','type','comment','edit','delete', 'confirmed'])
+        ->make(true);
     }
     
     public function create(){

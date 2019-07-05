@@ -16,10 +16,12 @@ class AdminUserController extends Controller
 
     public function getUsers()
     {   
-        $users = User::select(['id', 'name', 'email', 'created_at', 'status']);
+        $users = User::OrderBy('id');
 
         return Datatables::of($users)
-        ->addIndexColumn()
+        ->editColumn('name', function ($user) {
+            return '<a href="/user/'.$user->slug.'" class="text-link">'.$user->name.'</a>';
+        })
         ->setRowClass(function ($user) {
             return $user->status % 2 == 0 ? 'alert-danger' : 'alert-success';
         })
@@ -31,6 +33,7 @@ class AdminUserController extends Controller
             if ($user->status == 1) return 'Active';
             if ($user->status == 2) return 'Banned !';
         })
+        ->rawColumns(['name', 'confirmed'])
         ->make(true);
     }
     

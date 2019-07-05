@@ -25,16 +25,12 @@ class PostController extends Controller
     }
     
 	public function index(){
-        // $menus = $this->menus();
-        // $tags  = Tag::all();
-		// $posts = Post::OrderBy('sticky','DESC')->latest()->paginate(10);
-		// return view('admin.posts.index', compact('posts','menus','tags'));
         return view('admin.posts.index');
 	}
 
     public function getPosts()
     {   
-        $posts = Post::with('user')->with('menu')->OrderBy('sticky','DESC')->latest()->get();
+        $posts = Post::latest()->with('user')->with('menu')->get();
 
         return Datatables::of($posts)
         ->addColumn('img', function ($post) { 
@@ -42,9 +38,13 @@ class PostController extends Controller
             if ($post->img != null){ $url= asset('posts/thumb/'.$post->img); }
             return '<img src="'.$url.'" border="0" width="50" class="img-rounded" align="center" />';
         })
-        ->rawColumns(['img', 'confirmed'])
-        ->setRowClass(function ($post) {
-            return $post->status % 2 == 0 ? 'alert-danger' : 'alert-success';
+        ->editColumn('title', function ($post) {
+            if ($post->sticky==0) {
+                return '<a href="/read/post/'.$post->slug.'">'.$post->title.'</a>';
+            }
+            if ($post->sticky==1) {
+                return '<a href="/read/post/'.$post->slug.'" class="sticky">'.$post->title.'</a>';
+            }
         })
         ->editColumn('created_at', function ($post) {
             return date('d-F-Y', strtotime($post->created_at));
@@ -55,16 +55,15 @@ class PostController extends Controller
         ->addColumn('delete', function ($post) {
             return '<a class="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target=".delete-post-'.$post->id.'"><i class="fas fa-trash"></i></a><div class="modal fade delete-post-'.$post->id.'" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><h5>Delete Post '.$post->title.' ?</h5><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body"><a class="btn btn-danger btn-sm" href="/admin/post/'.$post->id.'/delete">Delete !</a><button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button></div></div></div></div>';
         })
-        ->rawColumns(['edit', 'confirmed'])
-        ->rawColumns(['delete', 'confirmed'])
         ->editColumn('status', function ($post) {
-            if ($post->status == 0) return 'Draft';
-            if ($post->status == 1) return 'Publish';
+            if ($post->status == 0) return '<span class="text-danger">Draft</span>';
+            if ($post->status == 1) return '<span class="text-success">Publish</span>';
         })
         ->editColumn('comment', function ($post) {
-            if ($post->status == 0) return 'Tidak';
-            if ($post->status == 1) return 'Ya';
+            if ($post->comment == 0) return '<i class="fas fa-times text-danger"></i>';
+            if ($post->comment == 1) return '<i class="fas fa-check text-success"></i>';
         })
+        ->rawColumns(['img','title','edit','delete','status','comment', 'confirmed'])
         ->make(true);
     }
 	

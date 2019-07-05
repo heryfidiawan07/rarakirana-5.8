@@ -64,6 +64,8 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/category/parent-menu/{id}', 'CategoryController@getChildMenu');
     // Admin Product
     Route::get('/admin/products', 'ProductController@index');
+    Route::get('/admin/getproducts', 'ProductController@getProducts')->name('get.products');
+
     Route::get('/admin/product/create', 'ProductController@create');
     Route::post('/admin/product/store', 'ProductController@store');
     Route::get('/admin/product/{id}/edit', 'ProductController@edit');

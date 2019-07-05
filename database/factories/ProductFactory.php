@@ -2,15 +2,19 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Post::class, function (Faker $faker) {
+$factory->define(App\Product::class, function (Faker $faker) {
     $admin = App\User::where('role',1)->first();
     return [
         'user_id' => $admin->id,
-        'menu_id' => 1,//Setting manu_id
+        'etalase_id' => 1,//Setting manu_id
         'title'   => $faker->sentence,
         'slug'    => str_slug($faker->sentence),
+        'first_price' => $first = rand ( 10000 , 99999 ),
+        'discount' => $disc = rand ( 1000 , 9999 ),
+        'price' => $first-$disc,
+        'weight' => 1,
         'description' => $faker->paragraph,
-        'img'     => null,
+        'type' => rand(0,1),
         'comment' => rand(0,1),
         'status'  => rand(0,1),
         'sticky'  => rand(0,1),

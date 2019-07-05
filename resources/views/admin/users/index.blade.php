@@ -17,7 +17,6 @@
                 <table class="table table-bordered" id="users-table">
                     <thead>
                         <tr>
-                            <th>Id</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Joined</th>
@@ -42,7 +41,6 @@
                 serverSide: true,
                 ajax: '{!! route('get.users') !!}',
                 columns: [
-                        { data: 'id', name: 'id' },
                         { data: 'name', name: 'name' },
                         { data: 'email', name: 'email' },
                         { data: 'created_at', name: 'created_at' },
