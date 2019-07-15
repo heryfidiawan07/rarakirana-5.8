@@ -39,7 +39,7 @@
             <div class="col-sm-9">
                 @if ($products->count())
                     <div class="row">
-                        @foreach ($products->where('etalase.status',1)->where('status',1) as $product)
+                        @foreach ($products as $product)
                             @include('products.thumb-content')
                         @endforeach
                         <div class="col-md-12 col-lg-12">

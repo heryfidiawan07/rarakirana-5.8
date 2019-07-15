@@ -86,11 +86,10 @@ class PostController extends Controller
             'sticky' => 'required',
             'img' => 'mimes:jpeg,jpg,bmp,png',
         ]);
-        $cekSlug = Post::whereSlug(str_slug($request->title))->first();
-        if ($cekSlug) {
-            $slug = str_slug($request->title).date('His');
-        }else{
-            $slug = str_slug($request->title);
+        $slug = str_slug($request->title);
+        $slugDuplicate = Post::whereSlug($slug)->first();
+        if ($slugDuplicate) {
+            $slug = $slug.'-'.date('His');
         }
         $img  = $request->file('img');
         if (!empty($img)) {
@@ -155,15 +154,12 @@ class PostController extends Controller
             'sticky' => 'required',
             'img' => 'mimes:jpeg,jpg,bmp,png',
         ]);
-        $post    = Post::find($id);
-        $cekSlug = Post::whereSlug(str_slug($request->title))->first();
-        if (!$cekSlug) {
-            $slug = str_slug($request->title);//dd('tidak ada');
-        }else{
-            if ($cekSlug->id == $post->id) {
-                $slug = str_slug($request->title);//dd('dirinya sendiri');
-            }else {
-                $slug = str_slug($request->title).date('His');//dd('ada di post lain');
+        $post   = Post::find($id);
+        $slug   = str_slug($request->title);
+        $slugDuplicate = Post::whereSlug($slug)->first();
+        if ($slugDuplicate) {
+            if ($slugDuplicate->id != $post->id) {
+                $slug = $slug.'-'.date('His');
             }
         }
         $img  = $request->file('img');

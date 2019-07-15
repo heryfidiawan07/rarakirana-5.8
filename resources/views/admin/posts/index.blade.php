@@ -21,7 +21,7 @@
                         <small class="danger">{{ session('status') }}</small>
                     @endif
                 </div>
-                <div class="table-responsive">
+                <div class="table-responsive p-2">
                     <table class="table table-hover" id="post-table">
                         <thead>
                             <tr>

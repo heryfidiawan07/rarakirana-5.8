@@ -27,53 +27,75 @@
                         <p class="text-danger">Please setup product etalase !</p>
                     @endif
                 </div>
-                <div class="table-responsive">
-                    <table class="table table-hover" id="product-table">
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Price</th>
-                                <th>Etalase</th>
-                                <th>Type</th>
-                                <th>Discus</th>
-                                <th>Created</th>
-                                <th>Author</th>
-                                <th>Status</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
+                    <div class="table-responsive p-2">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Image</th>
+                                    <th>Title</th>
+                                    <th>Price</th>
+                                    <th>Etalase</th>
+                                    <th>Type</th>
+                                    <th>Discus</th>
+                                    <th>Created</th>
+                                    <th>Author</th>
+                                    <th>Status</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            @foreach ($products as $product)
+                                <tr>
+                                    <td>{{$i}}</td>
+                                    <td class="td-100">
+                                        <img @if ($product->pictures->count() < 1)src="/products/thumb/no-image.png"@else src="/products/thumb/{{$product->pictures[0]->img}}"@endif width="100">
+                                    </td>
+                                    <td class="td-150">
+                                        <a href="/show/product/{{$product->slug}}" class="text-link @if($product->sticky=1) sticky @endif">{{str_limit($product->title, 50)}}</a>
+                                    </td>
+                                    <td class="td-100">Rp {{number_format($product->price)}}</td>
+                                    <td>
+                                        <a href="/product/etalase/{{$product->etalase->slug}}">{{$product->etalase->name}}</a>
+                                    </td>
+                                    <td>
+                                        @if ($product->type=1)
+                                            <i class="text-success">Online</i>
+                                        @else
+                                            <i class="text-muted">Offline</i>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($product->comment=1)
+                                            <i class="text-success">Yes</i>
+                                        @else
+                                            <i class="text-danger">No</i>
+                                        @endif
+                                    </td>
+                                    <td class="td-100"><small>{{ date('d F, Y', strtotime($product->created_at))}}</small></td>
+                                    <td class="td-100">{{str_limit($product->user->name, 10)}}</td>
+                                    <td>
+                                        @if ($product->status == 0)
+                                            <i class="text-danger">Draft</i>
+                                        @else
+                                            <i class="text-success">Active</i>
+                                        @endif
+                                    <td>
+                                        <a href="/admin/product/'.$product->id.'/edit" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
+                                    </td>
+                                    <td>@include('admin.products.delete')</td>
+                                </tr>
+                                <tr>
+                                    <td>@include('admin.products.quick-edit')</td>
+                                </tr>
+                                <?php $i++ ?>
+                            @endforeach
+                        </table>
+                    </div>
+                <div class="card-footer">{{$products->links()}}</div>
             </div>
         </div>
 
     </div>
 </div>
-@endsection
-
-@section('js')
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready( function () {
-            $('#product-table').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '{!! route('get.products') !!}',
-                columns: [
-                        { data: 'title', name: 'title' },
-                        { data: 'price', name: 'price' },
-                        { data: 'etalase.name', name: 'etalase.name' },
-                        { data: 'type', name: 'type' },
-                        { data: 'comment', name: 'comment' },
-                        { data: 'created_at', name: 'created_at' },
-                        { data: 'user.name', name: 'user.name'},
-                        { data: 'status', name: 'status' },
-                        { data: 'edit', name: 'edit', orderable: false, searchable: false},
-                        { data: 'delete', name: 'delete', orderable: false, searchable: false},
-                    ]
-                });
-        });
-    </script>
 @endsection
