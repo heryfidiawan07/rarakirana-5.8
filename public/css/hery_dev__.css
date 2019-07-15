@@ -158,8 +158,8 @@ iframe {
     font-weight: bold;
     font-style: italic;
 }
-td {
-    min-width: 100px;
+.td-100 {
+    min-width: 100px !important;
 }
 .td-150 {
     min-width: 150px !important;

@@ -57,7 +57,7 @@
                     <p class="text-orange text-size-15 bold">
                         Rp {{number_format($product->price)}}
                         @if ($product->discount > 0)
-                            <span class="text-size-15 text-sale">SALE</span>
+                            <span class="text-sale">Sale</span>
                         @endif
                     </p>
                     <p class="text-center">

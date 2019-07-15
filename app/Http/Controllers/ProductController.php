@@ -24,60 +24,9 @@ class ProductController extends Controller
     public function index(){
         $adminAdd = Address::where('origin',1)->first();
         $etalases = Etalase::all();
-        return view('admin.products.index', compact('adminAdd','etalases'));
-    }
-    
-    public function getProducts(){
-        $products = Product::latest()->with('user')->with('etalase')->get();
-
-        return Datatables::of($products)
-        ->editColumn('title', function ($product) {
-            if ($product->sticky==0) {
-                return '<a href="/show/product/'.$product->slug.'" class="text-link">'.$product->title.'</a>';
-            }
-            if ($product->sticky==1) {
-                return '<a href="/show/product/'.$product->slug.'" class="text-link text-success">'.$product->title.'</a>';
-            }
-        })
-        ->editColumn('created_at', function ($product) {
-            return date('d-F-Y', strtotime($product->created_at));
-        })
-        ->addColumn('edit', function ($product) {
-            return '<a href="/admin/product/'.$product->id.'/edit" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>';
-        })
-        ->addColumn('delete', function ($product) {
-            return '<a class="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target=".delete-product-'.$product->id.'"><i class="fas fa-trash"></i></a>
-
-                <div class="modal fade delete-product-'.$product->id.'" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5>Delete Product '.$product->title.' ?</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            </div>
-                            <div class="modal-body">
-                                <a class="btn btn-danger btn-sm" href="/admin/product/'.$product->id.'/delete">Delete !</a>
-                                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>';
-        })
-        ->editColumn('price', 'Rp {{number_format($price)}}')
-        ->editColumn('status', function ($product) {
-            if ($product->status == 0) return '<span class="text-danger">Draft</span>';
-            if ($product->status == 1) return '<span class="text-success">Publish</span>';
-        })
-        ->editColumn('comment', function ($product) {
-            if ($product->comment == 0) return '<i class="fas fa-times text-danger"></i>';
-            if ($product->comment == 1) return '<i class="fas fa-check text-success"></i>';
-        })
-        ->editColumn('type', function ($product) {
-            if ($product->status == 0) return '<span class="text-info">Online</span>';
-            if ($product->status == 1) return '<span class="text-secondary">Offline</span>';
-        })
-        ->rawColumns(['title','status','type','comment','edit','delete', 'confirmed'])
-        ->make(true);
+        $products = Product::orderBy('sticky','DESC')->paginate(10);
+        $i        = 1;
+        return view('admin.products.index', compact('adminAdd','etalases','products', 'i'));
     }
     
     public function create(){
@@ -104,11 +53,10 @@ class ProductController extends Controller
             'img.*' => 'required|mimes:jpeg,jpg,bmp,png',
         ]);
         $images = $request->file('img');
-        $cekSlug = Product::whereSlug(str_slug($request->title))->first();
-        if ($cekSlug) {
-            $slug = str_slug($request->title).date('His');
-        }else{
-            $slug = str_slug($request->title);
+        $slug = str_slug($request->title);
+        $slugDuplicate = Product::whereSlug($slug)->first();
+        if ($slugDuplicate) {
+            $slug = $slug.'-'.date('His');
         }
         if (empty($images)) {
             return redirect("admin/product/create")->with('warning','Gambar product tidak boleh kosong !');
@@ -173,18 +121,13 @@ class ProductController extends Controller
         ]);
         $product = Product::find($id);
         $images = $request->file('img');
-
-        $cekSlug = Product::whereSlug(str_slug($request->title))->first();
-        if (!$cekSlug) {
-            $slug = str_slug($request->title);//dd('tidak ada');
-        }else{
-            if ($cekSlug->id == $product->id) {
-                $slug = str_slug($request->title);//dd('dirinya sendiri');
-            }else {
-                $slug = str_slug($request->title).date('His');//dd('ada di product lain');
+        $slug = str_slug($request->title);
+        $slugDuplicate = Product::whereSlug($slug)->first();
+        if ($slugDuplicate) {
+            if ($slugDuplicate->id != $product->id) {
+                $slug = $slug.'-'.date('His');
             }
         }
-
         if (empty($images) && $product->pictures->count()==0) {
             return redirect("admin/product/{$product->id}/edit")->with('warning','Gambar product tidak boleh kosong !');
         }else{
@@ -268,7 +211,15 @@ class ProductController extends Controller
     public function etalase($slug){
         $etalase = Etalase::whereSlug($slug)->first();
         if ($etalase->status==1) {
-            $products = $etalase->products()->orderBy('sticky','DESC')->latest()->paginate(9);
+            if ($etalase->childs()->count() > 0) {
+                $products = Product::where('status',1)->whereHas('etalase', function ($query) use ($etalase) {
+                                            $query->where('status', 1)->where('parent_id',$etalase->id);
+                                        })->orderBy('sticky','DESC')->paginate(9);
+            }else{
+                $products = Product::where('status',1)->whereHas('etalase', function ($query) use ($etalase) {
+                                            $query->where('status', 1)->where('id',$etalase->id);
+                                        })->orderBy('sticky','DESC')->paginate(9);
+            }
             $etalases = Etalase::where('menu_id',$etalase->menu->id)->where('parent_id',0)->get();
             return view('products.etalase', compact('products','etalases','etalase'));
         }

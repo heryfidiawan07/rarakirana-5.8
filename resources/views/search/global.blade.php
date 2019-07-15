@@ -60,5 +60,14 @@
             @endif
         </div>
     @endif
+
+    <div class="row">
+        @if ($products->count() < 1 && $posts->count() < 1 && $threads->count() < 1)
+            <div class="alert alert-light" role="alert">
+              Pencarian tidak di temukan.
+            </div>
+        @endif
+    </div>
+
 </div>
 @endsection
