@@ -4,10 +4,10 @@
             <div class="products-scroll">
                 <div class="product-frame">
                     <img @if($product->pictures->count()) src="/products/thumb/{{$product->pictures[0]->img}}" @else src="/products/thumb/no-image.png" @endif height="180" class="rounded mx-auto d-block product-img-index">
-                    <p class="text-center text-wrap mt-2">
+                    <p class="frame-text-3em text-center text-wrap mt-2">
                         <a class="parent-color bold text-link hover-unbold @if($product->sticky==1) sticky @endif" href="/show/product/{{$product->slug}}">{{str_limit($product->title,40)}}</a>
                     </p>
-                    <p class="text-center">
+                    <p class="frame-text-3em text-center">
                         <span class="text-orange bold">Rp {{number_format($product->price)}}</span>
                         @if ($product->discount > 0)
                             <span class="text-sale">Sale</span>

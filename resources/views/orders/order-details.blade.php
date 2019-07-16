@@ -34,13 +34,13 @@
                         @foreach ($details as $detail)
                             <div class="col-md-4">
                                 <div class="product-frame">
-                                    <img src="/products/thumb/{{$detail->product->pictures[0]->img}}" height="150" class="rounded mx-auto d-block product-img-index">
+                                    <img src="/products/thumb/{{$detail->product->pictures[0]->img}}" height="180" class="rounded mx-auto d-block product-img-index">
                                     <div class="frame-text-3em text-center">
                                         <a class="parent-color bold text-link hover-unbold" href="/show/product/{{$detail->product->slug}}">{{str_limit($detail->product->title, 40)}}</a>
                                     </div>
                                     <div class="text-center mt-1">
                                             @if ($detail->product->discount > 0)
-                                                <span class="text-sale"> SALE</span>
+                                                <span class="text-sale"> Sale</span>
                                             @endif
                                             <p>Rp {{number_format($detail->product->price)}} x <i>{{$detail->qty}}</i> = <b>Rp {{number_format($detail->product->price*$detail->qty)}}</b></p>
                                     </div>
@@ -65,24 +65,24 @@
                     <div class="table-raponsive">
                         <table class="table table-hover">
                             <tr>
-                                <td>No Order:</td>
-                                <td>{{$order->no_order}}</td>
+                                <td>No Order</td>
+                                <td>: {{$order->no_order}}</td>
                             </tr>
                             <tr>
-                                <td>Note:</td>
-                                <td>{{$order->note}}</td>
+                                <td>Note</td>
+                                <td>: {{$order->note}}</td>
                             </tr>
                             <tr>
-                                <td>Kurir:</td>
-                                <td>{{strtoupper($order->kurir)}} - {{$order->services}}</td>
+                                <td>Kurir</td>
+                                <td>: {{strtoupper($order->kurir)}} - {{$order->services}}</td>
                             </tr>
                             <tr>
-                                <td>Ongkir:</td>
-                                <td>Rp {{number_format($order->ongkir)}}</td>
+                                <td>Ongkir</td>
+                                <td>: Rp {{number_format($order->ongkir)}}</td>
                             </tr>
                             <tr>
-                                <td>Total Price:</td>
-                                <td>Rp {{number_format($order->total_price)}}</td>
+                                <td>Total Price</td>
+                                <td>: Rp {{number_format($order->total_price)}}</td>
                             </tr>
                         </table>
                     </div>

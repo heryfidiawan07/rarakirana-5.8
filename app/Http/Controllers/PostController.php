@@ -30,7 +30,7 @@ class PostController extends Controller
 
     public function getPosts()
     {   
-        $posts = Post::latest()->with('user')->with('menu')->get();
+        $posts = Post::orderBy('sticky')->with('user')->with('menu')->get();
 
         return Datatables::of($posts)
         ->addColumn('img', function ($post) { 

@@ -4,7 +4,7 @@
     <div class="form-group">
         <label>Order Status</label>
         <select class="form-control" name="order_status">
-            <option value="">Select</option>
+            <option value="{{$order->status}}">{{$orderStatus[$order->status]}}</option>
             @foreach ($orderStatus as $key => $ordersts)
                 <option value="{{$key}}">{{$ordersts}}</option>
             @endforeach
@@ -13,7 +13,11 @@
     <div class="form-group">
         <label>Payment Status</label>
         <select class="form-control" name="pay_status">
-            <option value="">Select</option>
+            @if ($order->payment)
+                <option value="$order->payment->status">{{$payStatus[$order->payment->status]}}</option>
+            @else
+                <option value="">Select</option>
+            @endif
             @foreach ($payStatus as $key => $paysts)
                 <option value="{{$key}}">{{$paysts}}</option>
             @endforeach

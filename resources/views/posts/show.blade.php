@@ -12,11 +12,14 @@
         <div class="col-md-7">
             <p class="parent-color bold text-size-15 text-center">{{$post->title}}</p>
             @if ($post->img != null)
-                <img src="/posts/img/{{$post->img}}" alt="{{$post->title}}">
+                <div class="text-center">
+                    <img src="/posts/img/no-image.png" alt="{{$post->title}}">
+                </div>
             @endif
             <div class="mb-3">
                 {!! nl2br($post->description) !!}
-                <i class="far fa-calendar-alt"></i> {{ date('d F, Y', strtotime($post->created_at))}}
+                <br>
+                <p class="italic"><i class="far fa-calendar-alt"></i> {{ date('d F, Y', strtotime($post->created_at))}}</p>
             </div>
             @if ($post->comment==1)
                 <hr>

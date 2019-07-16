@@ -83,7 +83,7 @@
     @endforeach
 @endif
 
-<form method="POST" action="/post/{{$post->slug}}/comment/store">
+@auth <form method="POST" action="/post/{{$post->slug}}/comment/store"> @endif
     @auth @csrf @endif
     <div class="form-group">
         <textarea rows="5" name="description" class="form-control" placeholder="Leave comment" required @guest disabled @endif>{{old('description')}}</textarea>
@@ -91,4 +91,4 @@
     <div class="form-group">
         <button class="btn btn-primary btn-sm" @guest disabled @endif><i class="fas fa-paper-plane"></i></button>
     </div>
-</form>
+@auth </form> @endif

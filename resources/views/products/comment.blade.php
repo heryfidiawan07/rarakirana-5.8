@@ -83,12 +83,12 @@
     @endforeach
 @endif
 
-<form method="POST" action="/product/{{$product->slug}}/comment/store">
+@auth <form method="POST" action="/product/{{$product->slug}}/comment/store"> @endif
     @auth @csrf @endif
     <div class="form-group">
-        <textarea rows="3" name="description" class="form-control" placeholder="Diskusi" required @if (!Auth::user()) disabled @endif>{{old('description')}}</textarea>
+        <textarea rows="3" name="description" class="form-control" placeholder="Diskusi" required @guest disabled @endif>{{old('description')}}</textarea>
     </div>
     <div class="form-group">
-        <button class="btn btn-primary btn-sm"><i class="fas fa-paper-plane" @if (!Auth::user()) disabled @endif></i></button>
+        <button class="btn btn-primary btn-sm" @guest disabled @endif><i class="fas fa-paper-plane"></i></button>
     </div>
-</form>
+@auth </form> @endif

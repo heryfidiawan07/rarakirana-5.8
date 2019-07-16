@@ -27,11 +27,10 @@ class PaymentController extends Controller
         $order    = Order::where('private_token', $validate->private_token)->first();
         if ($order) {
             if (Auth::user()->id === $order->user_id) {
+                $imgName = 'no-image.png';
                 if ($request->file('image_resi')->isValid()) {
                     $imgName = $order->no_order.'.'.$request->file('image_resi')->getClientOriginalExtension();
-                    $request->file('image_resi')->move(public_path('payment'), $imgName);
-                }else {
-                    $imgName = 'no-image.png';
+                    request()->image_resi->move(public_path('payment'), $imgName);
                 }
                 Payment::create([
                     'no_invoice' => 'INV/IRA/'.date("His").'/'.date("YmdHis"),
