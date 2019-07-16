@@ -48,7 +48,7 @@
                         </div>
                     @endforeach
                 </div>
-                <div class="card">
+                <div class="card mt-3">
                     <div class="card-header">Sub Total</div>
                     <div class="card-body">
                         <p> Harga Produk Rp <span id="subTotal" data-value="{{$totalPrice}}">{{number_format($totalPrice)}}</span></p>

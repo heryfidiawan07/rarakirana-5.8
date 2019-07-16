@@ -52,21 +52,22 @@
                                         <img @if ($product->pictures->count() < 1)src="/products/thumb/no-image.png"@else src="/products/thumb/{{$product->pictures[0]->img}}"@endif width="100">
                                     </td>
                                     <td class="td-150">
-                                        <a href="/show/product/{{$product->slug}}" class="text-link @if($product->sticky=1) sticky @endif">{{str_limit($product->title, 50)}}</a>
+                                        <a href="/show/product/{{$product->slug}}" class="text-link @if($product->sticky==1) sticky @endif">{{str_limit($product->title, 50)}}</a>
                                     </td>
-                                    <td class="td-100">Rp {{number_format($product->price)}}</td>
-                                    <td>
+                                    <td class="td-150">Rp {{number_format($product->price)}}</td>
+                                    <td class="td-100">
+                                        <i class="fas fa-user"></i> 
                                         <a href="/product/etalase/{{$product->etalase->slug}}">{{$product->etalase->name}}</a>
                                     </td>
                                     <td>
-                                        @if ($product->type=1)
+                                        @if ($product->type==1)
                                             <i class="text-success">Online</i>
                                         @else
                                             <i class="text-muted">Offline</i>
                                         @endif
                                     </td>
                                     <td>
-                                        @if ($product->comment=1)
+                                        @if ($product->comment==1)
                                             <i class="text-success">Yes</i>
                                         @else
                                             <i class="text-danger">No</i>
@@ -78,7 +79,7 @@
                                         @if ($product->status == 0)
                                             <i class="text-danger">Draft</i>
                                         @else
-                                            <i class="text-success">Active</i>
+                                            <i class="text-success">Publish</i>
                                         @endif
                                     <td>
                                         <a href="/admin/product/'.$product->id.'/edit" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
