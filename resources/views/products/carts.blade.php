@@ -14,7 +14,7 @@
                     @foreach ($products as $product)
                         <div class="col-md-6">
                             <div class="product-frame">
-                                <img src="/products/thumb/{{$product['item']->pictures[0]['img']}}" height="150" class="rounded mx-auto d-block product-img-index">
+                                <img src="/products/thumb/{{$product['item']->pictures[0]['img']}}" height="180" class="rounded mx-auto d-block product-img-index">
                                 <div class="frame-text-3em">
                                     <p class="text-center">
                                         <a class="text-link parent-color bold" href="/show/product/{{$product['item']['slug']}}">{{str_limit($product['item']['title'], 50)}}</a>
@@ -72,7 +72,7 @@
                             @include('products.form-login')
                         @else
                             @if ($addresses)
-                                <div style="max-height: 250px; overflow-x: scroll;">
+                                <div class="overflow-auto" style="max-height: 250px;">
                                     @foreach ($addresses as $address)
                                         @include('products.cart-address-details')
                                     @endforeach

@@ -61,9 +61,11 @@
                                     <p>{{$order->address->penerima}}</p>
                                     {{strip_tags($order->address->address)}}, {{$order->address->kecamatan}}, {{$order->address->kabupaten}}, {{$order->address->provinsi}}, {{$order->address->phone}}
                                     <hr>
-                                    @if ($order->payment->status == 1)
-                                        <a href="/admin/order/{{$order->slug_token}}/download" target="_blank" class="btn btn-success btn-sm">Download</a>
-                                        <a href="/admin/order/{{$order->slug_token}}/stream" target="_blank" class="btn btn-info btn-sm">Open & Print</a>
+                                    @if ($order->payment)
+                                        @if ($order->payment->status == 1)
+                                            <a href="/admin/order/{{$order->slug_token}}/download" target="_blank" class="btn btn-success btn-sm">Download</a>
+                                            <a href="/admin/order/{{$order->slug_token}}/stream" target="_blank" class="btn btn-info btn-sm">Open & Print</a>
+                                        @endif
                                     @endif
                                 </div>
                             </td>
