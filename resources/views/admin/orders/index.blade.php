@@ -45,11 +45,13 @@
                             </td>
                         </tr>
                         <tr>
-                            @if ($order->payment->status ==1 )
-                                <td>
-                                    <b>{{$order->resi_kurir}}</b>
-                                    @include('admin.orders.form-resi')
-                                </td>
+                            @if ($order->payment)
+                                @if ($order->payment->status ==1 )
+                                    <td>
+                                        <b>{{$order->resi_kurir}}</b>
+                                        @include('admin.orders.form-resi')
+                                    </td>
+                                @endif
                             @endif
                             <td>
                                 @include('admin.orders.form-manual-update')

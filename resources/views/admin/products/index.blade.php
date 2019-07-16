@@ -56,11 +56,10 @@
                                     </td>
                                     <td class="td-150">Rp {{number_format($product->price)}}</td>
                                     <td class="td-100">
-                                        <i class="fas fa-user"></i> 
                                         <a href="/product/etalase/{{$product->etalase->slug}}">{{$product->etalase->name}}</a>
                                     </td>
                                     <td>
-                                        @if ($product->type==1)
+                                        @if ($product->type==0)
                                             <i class="text-success">Online</i>
                                         @else
                                             <i class="text-muted">Offline</i>
@@ -74,7 +73,10 @@
                                         @endif
                                     </td>
                                     <td class="td-100"><small>{{ date('d F, Y', strtotime($product->created_at))}}</small></td>
-                                    <td class="td-100">{{str_limit($product->user->name, 10)}}</td>
+                                    <td class="td-100">
+                                        <i class="fas fa-user"></i> 
+                                        {{str_limit($product->user->name, 10)}}
+                                    </td>
                                     <td>
                                         @if ($product->status == 0)
                                             <i class="text-danger">Draft</i>

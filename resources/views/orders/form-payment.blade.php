@@ -5,7 +5,7 @@
         <input type="text" name="pengirim" class="form-control" placeholder="Nama Pengirim" value="{{old('pengirim')}}" required>
     </div>
     <div class="form-group">
-        <label>Upload Resi / Bukti Pengiriman</label>
+        <label>Upload resi / Bukti transfer</label>
         <input type=file name="image_resi" class="form-control-file">
     </div>
     <div class="form-group">
