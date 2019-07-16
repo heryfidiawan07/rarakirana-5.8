@@ -3,8 +3,8 @@
         @foreach($products->where('etalase.status',1) as $product)
             <div class="products-scroll">
                 <div class="product-frame">
-                    <img src=@if($product->pictures->count()) "/products/thumb/{{$product->pictures[0]->img}}"@else"/products/thumb/no-image.png" @endif height="150" class="rounded mx-auto d-block product-img-index">
-                    <p class="text-center text-wrap">
+                    <img @if($product->pictures->count()) src="/products/thumb/{{$product->pictures[0]->img}}" @else src="/products/thumb/no-image.png" @endif height="180" class="rounded mx-auto d-block product-img-index">
+                    <p class="text-center text-wrap mt-2">
                         <a class="parent-color bold text-link hover-unbold @if($product->sticky==1) sticky @endif" href="/show/product/{{$product->slug}}">{{str_limit($product->title,40)}}</a>
                     </p>
                     <p class="text-center">

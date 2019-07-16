@@ -42,17 +42,17 @@
                                             @if ($detail->product->discount > 0)
                                                 <span class="text-sale"> SALE</span>
                                             @endif
-                                            <p>Rp {{number_format($detail->product->price)}} x {{$detail->qty}} = Rp {{number_format($detail->product->price*$detail->qty)}}</p>
+                                            <p>Rp {{number_format($detail->product->price)}} x <i>{{$detail->qty}}</i> = <b>Rp {{number_format($detail->product->price*$detail->qty)}}</b></p>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
                         <div class="col-md-12">
-                            <div class="card">
+                            <div class="card mt-3">
                                 <div class="card-header">Sub Total</div>
                                 <div class="card-body">
                                     <p>Harga Produk Rp <span class="bold">{{number_format($order->total_price-$order->ongkir)}}</span></p>
-                                    <p>Ongkir       Rp <span class="bold">{{number_format($order->ongkir)}}</span></p>
+                                    <p>Ongkir Rp <span class="bold">{{number_format($order->ongkir)}}</span></p>
                                 </div>
                                 <div class="card-footer">
                                     Total Rp <span class="bold">{{number_format($order->total_price)}}</span>
