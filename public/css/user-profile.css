@@ -16,3 +16,6 @@
 #textarea-user-description {
     display: none;
 }
+.imgCaptionEdit:hover {
+    color: blue;
+}

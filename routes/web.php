@@ -160,8 +160,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/order/{slug}/arrived/{token}/create', 'UserController@arrivedOrder');
     // ======== User Profile
     Route::post('/user/{slug}/upload/img', 'UserController@uploadImg');
-    Route::post('/user/{slug}/create/description', 'UserController@createDesc');
-    Route::post('/user/{slug}/update/description', 'UserController@updateDesc');
+    Route::post('/user/{slug}/description', 'UserController@description');
     Route::post('/user/{slug}/edit/name', 'UserController@updateName');
     Route::get('/user/{slug}/invoice/{token}', 'UserController@streamInvoice');
 });

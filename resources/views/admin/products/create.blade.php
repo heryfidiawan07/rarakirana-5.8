@@ -129,6 +129,5 @@
 @section('js')
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
     <script src="/js/products/mce-product.js"></script>
-    <script type="text/javascript" src="/js/admin-dashboard.js"></script>
     <script type="text/javascript" src="/js/multiple-upload.js"></script>
 @endsection

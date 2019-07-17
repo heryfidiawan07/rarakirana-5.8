@@ -132,45 +132,36 @@ class UserController extends Controller
         return view('errors.404');
     }
 
-    public function createDesc(Request $request, $slug){
-        $data = request()->validate([
-            'description' => 'required',
+    public function description(Request $request, $slug){
+        $request->validate([
+            'description' => 'required|max:255',
         ]);
         $user = User::whereSlug($slug)->first();
-        if (Auth::user()->id == $user->id) {
-            $user->biodata()->create([
-                'description' => Purifier::clean($request->description),
-            ]);
-            return back();
-        }
-        return view('errors.404');
-    }
-    
-    public function updateDesc(Request $request, $slug){
-        $data = request()->validate([
-            'description' => 'required',
-        ]);
-        $user = User::whereSlug($slug)->first();
-        if (Auth::user()->id == $user->id) {
-            $user->biodata()->update([
-                'description' => Purifier::clean($request->description),
-            ]);
+        if (Auth::user()->id == $user->id){
+            if (! $user->description) {
+                $user->biodata()->create([
+                    'description' => $request->description,
+                ]);
+            }else {
+                $user->biodata()->update([
+                    'description' => $request->description,
+                ]);
+            }
             return back();
         }
         return view('errors.404');
     }
     
     public function updateName(Request $request, $slug){
-        $data = request()->validate([
+        $request->validate([
             'name' => 'required|min:3|max:50',
         ]);
         $user = User::whereSlug($slug)->first();
         if (Auth::user()->id == $user->id) {
-            $cekSlug = User::where('slug',str_slug($request->name))->first();
-            if ($cekSlug) {
+            $chekSlug = User::where('slug',str_slug($request->name))->first();
+            $slug     = str_slug($request->name);
+            if ($chekSlug) {
                 $slug = str_slug($request->name).date('His');
-            }else {
-                $slug = str_slug($request->name);
             }
             $user->update([
                 'name' => $request->name,

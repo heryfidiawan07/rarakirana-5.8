@@ -8,6 +8,7 @@
 
 @section('css')
     <link rel="stylesheet" type="text/css" href="/css/user-profile.css">
+    <link rel="stylesheet" type="text/css" href="/css/upload.css">
 @endsection
 
 @section('content')
@@ -50,5 +51,5 @@
 @endsection
 
 @section('js')
-    <script type="text/javascript" src="/js/user/profile.js"></script>
+    <script type="text/javascript" src="/js/upload.js"></script>
 @endsection

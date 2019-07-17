@@ -1,29 +1,42 @@
 @if ($user->biodata)
-    <div id="text-user-description">{!! nl2br(strip_tags($user->biodata->description)) !!}</div> 
-        @auth
-            @if (Auth::user()->id === $user->id)
-                <i class="fas fa-edit text-primary" id="btn-user-desc-edit"></i> 
-                <form method="POST" action="/user/{{$user->slug}}/update/description">
-                    @csrf
-                    <textarea rows="5" id="textarea-user-description" name="description" class="form-control mb-1" required>{!! strip_tags(nl2br($user->biodata->description)) !!}</textarea>
-                    <button class="btn btn-primary btn-sm" id="btn-user-desc-save"><i class="fas fa-paper-plane"></i></button>
-                    <button class="btn bg-silver btn-sm" id="btn-user-desc-cancel">Cancel</button>
-                </form>
-            @endif 
-        @endif
+    <div class="media">
+        {!! strip_tags(nl2br($user->biodata->description)) !!}
+    </div>
 @endif
+
 @auth
-    @if(Auth::user()->id == $user->id)
-        @if (!$user->biodata)
-            <form method="POST" action="/user/{{$user->slug}}/create/description">
-                @csrf
-                <div class="form-group">
-                    <textarea name="description" rows="5" class="form-control" placeholder="Tentang anda">{{old('description')}}</textarea>
+    @if (Auth::user()->id === $user->id)
+        <button type="button" class="btn btn-light btn-sm mt-2" data-toggle="modal" data-target="#editDescription">
+            @if ($user->biodata)
+                <i class="fas fa-edit"></i>
+            @else
+                Tambahkan deskripsi tentang anda
+            @endif
+        </button>
+
+        <div class="modal fade" id="editDescription" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <form method="POST" action="/user/{{$user->slug}}/description">
+                            @csrf
+                            @if ($user->biodata)
+                                <textarea rows="5" name="description" class="form-control mb-1 {{ $errors->has('description') ? ' is-invalid' : '' }}" required>{!! strip_tags(nl2br($user->biodata->description)) !!}</textarea>
+                            @else
+                                <textarea rows="5" name="description" class="form-control mb-1 {{ $errors->has('description') ? ' is-invalid' : '' }}" placeholder="Tentang anda" required>{{old('description')}}</textarea>
+                            @endif
+                            </textarea>
+                            @if ($errors->has('description'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('description') }}</strong>
+                                </span>
+                            @endif
+                            <button class="btn btn-primary btn-sm">Save</button>
+                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <button class="btn btn-success btn-sm"><i class="fas fa-paper-plane"></i></button>
-                </div>
-            </form>
-        @endif
+            </div>
+        </div>
     @endif
 @endif
