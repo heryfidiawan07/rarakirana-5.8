@@ -1,6 +1,8 @@
 <div class="col-sm-6 col-md-6 col-xl-4 mb-3">
     <div class="product-frame">
-        <img @if ($product->pictures->count() < 1)src="/products/thumb/no-image.png"@else src="/products/thumb/{{$product->pictures[0]->img}}"@endif height="180" class="rounded mx-auto d-block product-img-index bg-light">
+        <a href="/show/product/{{$product->slug}}">
+            <img @if ($product->pictures->count() < 1)src="/products/thumb/no-image.png"@else src="/products/thumb/{{$product->pictures[0]->img}}"@endif height="180" class="rounded mx-auto d-block product-img-index bg-light">
+        </a>
         <div class="frame-text-3em text-center mt-2">
             <a class="parent-color bold text-link hover-unbold @if($product->sticky==1) sticky @endif" href="/show/product/{{$product->slug}}">{{str_limit($product->title,40)}}</a>
         </div>

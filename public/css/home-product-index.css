@@ -1,12 +1,12 @@
 /*Products Scroll*/
 .products-scroll-frame {
-    overflow-x: scroll;
+    overflow-x: auto;
     white-space: nowrap;
 }
 .products-scroll {
     display: inline-block;
     margin-left: 10px;
-    width: 255px;
+    width: 244px;
 }
 .product-frame {
     margin-bottom: 10px !important;
@@ -14,4 +14,12 @@
 .product-title .link-product-title {
     white-space: pre-line;
     font-size: 0.8em;
+}
+.post-img-index {
+    height: 120px;
+}
+@media only screen and (max-width: 400px) {
+    .post-img-index {
+        height: 200px;
+    }
 }

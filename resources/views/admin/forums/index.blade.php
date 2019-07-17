@@ -43,6 +43,7 @@
                         </table>
                     </div>
                 @endif
+                <div class="card-footer"><small>{{$forums->links()}}</small></div>
             </div>
         </div>
 

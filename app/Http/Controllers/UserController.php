@@ -158,10 +158,10 @@ class UserController extends Controller
         ]);
         $user = User::whereSlug($slug)->first();
         if (Auth::user()->id == $user->id) {
-            $chekSlug = User::where('slug',str_slug($request->name))->first();
             $slug     = str_slug($request->name);
+            $chekSlug = User::where('slug',$slug)->first();
             if ($chekSlug) {
-                $slug = str_slug($request->name).date('His');
+                $slug = $slug.'-'.date('His');
             }
             $user->update([
                 'name' => $request->name,

@@ -6,7 +6,7 @@ $factory->define(App\Product::class, function (Faker $faker) {
     $admin = App\User::where('role',1)->first();
     return [
         'user_id' => $admin->id,
-        'etalase_id' => rand(3,5),//Setting menu_id
+        'etalase_id' => 3,//Setting menu_id
         'title'   => $faker->sentence,
         'slug'    => str_slug($faker->sentence),
         'first_price' => $first = rand ( 10000 , 99999 ),
@@ -15,8 +15,8 @@ $factory->define(App\Product::class, function (Faker $faker) {
         'weight' => 1,
         'description' => $faker->paragraph,
         'type' => rand(0,1),
-        'comment' => rand(0,1),
-        'status'  => rand(0,1),
-        'sticky'  => rand(0,1),
+        'comment' => 1,
+        'status'  => 1,
+        'sticky'  => 0,
     ];
 });

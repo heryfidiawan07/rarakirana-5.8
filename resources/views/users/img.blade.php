@@ -19,6 +19,7 @@
                                 @csrf
                                 @include('parts.upload')
                                 <input type="submit" class="btn btn-primary btn-sm" value="Save">
+                                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
                             </form>
                         </div>
                     </div>

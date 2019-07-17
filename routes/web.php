@@ -106,6 +106,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/inbox/{id}/delete', 'InboxController@delete');
     // Product Offline
     Route::get('/admin/product/offline', 'OfflineController@index');
+    Route::get('/admin/product/stream/{id}', 'OfflineController@stream');
     Route::get('/admin/product/offline/{id}/delete', 'OfflineController@delete');
     // application
     Route::get('/admin/application', 'ApplicationController@index');
