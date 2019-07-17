@@ -16,7 +16,7 @@ class CreateBiodatasTable extends Migration
         Schema::create('biodatas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->string('gender')->nullable();
             $table->date('birthday')->nullable();
             $table->timestamps();

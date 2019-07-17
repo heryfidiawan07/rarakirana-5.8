@@ -1,19 +1,29 @@
 <div id="img-profile">
-    <img src="/users/{{$user->img}}" class="img-thumbnail mb-2">
+    <figure class="figure">
+        <img src="/users/{{$user->img}}" class="img-thumbnail mb-2">
+        @auth
+            @if (Auth::user()->id === $user->id)
+                <figcaption class="figure-caption text-center">
+                    <i class="fas fa-edit imgCaptionEdit" type="button" data-toggle="modal" data-target="#editPhoto"></i>
+                </figcaption>
+            @endif
+        @endif
+    </figure>
     @auth
         @if (Auth::user()->id === $user->id)
-            <form method="POST" action="/user/{{$user->slug}}/upload/img" enctype="multipart/form-data">
-                @csrf
-                <div class="input-group input-group-sm">
-                    <div class="custom-file">
-                        <input type="file" name="img" class="custom-file-input" id="input-user-img" aria-describedby="input-img">
-                        <label class="custom-file-label" for="input-user-img">Choose file</label>
-                    </div>
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" id="input-img">Save</button>
+            <div class="modal fade" id="editPhoto" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <form method="POST" action="/user/{{$user->slug}}/upload/img" enctype="multipart/form-data">
+                                @csrf
+                                @include('parts.upload')
+                                <input type="submit" class="btn btn-primary btn-sm" value="Save">
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </form>
+            </div>
         @endif
     @endif
 </div>
