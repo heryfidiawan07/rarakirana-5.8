@@ -12,10 +12,17 @@
 
         <h2 class="text-center text-success"><b>{{$app ? $app->name : 'Rarakirana'}}</b></h2>
         <small>
-            <p>Tanggal: {{ date('d F, Y', strtotime($order->created_at))}}</p>
+            <p>
+                Tanggal: {{ date('d F, Y', strtotime($order->created_at))}} | 
+                @if ($order->payment)
+                    {{$order->payment->no_invoice}}
+                @else
+                    {{$order->no_order}}
+                @endif
+            </p>
             <table class="table table-bordered">
                 <tr class="table-active">
-                    <td colspan="2">
+                    <td>
                         <b>Ringkasan Order</b>
                         @if ($order->payment)
                             @if ($order->payment->status == 1)
@@ -27,20 +34,18 @@
                             <small class="text-warning ml-3 italic">{{$userOrderStatus[$order->status]}}</small>
                         @endif
                     </td>
+                    <td></td>
                 </tr>
                 <tr>
-                    <td>
-                        Total Belanja
-                        @if ($order->payment)
-                            {{$order->payment->no_invoice}}
-                        @else
-                            {{$order->no_order}}
-                        @endif
-                    </td>
-                    <td><b>Rp {{number_format($order->total_price)}}</b></td>
+                    <td>Harga Produk</td>
+                    <td><b>Rp {{number_format($order->total_price-$order->ongkir)}}</b></td>
+                </tr>
+                <tr>
+                    <td>Ongkir</td>
+                    <td><b>Rp {{number_format($order->ongkir)}}</b></td>
                 </tr>
                 <tr class="table-secondary">
-                    <td>Subtotal Belanja</td>
+                    <td>Total Belanja</td>
                     <td><b>Rp {{number_format($order->total_price)}}</b></td>
                 </tr>
             </table>
@@ -110,7 +115,7 @@
                 </tr>
                 <tr class="table-active">
                     <td colspan="1"></td>
-                    <td colspan="3"><b>Subtotal Harga Produk</b></td>
+                    <td colspan="3"><b>Harga Produk</b></td>
                     <td><b>Rp {{number_format($order->total_price-$order->ongkir)}}</b></td>
                 </tr>
                 <tr>

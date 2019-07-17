@@ -2,17 +2,14 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Post::class, function (Faker $faker) {
-    $admin = App\User::where('role',1)->first();
+$factory->define(App\Forum::class, function (Faker $faker) {
     return [
-        'user_id' => $admin->id,
-        'menu_id' => 1,
+        'user_id' => rand(1,103),
+        'category_id' => rand(2,6),//Setting category_id
         'title'   => $faker->sentence,
         'slug'    => str_slug($faker->sentence),
         'description' => $faker->paragraph,
-        'img'     => null,
         'comment' => 1,
         'status'  => 1,
-        'sticky'  => 0,
     ];
 });

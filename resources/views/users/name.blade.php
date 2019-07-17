@@ -1,4 +1,4 @@
-<h3>
+<h3 class="bold">
     {{$user->name}}
     @auth
         @if (Auth::user()->id === $user->id)

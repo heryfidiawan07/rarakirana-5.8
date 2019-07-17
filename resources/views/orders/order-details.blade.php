@@ -34,7 +34,7 @@
                         @foreach ($details as $detail)
                             <div class="col-md-4">
                                 <div class="product-frame">
-                                    <img src="/products/thumb/{{$detail->product->pictures[0]->img}}" height="180" class="rounded mx-auto d-block product-img-index">
+                                    <img @if($detail->product->pictures->count() > 0) src="/products/thumb/{{$detail->product->pictures[0]->img}}" @else src="/products/thumb/no-image.png" @endif height="180" class="rounded mx-auto d-block product-img-index">
                                     <div class="frame-text-3em text-center">
                                         <a class="parent-color bold text-link hover-unbold" href="/show/product/{{$detail->product->slug}}">{{str_limit($detail->product->title, 40)}}</a>
                                     </div>

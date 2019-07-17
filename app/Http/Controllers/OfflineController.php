@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use Purifier;
 use App\Product;
 use App\Offline;
@@ -19,12 +20,12 @@ class OfflineController extends Controller
     }
     
     public function store(Request $request, $slug){
-        $data = request()->validate([
+        $request->validate([
             'phone' => 'required|max:12',
             'email' => 'required|max:50',
             'address' => 'required|max:500',
             'description' => 'required|max:5000',
-            // 'g-recaptcha-response' => 'required|captcha',
+            'g-recaptcha-response' => 'required|captcha',
         ]);
         $product = Product::whereSlug($slug)->first();
         if ($product) {
@@ -45,6 +46,15 @@ class OfflineController extends Controller
         $offline = Offline::find($id);
         if ($offline) {
             $offline->delete();
+        }
+        return back();
+    }
+    
+    public function stream($id){
+        $offer = Offline::find($id);
+        if ($offer) {
+            $pdf = PDF::loadView('admin.offlines.offer-pdf', compact('offer'));
+            return $pdf->stream();
         }
         return back();
     }

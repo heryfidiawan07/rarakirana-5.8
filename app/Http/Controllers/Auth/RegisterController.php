@@ -77,11 +77,10 @@ class RegisterController extends Controller
     
     protected function create(array $data)
     {   
-        $cekSlug = User::where('slug', str_slug($data['name']))->first();
-        if ($cekSlug) {
-            $slug = str_slug($data['name']).date('His');
-        }else{
-            $slug = str_slug($data['name']);
+        $slug = str_slug($data['name']);
+        $chekSlug = User::where('slug', $slug)->first();
+        if ($chekSlug) {
+            $slug = $slug.'-'.date('His');
         }
         $user = User::create([
             'name' => $data['name'],
