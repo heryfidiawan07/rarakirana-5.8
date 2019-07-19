@@ -1,14 +1,6 @@
-@extends('layouts.app')
-
-@section('css')
-    <link rel="stylesheet" type="text/css" href="/css/left-right-modal.css">
-@endsection
-
-@section('content')
-<div class="container-fluid">
+@include('admin.header')
     
-    <span class="parent-color bold text-size-15">Menu List</span>
-    @include('admin.left-sidebar')
+    <span id="panel-name">Menu</span>
             
 	<div class="row">
 
@@ -70,5 +62,5 @@
 		</div>
 
 	</div>
-</div>
-@endsection
+
+@include('admin.footer')

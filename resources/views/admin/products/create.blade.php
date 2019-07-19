@@ -1,18 +1,11 @@
-@extends('layouts.app')
-
-@section('css')
-    <link rel="stylesheet" type="text/css" href="/css/left-right-modal.css">
-    <link rel="stylesheet" type="text/css" href="/css/multiple-upload.css">
-@endsection
-
-@section('content')
-<div class="container">
+@include('admin.header')
     
-    <span class="parent-color bold text-size-15">Create Product</i></span>
-    @include('admin.left-sidebar')
+    <link rel="stylesheet" type="text/css" href="/css/multiple-upload.css">
+
+    <span id="panel-name">Create Product</span>    
 
     <form method="POST" action="/admin/product/store" enctype="multipart/form-data">
-        {{csrf_field()}}
+        @csrf
         <div class="row">
             <div class="col-md-9">
                 <div class="form-group">
@@ -123,11 +116,9 @@
         </div>
     </form>
         
-</div>
-@endsection
+@include('admin.footer')
 
-@section('js')
-    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-    <script src="/js/products/mce-product.js"></script>
-    <script type="text/javascript" src="/js/multiple-upload.js"></script>
-@endsection
+{{-- <script src="{{ asset('js/app.js') }}"></script> --}}
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<script src="/js/products/mce-product.js"></script>
+<script type="text/javascript" src="/js/multiple-upload.js"></script>

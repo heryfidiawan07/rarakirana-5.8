@@ -1,14 +1,6 @@
-@extends('layouts.app')
-
-@section('css')
-    <link rel="stylesheet" type="text/css" href="/css/left-right-modal.css">
-@endsection
-
-@section('content')
-<div class="container-fluid">
+@include('admin.header')
     
-    <span class="parent-color bold text-size-15">Etalase List</i></span>
-    @include('admin.left-sidebar')
+    <span id="panel-name">Etalase</span>
             
 	<div class="row">
 
@@ -87,9 +79,8 @@
 		</div>
 
 	</div>
-</div>
-@endsection
 
-@section('js')
-    <script type="text/javascript" src="/js/products/etalase-get-child-menu.js"></script>
-@endsection
+@include('admin.footer')
+
+{{-- <script src="{{ asset('js/app.js') }}"></script> --}}
+<script type="text/javascript" src="/js/products/etalase-get-child-menu.js"></script>

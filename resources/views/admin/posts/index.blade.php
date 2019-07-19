@@ -1,15 +1,8 @@
-@extends('layouts.app')
-
-@section('css')
-    <link rel="stylesheet" type="text/css" href="/css/left-right-modal.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-@endsection
-
-@section('content')
-<div class="container-fluid">
+@include('admin.header')
     
-    <span class="parent-color bold text-size-15">Post List</i></span>
-    @include('admin.left-sidebar')
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
+    <span id="panel-name">Posts</span>
             
     <div class="row">
 
@@ -42,30 +35,29 @@
         </div>
 
     </div>
-</div>
-@endsection
 
-@section('js')
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready( function () {
-            $('#post-table').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '{!! route('get.posts') !!}',
-                columns: [
-                        { data: 'img', name: 'img' },
-                        { data: 'title', name: 'title' },
-                        { data: 'menu.name', name: 'menu.name' },
-                        { data: 'comment', name: 'comment' },
-                        { data: 'created_at', name: 'created_at' },
-                        { data: 'user.name', name: 'user.name'},
-                        { data: 'status', name: 'status' },
-                        { data: 'edit', name: 'edit', orderable: false, searchable: false},
-                        { data: 'delete', name: 'delete', orderable: false, searchable: false},
-                    ]
-                });
-        });
-    </script>
-@endsection
+@include('admin.footer')
+
+{{-- <script src="{{ asset('js/app.js') }}"></script> --}}
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+    $(document).ready( function () {
+        $('#post-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '{!! route('get.posts') !!}',
+            columns: [
+                    { data: 'img', name: 'img' },
+                    { data: 'title', name: 'title' },
+                    { data: 'menu.name', name: 'menu.name' },
+                    { data: 'comment', name: 'comment' },
+                    { data: 'created_at', name: 'created_at' },
+                    { data: 'user.name', name: 'user.name'},
+                    { data: 'status', name: 'status' },
+                    { data: 'edit', name: 'edit', orderable: false, searchable: false},
+                    { data: 'delete', name: 'delete', orderable: false, searchable: false},
+                ]
+            });
+    });
+</script>

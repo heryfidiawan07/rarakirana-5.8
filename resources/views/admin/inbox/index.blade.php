@@ -1,14 +1,6 @@
-@extends('layouts.app')
-
-@section('css')
-    <link rel="stylesheet" type="text/css" href="/css/left-right-modal.css">
-@endsection
-
-@section('content')
-<div class="container-fluid">
+@include('admin.header')
     
-    <span class="parent-color bold text-size-15">Inbox</i></span>
-    @include('admin.left-sidebar')
+    <span id="panel-name">Inbox</span>
     
     <div class="row">
         @foreach ($inboxes as $inbox)
@@ -39,5 +31,4 @@
         {{$inboxes->links()}}
     </div>
 
-</div>
-@endsection
+@include('admin.footer')
