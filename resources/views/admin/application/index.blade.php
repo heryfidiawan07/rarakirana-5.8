@@ -1,15 +1,8 @@
-@extends('layouts.app')
-
-@section('css')
-    <link rel="stylesheet" type="text/css" href="/css/left-right-modal.css">
-    <link rel="stylesheet" type="text/css" href="/css/upload.css">
-@endsection
-
-@section('content')
-<div class="container-fluid">
+@include('admin.header')
     
-    <span class="parent-color bold text-size-15">App Setting</i></span>
-    @include('admin.left-sidebar')
+    <link rel="stylesheet" type="text/css" href="/css/upload.css">
+    
+    <span id="panel-name">App Setting</span>
 
     <div class="row">
         
@@ -73,9 +66,8 @@
         </div>
 
     </div>
-</div>
-@endsection
 
-@section('js')
-    <script type="text/javascript" src="/js/upload.js"></script>
-@endsection
+@include('admin.footer')
+
+{{-- <script src="{{ asset('js/app.js') }}"></script> --}}
+<script type="text/javascript" src="/js/upload.js"></script>

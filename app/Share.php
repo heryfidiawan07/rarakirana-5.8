@@ -9,7 +9,7 @@ class Share extends Model
     protected $fillable = ['class','link','user_id',];
 
     public function shares(){
-        return ['fab fa-facebook-square','fab fa-twitter-square','fab fa-google-plus-square','fab fa-pinterest-square','fab fa-linkedin','fas fa-envelope','fab fa-whatsapp-square','fas fa-phone-square','fas fa-sms',];
+        return ['fab fa-facebook-square','fab fa-twitter-square','fab fa-google-plus-square','fab fa-pinterest-square','fab fa-linkedin','fas fa-envelope','fab fa-whatsapp-square','fas fa-phone-square','fas fa-comment-alt',];
     }
 
     public function urls(){

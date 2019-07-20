@@ -1,15 +1,6 @@
-@extends('layouts.app')
-
-@section('css')
-    <link rel="stylesheet" type="text/css" href="/css/left-right-modal.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-@endsection
-
-@section('content')
-<div class="container-fluid">
+@include('admin.header')
     
-    <span class="parent-color bold text-size-15">Product List</i></span>
-    @include('admin.left-sidebar')
+    <span id="panel-name">Product list</span>
     
     <div class="row">
 
@@ -84,7 +75,7 @@
                                             <i class="text-success">Publish</i>
                                         @endif
                                     <td>
-                                        <a href="/admin/product/'.$product->id.'/edit" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
+                                        <a href="/admin/product/{{$product->id}}/edit" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
                                     </td>
                                     <td>@include('admin.products.delete')</td>
                                 </tr>
@@ -100,5 +91,5 @@
         </div>
 
     </div>
-</div>
-@endsection
+
+@include('admin.footer')

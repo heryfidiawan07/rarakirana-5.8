@@ -1,21 +1,12 @@
-@extends('layouts.app')
-
-@section('css')
-    <link rel="stylesheet" type="text/css" href="/css/left-right-modal.css">
-    <link rel="stylesheet" type="text/css" href="/css/upload.css">
-@endsection
-
-@section('content')
-<div class="container">
+@include('admin.header')
     
-    <span class="parent-color bold text-size-15">Edit Post</i></span>
-    @include('admin.left-sidebar')
+    <link rel="stylesheet" type="text/css" href="/css/upload.css">
 
-    <div class="row">
+    <span id="panel-name">Edit Post</span>
 
         <form method="POST" action="/admin/post/{{$post->id}}/update" enctype="multipart/form-data">
             <div class="row">
-                {{csrf_field()}}
+                @csrf
                 <div class="col-md-9">
                     <div class="form-group">
                         <label for="title">Title</label>
@@ -144,13 +135,9 @@
             </div>
         </form>
 
-    </div>
-        
-</div>
-@endsection
+@include('admin.footer')
 
-@section('js')
-    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-    <script src="/js/posts/mce-post.js"></script>
-    <script type="text/javascript" src="/js/upload.js"></script>
-@endsection
+{{-- <script src="{{ asset('js/app.js') }}"></script> --}}
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<script src="/js/posts/mce-post.js"></script>
+<script type="text/javascript" src="/js/upload.js"></script>

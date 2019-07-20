@@ -1,15 +1,8 @@
-@extends('layouts.app')
-
-@section('css')
-    <link rel="stylesheet" type="text/css" href="/css/left-right-modal.css">
-    <link rel="stylesheet" type="text/css" href="/css/multiple-upload.css">
-@endsection
-
-@section('content')
-<div class="container">
+@include('admin.header')
     
-    <span class="parent-color bold text-size-15">Edit Product</i></span>
-    @include('admin.left-sidebar')
+    <link rel="stylesheet" type="text/css" href="/css/multiple-upload.css">
+
+    <span id="panel-name">Edit Product</span>
 
     <form method="POST" action="/admin/product/{{$product->id}}/update" enctype="multipart/form-data">
         @csrf
@@ -148,12 +141,9 @@
         </div>
     </form>
 
-</div>
-@endsection
+@include('admin.footer')
 
-@section('js')
-    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-    <script src="/js/products/mce-product.js"></script>
-    <script type="text/javascript" src="/js/multiple-upload.js"></script>
-    <script type="text/javascript" src="/js/admin-product-pictures.js"></script>
-@endsection
+{{-- <script src="{{ asset('js/app.js') }}"></script> --}}
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<script src="/js/products/mce-product.js"></script>
+<script type="text/javascript" src="/js/multiple-upload.js"></script>
