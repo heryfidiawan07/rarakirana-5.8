@@ -7,7 +7,7 @@
             <div class="col-md-8">
                 <div class="card-body">
                     <div class="frame-text-3em">
-                        <h6 class="card-title parent-color bold @if($post->sticky==1) sticky @endif">{{str_limit($post->title, 100, '...')}}</h6>
+                        <h6 class="card-title parent-color bold @if($post->sticky==1) sticky @endif">{{str_limit($post->title, 70, '...')}}</h6>
                     </div>
                     <p class="card-text">
                         <small class="text-muted">

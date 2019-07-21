@@ -11,7 +11,7 @@
                             <a class="text-link" href="/show/product/{{$offline->product->slug}}">
                                 {{strip_tags($offline->product->title)}}
                             </a>
-                            <span style="float: right;"><a href="/admin/product/stream/{{$offline->id}}" target="__blank" class="btn btn-primary btn-sm">Print</a></span>
+                            <span style="float: right;"><a href="/admin/product/stream/{{$offline->id}}" target="__blank" class="btn btn-primary btn-sm"><i class="fas fa-print"></i> Print</a></span>
                         </p>
                     </div>
                     <div class="card-body">

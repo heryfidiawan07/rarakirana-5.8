@@ -1,4 +1,4 @@
-<a class="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target=".delete-follow-{{$follow->id}}">Delete !</a>
+<a class="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target=".delete-follow-{{$follow->id}}"><i class="fas fa-trash"></i></a>
 
 <div class="modal fade delete-follow-{{$follow->id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

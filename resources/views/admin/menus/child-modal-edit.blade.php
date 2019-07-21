@@ -13,7 +13,7 @@
             </div>
             <div class="modal-body">
                 <form method="POST" action="/admin/menu/{{$child->id}}/update">
-                    {{csrf_field()}}
+                    @csrf
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input name="nameEdit" type="text" class="form-control" id="name" value="{{$child->name}}" required>

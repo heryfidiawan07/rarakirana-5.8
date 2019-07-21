@@ -1,19 +1,13 @@
 @extends('layouts.app')
 
-@section('css')
-    <link rel="stylesheet" type="text/css" href="/css/admin-dashboard.css">
-    <link rel="stylesheet" type="text/css" href="/css/admin-post.css">
-    <link rel="stylesheet" type="text/css" href="/css/upload.css">
-@endsection
-
 @section('content')
-@include('admin.left-sidebar')
+
 <div class="container-fluid">
 
     <div class="row">
         <div class="col-md-9">
             <form method="POST" action="/thread/store">
-            {{csrf_field()}}
+            @csrf
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input name="title" type="text" class="form-control" id="title" placeholder="Title" value="{{old('title')}}">
@@ -45,9 +39,4 @@
     </div>
     
 </div>
-@endsection
-
-@section('js')
-    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-    <script src="/js/mce-post.js"></script>
 @endsection

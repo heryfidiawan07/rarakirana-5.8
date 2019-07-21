@@ -13,11 +13,19 @@ class ShareController extends Controller
     }
 
     public function store(Request $request){
-        Share::create([
-            'class' => $request->share_class,
-            'link' => $request->share_link,
-            'user_id' => Auth::user()->id,
+        $data = request()->validate([
+            'share' => 'required',
         ]);
+        $share = new Share;
+        $class = $share->shares();
+        $url   = $share->urls();
+        foreach ($request->share as $key) {
+            Share::create([
+                'class' => $class[$key],
+                'link' => $url[$key],
+                'user_id' => Auth::user()->id,
+            ]);
+        }
         return back();
     }
 

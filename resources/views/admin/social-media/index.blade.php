@@ -1,5 +1,7 @@
 @include('admin.header')
     
+    {{-- <link rel="stylesheet" type="text/css" href="/css/social-media.css"> --}}
+
     <span id="panel-name">Social Media</span>
     
     <div class="row">
@@ -7,25 +9,19 @@
             <div class="card">
                 <div class="card-header"><label>Social Media Share</label></div>
                 <div class="card-body">
-                    @foreach ($adminShareClass as $key => $class)
-                        <form method="POST" action="/admin/share/store">
-                            @csrf
-                            <div class="form-group">
-                                <div class="input-group input-group-sm">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <i class="{{$class}}"></i>
-                                            <input type="hidden" name="share_class" value="{{$class}}">
-                                        </div>
-                                        <input type="text" name="share_link" class="form-control" value="{{$adminShareUrls[$key]}}" required readonly>
-                                        <div class="input-group-append">
-                                            <input type="submit" class="btn btn-primary btn-sm" value="Save" @foreach ($shares as $share) @if ($class === $share->class) disabled @endif @endforeach>
-                                        </div>
-                                    </div>
-                                </div>
+                    <form method="POST" action="/admin/share/store">
+                    @csrf
+                        @foreach ($adminShareClass as $key => $class)
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" value="{{$key}}" name="share[]" 
+                                @foreach ($shares as $share) @if($share->class === $class) disabled @endif @endforeach>
+                                <label class="form-check-label">
+                                    <i class="{{$class}}"></i>
+                                </label>
                             </div>
-                        </form>
-                    @endforeach
+                        @endforeach
+                        <input type="submit" class="btn btn-primary btn-sm" value="Save">
+                    </form>
                 </div>
             </div>
         </div>

@@ -82,10 +82,19 @@ class ThreadController extends Controller
         $category   = Category::whereSlug($slug)->first();
         $categories = Category::all();
         if ($category->status==1) {
-            $threads = $category->forums()->paginate(10);
+            if ($category->childs()->count() > 0) {
+                $threads = Forum::where('status',1)->whereHas('category', function ($query) use ($category) {
+                                            $query->where('status', 1)->where('parent_id',$category->id);
+                                        })->paginate(9);
+            }else{
+                $threads = Forum::where('status',1)->whereHas('category', function ($query) use ($category) {
+                                            $query->where('status', 1)->where('id',$category->id);
+                                        })->paginate(9);
+            }
+            $categorys = category::where('menu_id',$category->menu->id)->where('parent_id',0)->get();
             return view('threads.category', compact('category','categories','threads'));
         }
-        return view('errors.404');
+        return redirect('/');
     }
     
 }
