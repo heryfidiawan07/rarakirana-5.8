@@ -16,22 +16,23 @@
             $('#navbar-panel-name').text($('#panel-name').text());
 
             $('#dismiss').on('click', function () {
-                $('.dsh-text').css('display','none');
-                $('#dismiss').css('display','none');
-                $('#openSidebar').css('display','unset');
-                $('#sidebar').css('width','65');
-                $('#content').css('padding-left','75px');
-                $('#sidebar-name').css('display','none');
+                $('.dsh-text').hide();
+                $('#dismiss').hide();
+                $('#openSidebar').show();
+                // $('#openSidebar').css('display','unset');
+                $('#sidebar').css('width','auto');
+                $('#content').css('padding-left','65px');
+                $('#sidebar-name').hide();
                 // console.log(document.getElementById("sidebar").clientWidth);
             });
 
             $('#openSidebar').on('click', function () {
-                $('#sidebar').css('width','250');
-                $('#content').css('padding-left','260px');
-                $('.dsh-text').css('display','unset');
-                $('#dismiss').css('display','unset');
-                $('#openSidebar').css('display','none');
-                $('#sidebar-name').css('display','unset');
+                $('#sidebar').css('width','auto');
+                $('#content').css('padding-left','180px');
+                $('.dsh-text').show();
+                $('#dismiss').show();
+                $('#openSidebar').hide();
+                $('#sidebar-name').show();
                 // console.log(document.getElementById("sidebar").clientWidth);
             });
         });

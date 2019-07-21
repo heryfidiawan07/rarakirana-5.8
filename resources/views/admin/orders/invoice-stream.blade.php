@@ -49,8 +49,8 @@
                         <td>{{str_limit($detail->product->title, 20)}}</td>
                         <td>{{number_format($detail->qty)}}</td>
                         <td>{{number_format($detail->product->weight)}} gr</td>
-                        <td>{{number_format($detail->product->price)}}</td>
-                        <td>{{number_format($subtotal = $detail->product->price*$detail->qty)}}</td>
+                        <td>Rp {{number_format($detail->product->price)}}</td>
+                        <td>Rp {{number_format($subtotal = $detail->product->price*$detail->qty)}}</td>
                     </tr>
                 @endforeach
                 <tr>

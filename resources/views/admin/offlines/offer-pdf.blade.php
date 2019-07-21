@@ -10,15 +10,15 @@
     </head>
     <body>
         
-        <h4>OFFERING LETTER</h4>
+        <h5>OFFERING LETTER</h5>
         <br>
 
-        <h2 class="text-center text-success"><b>{{$app ? $app->name : 'Rarakirana'}}</b></h2>
+        <h3 class="text-center text-success"><b>{{$app ? $app->name : 'Rarakirana'}}</b></h3>
         <p class="text-center">{{$app ? $app->address : 'Address'}}</p>
         
         <hr>
         <small>{{ date('d F, Y', strtotime($offer->created_at))}}</small>
-        <table class="table">
+        <table class="table table-sm">
             <tr>
                 <td>
                     @if ($offer->product->pictures->count())
@@ -61,7 +61,7 @@
                 <td>{!! nl2br(strip_tags($offer->address)) !!}</td>
             </tr>
         </table>
-        <h5>Description: </h5>
+        <p><b>Description: </b></p>
         <hr>
         <p>{!! nl2br(strip_tags($offer->description)) !!}</p>
 

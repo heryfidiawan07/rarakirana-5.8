@@ -27,12 +27,7 @@ class Category extends Model
     }
 
     public function forums(){
-        // return $this->hasMany('App\Forum');
-        if ( $this->parent_id ){
-            return $this->hasMany('App\Forum');
-        }else{
-            return $this->hasManyThrough('App\Forum', 'App\Category', 'parent_id');
-        }
+        return $this->hasMany('App\Forum');
     }
     
 }

@@ -55,8 +55,8 @@
                                     <hr>
                                     @if ($order->payment)
                                         @if ($order->payment->status == 1)
-                                            <a href="/admin/order/{{$order->slug_token}}/download" target="_blank" class="btn btn-success btn-sm">Download</a>
-                                            <a href="/admin/order/{{$order->slug_token}}/stream" target="_blank" class="btn btn-info btn-sm">Open & Print</a>
+                                            <a href="/admin/order/{{$order->slug_token}}/download" target="_blank" class="btn btn-success btn-sm"><i class="fas fa-download"></i> Download</a>
+                                            <a href="/admin/order/{{$order->slug_token}}/stream" target="_blank" class="btn btn-info btn-sm"><i class="fas fa-print"></i> Print</a>
                                         @endif
                                     @endif
                                 </div>
