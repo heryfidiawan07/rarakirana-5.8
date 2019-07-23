@@ -123,7 +123,7 @@
 @endsection
 
 @section('js')
-{{-- <script src="{{ asset('js/app.js') }}"></script> --}}
+<script src="{{ asset('js/app.js') }}"></script>
 <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 <script src="/js/products/mce-product.js"></script>
 <script type="text/javascript" src="/js/multiple-upload.js"></script>

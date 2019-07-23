@@ -78,13 +78,13 @@ class ProductController extends Controller
                 'user_id' => Auth::user()->id,
             ]);
             foreach ($images as $key => $img) {
-                $extends = $img->getClientOriginalExtension();
-                $imgName = $slug.'-'.date("YmdHis").$key.'.'.$extends;
+                $ex      = $img->getClientOriginalExtension();
+                $imgName = $slug.'-'.date("YmdHis").$key.'.'.$ex;
                 $path    = $img->getRealPath();
                 $img     = Image::make($path)->resize(null, 630, function ($constraint) {
                                 $constraint->aspectRatio();
                             });
-                $thumb    = Image::make($path)->resize(null, 300, function ($constraint) {
+                $thumb    = Image::make($path)->resize(null, 200, function ($constraint) {
                                 $constraint->aspectRatio();
                             });
                 $thumb->save(public_path("products/thumb/". $imgName));
@@ -149,13 +149,13 @@ class ProductController extends Controller
             ]);
             if (!empty($images)) {
                 foreach ($images as $key => $img) {
-                    $extends = $img->getClientOriginalExtension();
-                    $imgName = $slug.'-'.date("YmdHis").$key.'.'.$extends;
+                    $ex      = $img->getClientOriginalExtension();
+                    $imgName = $slug.'-'.date("YmdHis").$key.'.'.$ex;
                     $path    = $img->getRealPath();
                     $img     = Image::make($path)->resize(null, 630, function ($constraint) {
                                     $constraint->aspectRatio();
                                 });
-                    $thumb    = Image::make($path)->resize(null, 300, function ($constraint) {
+                    $thumb    = Image::make($path)->resize(null, 200, function ($constraint) {
                                     $constraint->aspectRatio();
                                 });
                     $thumb->save(public_path("products/thumb/". $imgName));
