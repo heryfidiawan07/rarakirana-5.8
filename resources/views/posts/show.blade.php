@@ -11,9 +11,9 @@
         
         <div class="col-md-7">
             <p class="parent-color bold text-size-15 text-center">{{$post->title}}</p>
-            @if ($post->img != null)
+            @if ($post->img)
                 <div class="text-center">
-                    <img src="/posts/img/no-image.png" alt="{{$post->title}}">
+                    <img src="/posts/img/{{$post->img}}" alt="{{$post->title}}">
                 </div>
             @endif
             <div class="mb-3">

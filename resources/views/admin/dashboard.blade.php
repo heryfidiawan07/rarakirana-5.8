@@ -1,5 +1,7 @@
-@include('admin.header')
+@extends('admin.layouts.app')
 
-<span id="panel-name">ADMIN DASHBOARD</span>
+@section('adminContent')
 
-@include('admin.footer')
+    <span id="panel-name">ADMIN DASHBOARD</span>
+
+@endsection

@@ -1,4 +1,6 @@
-@include('admin.header')
+@extends('admin.layouts.app')
+
+@section('adminContent')
     
     <span id="panel-name">Address</span>
     
@@ -28,8 +30,10 @@
         </div>
 
     </div>
-    
-@include('admin.footer')
 
-{{-- <script src="{{ asset('js/app.js') }}"></script> --}}
-<script type="text/javascript" src="/js/admin/address.js"></script>
+@endsection
+
+@section('js')
+    {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
+    <script type="text/javascript" src="/js/admin/address.js"></script>
+@endsection

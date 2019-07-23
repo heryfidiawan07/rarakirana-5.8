@@ -1,4 +1,6 @@
-@include('admin.header')
+@extends('admin.layouts.app')
+
+@section('adminContent')
     
     <span id="panel-name">Menu</span>
             
@@ -63,4 +65,4 @@
 
 	</div>
 
-@include('admin.footer')
+@endsection

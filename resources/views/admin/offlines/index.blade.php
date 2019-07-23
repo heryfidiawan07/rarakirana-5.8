@@ -1,6 +1,8 @@
-@include('admin.header')
+@extends('admin.layouts.app')
+
+@section('adminContent')
     
-    <span id="panel-name">Product Offline / Offer</span>
+    <span id="panel-name">Product Offline</span>
     
     <div class="row">
         @foreach ($offlines as $offline)
@@ -33,4 +35,4 @@
         {{$offlines->links()}}
     </div>
 
-@include('admin.footer')
+@endsection

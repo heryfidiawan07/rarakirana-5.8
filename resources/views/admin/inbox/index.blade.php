@@ -1,4 +1,6 @@
-@include('admin.header')
+@extends('admin.layouts.app')
+
+@section('adminContent')
     
     <span id="panel-name">Inbox</span>
     
@@ -31,4 +33,4 @@
         {{$inboxes->links()}}
     </div>
 
-@include('admin.footer')
+@endsection
