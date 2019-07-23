@@ -1,6 +1,8 @@
-@include('admin.header')
-    
-    <span id="panel-name">Account <i>(Bank)</i></span>
+@extends('admin.layouts.app')
+
+@section('adminContent')
+
+    <span id="panel-name">ADMIN DASHBOARD</span>
 
     <div class="row">
         
@@ -58,4 +60,4 @@
 
     </div>
 
-@include('admin.footer')
+@endsection

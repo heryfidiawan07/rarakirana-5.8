@@ -1,4 +1,6 @@
-@include('admin.header')
+@extends('admin.layouts.app')
+
+@section('adminContent')
     
     <span id="panel-name">Etalase</span>
             
@@ -80,7 +82,9 @@
 
 	</div>
 
-@include('admin.footer')
+@endsection
 
+@section('js')
 {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
 <script type="text/javascript" src="/js/products/etalase-get-child-menu.js"></script>
+@endsection

@@ -1,6 +1,6 @@
-@include('admin.header')
-    
-    {{-- <link rel="stylesheet" type="text/css" href="/css/social-media.css"> --}}
+@extends('admin.layouts.app')
+
+@section('adminContent')
 
     <span id="panel-name">Social Media</span>
     
@@ -16,7 +16,7 @@
                                 <input class="form-check-input" type="checkbox" value="{{$key}}" name="share[]" 
                                 @foreach ($shares as $share) @if($share->class === $class) disabled @endif @endforeach>
                                 <label class="form-check-label">
-                                    <i class="{{$class}}"></i>
+                                    <i class="{{$class}} fa-2x"></i>
                                 </label>
                             </div>
                         @endforeach
@@ -107,4 +107,4 @@
         </div>
     </div>
 
-@include('admin.footer')
+@endsection

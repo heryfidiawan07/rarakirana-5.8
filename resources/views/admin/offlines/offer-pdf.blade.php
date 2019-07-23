@@ -14,7 +14,7 @@
         <br>
 
         <h3 class="text-center text-success"><b>{{$app ? $app->name : 'Rarakirana'}}</b></h3>
-        <p class="text-center">{{$app ? $app->address : 'Address'}}</p>
+        <p class="text-center">{{$app ? $app->address : 'Address'}}, {{$app ? $app->telp : ''}}, {{$app ? $app->email : ''}}</p>
         
         <hr>
         <small>{{ date('d F, Y', strtotime($offer->created_at))}}</small>
@@ -47,7 +47,7 @@
         
         <hr>
         
-        <table class="table">
+        <table class="table table-sm">
             <tr>
                 <td>Email</td>
                 <td>{{$offer->email}}</td>

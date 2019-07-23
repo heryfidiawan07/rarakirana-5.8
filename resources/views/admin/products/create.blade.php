@@ -1,6 +1,10 @@
-@include('admin.header')
-    
+@extends('admin.layouts.app')
+
+@section('css')    
     <link rel="stylesheet" type="text/css" href="/css/multiple-upload.css">
+@endsection
+
+@section('adminContent')
 
     <span id="panel-name">Create Product</span>    
 
@@ -116,9 +120,11 @@
         </div>
     </form>
         
-@include('admin.footer')
+@endsection
 
+@section('js')
 {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
 <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 <script src="/js/products/mce-product.js"></script>
 <script type="text/javascript" src="/js/multiple-upload.js"></script>
+@endsection

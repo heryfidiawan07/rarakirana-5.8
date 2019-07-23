@@ -1,6 +1,10 @@
-@include('admin.header')
-    
+@extends('admin.layouts.app')
+
+@section('css')
     <link rel="stylesheet" type="text/css" href="/css/upload.css">
+@endsection
+
+@section('adminContent')    
     
     <span id="panel-name">App Setting</span>
 
@@ -67,7 +71,9 @@
 
     </div>
 
-@include('admin.footer')
+@endsection
 
+@section('js')
 {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
 <script type="text/javascript" src="/js/upload.js"></script>
+@endsection
