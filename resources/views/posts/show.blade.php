@@ -16,7 +16,7 @@
                     <img src="/posts/img/{{$post->img}}" alt="{{$post->title}}">
                 </div>
             @endif
-            <div class="mb-3">
+            <div class="mb-3 mt-2">
                 {!! nl2br($post->description) !!}
                 <br>
                 <p class="italic"><i class="far fa-calendar-alt"></i> {{ date('d F, Y', strtotime($post->created_at))}}</p>

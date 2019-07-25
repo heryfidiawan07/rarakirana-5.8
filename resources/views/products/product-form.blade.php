@@ -24,6 +24,6 @@
         <textarea class="form-control" name="description" required>{{old('description')}}</textarea>
     </div>
     <div class="form-group">
-        <input type="submit" class="btn btn-primary btn-sm" value="Send">
+        <button class="btn btn-primary btn-sm"><i class="fas fa-paper-plane"></i> Send</button>
     </div>
 </form>

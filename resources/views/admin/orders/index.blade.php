@@ -8,7 +8,7 @@
 
         <div class="col-md-12">
             @foreach ($orders as $order)
-                <div class="card">
+                <div class="card mb-2">
                     <div class="card-header">
                         <p>
                             {{$order->no_order}}

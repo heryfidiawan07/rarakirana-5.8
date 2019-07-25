@@ -11,7 +11,11 @@
                     <div class="card-header">
                         <p>
                             {{strip_tags($inbox->title)}}
-                            <span style="float: right;"><a href="" class="btn btn-primary btn-sm">Print</a></span>
+                            <span style="float: right;">
+                                <a href="" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-print"></i> Print
+                                </a>
+                            </span>
                         </p>
                     </div>
                     <div class="card-body">

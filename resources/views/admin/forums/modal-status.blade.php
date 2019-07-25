@@ -1,4 +1,4 @@
-<a class="btn btn-info btn-sm" href="#" data-toggle="modal" data-target=".admin-forum-{{$forum->id}}"> Admin Status ?</a>
+<a class="btn btn-info btn-sm" href="#" data-toggle="modal" data-target=".admin-forum-{{$forum->id}}"> Action ?</a>
 
 <div class="modal fade admin-forum-{{$forum->id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

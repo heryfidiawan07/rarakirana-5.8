@@ -60,8 +60,8 @@ class PostController extends Controller
             if ($post->status == 1) return '<span class="text-success">Publish</span>';
         })
         ->editColumn('comment', function ($post) {
-            if ($post->comment == 0) return '<i class="fas fa-times text-danger"></i>';
-            if ($post->comment == 1) return '<i class="fas fa-check text-success"></i>';
+            if ($post->comment == 0) return '<span class="text-danger">No</span>';
+            if ($post->comment == 1) return '<span class="text-success">Yes</span>';
         })
         ->rawColumns(['img','title','edit','delete','status','comment', 'confirmed'])
         ->make(true);

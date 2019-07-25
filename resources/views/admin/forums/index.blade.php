@@ -11,7 +11,7 @@
                 @if($forums->count())
                     <div class="table-responsive">
                         <table class="table table-hover">
-                            <th>Title</th><th>Parent Menu</th><th>Created</th><th>User</th><th>Status</th><th>Admin Status</th>
+                            <th>Title</th><th>Parent Menu</th><th>Created</th><th>User</th><th>Status</th><th>Action</th>
                             @foreach($forums as $forum)
                                 <tr>
                                     <td><a class="text-link" href="/thread/{{$forum->slug}}">{{$forum->title}}</a></td>
