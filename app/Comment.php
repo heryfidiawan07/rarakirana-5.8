@@ -13,15 +13,15 @@ class Comment extends Model
     }
 
     public function parent(){
-        return $this->belongsTo('App\Comment','parent_id');
+        return $this->belongsTo(Comment::class, 'parent_id');
     }
 
     public function childs(){
-        return $this->hasMany('App\Comment','parent_id');
+        return $this->hasMany(Comment::class, 'parent_id');
     }
     
     public function user(){
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
     
 }

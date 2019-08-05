@@ -9,7 +9,7 @@ class Offline extends Model
     protected $fillable = ['product_id','phone','email','address','description',];
 
     public function product(){
-        return $this->belongsTo('App\Product');
+        return $this->belongsTo(Product::class);
     }
     
 }

@@ -27,19 +27,19 @@ class Order extends Model
     }
 
     public function user(){
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 
     public function address(){
-        return $this->belongsTo('App\Address');
+        return $this->belongsTo(Address::class);
     }
 
     public function payment(){
-        return $this->hasOne('App\Payment');
+        return $this->hasOne(Payment::class);
     }
     
     public function details(){
-        return $this->hasMany('App\OrderDetail');
+        return $this->hasMany(OrderDetail::class);
     }
     
 }

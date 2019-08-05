@@ -20,7 +20,7 @@ class OfflineController extends Controller
     }
     
     public function store(Request $request, $slug){
-        $request->validate([
+        $this->validate($request, [
             'phone' => 'required|max:12',
             'email' => 'required|max:50',
             'address' => 'required|max:500',

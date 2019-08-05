@@ -39,7 +39,7 @@ class ProductController extends Controller
     }
     
     public function store(Request $request){
-        $data = request()->validate([
+        $this->validate($request, [
             'title' => 'required|unique:products|max:255',
             'etalase_id' => 'required',
             'first_price' => 'required',
@@ -106,7 +106,7 @@ class ProductController extends Controller
     }
     
     public function update(Request $request, $id){
-        $data = request()->validate([
+        $this->validate($request, [
             'title' => 'required|max:255',
             'etalase_id' => 'required',
             'first_price' => 'required',

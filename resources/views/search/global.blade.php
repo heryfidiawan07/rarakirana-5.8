@@ -18,7 +18,7 @@
     <div class="col-md-9">
         <div class="row">
             @if ($products->count())
-                @foreach ($products->where('etalase.status',1) as $product)
+                @foreach ($products as $product)
                     @include('products.thumb-content')
                 @endforeach
 
@@ -34,7 +34,7 @@
     @if ($posts->count())
         <h2 class="parent-color bold mt-3">News</h2>
         <div class="row">
-            @foreach ($posts->where('menu.status',1) as $post)
+            @foreach ($posts as $post)
                 <div class="col-lg-6">
                     @include('posts.content-index')
                 </div>
@@ -50,7 +50,7 @@
     @if ($threads->count())
         <h2 class="parent-color bold mt-5">Threads</h2>
         <div class="row">
-            @foreach ($threads->where('category.status',1)->where('status',1) as $thread)
+            @foreach ($threads as $thread)
                 @include('threads.content-index')
             @endforeach
             @if ($threads->count() > 6)

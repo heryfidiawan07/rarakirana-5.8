@@ -21,7 +21,7 @@ class EtalaseController extends Controller
     }
 
     public function store(Request $request){
-        $request->validate([
+        $this->validate($request, [
             'name' => 'required|unique:etalases',
             'menu_id' => 'required',
             'parent_id' => 'required',
@@ -40,7 +40,7 @@ class EtalaseController extends Controller
     }
 
     public function update(Request $request, $id){
-        $request->validate([
+        $this->validate($request, [
             'nameEdit' => 'required',
             'menu_edit' => 'required',
             'parent_edit' => 'required',
@@ -66,7 +66,8 @@ class EtalaseController extends Controller
         return back();
     }
     
-    public function getChildMenu($id){//JQuery Mengambil parent child berdasarkan Parent Menu yang di pilih
+    public function getChildMenu($id){
+        //JQuery -> Mengambil parent child berdasarkan Parent Menu yang di pilih
         $menu = Menu::find($id);
         return response(['childs' => $menu->etalases, 'count' => $menu->etalases->count()]);
     }

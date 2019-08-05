@@ -24,14 +24,14 @@ class MenuController extends Controller
 	}
 
 	public function store(Request $request){
-		$data = request()->validate([
+		$this->validate($request, [
 			'name' => 'required|unique:menus',
 			'setting' => 'required',
 			'parent_id' => 'required',
             'contact' => 'required',
 		]);
-		//fas fa-square-full -> icon default
-		Menu::create([
+        $admin = Auth::user()->where('role', 1)->first();
+		$admin->menus()->create([
 			'name' => $request->name,
 			'slug' => str_slug($request->name),
 			'title' => $request->title,
@@ -39,8 +39,7 @@ class MenuController extends Controller
 			'setting' => $request->setting,
 			'icon' => $request->icon,
 			'parent_id' => $request->parent_id,
-            'contact' => $request->contact,
-			'user_id' => Auth::user()->id,
+            'contact' => $request->contact
 		]);
 		return back();
 	}
@@ -51,8 +50,8 @@ class MenuController extends Controller
             'settingEdit' => 'required',
             'parent_edit' => 'required',
         ]);
-        $menu = Menu::find($id);
-        $menu->update([
+        $admin = Auth::user()->where('role', 1)->first();
+        $admin->menus()->whereId($id)->update([
             'name' => $request->nameEdit,
             'slug' => str_slug($request->nameEdit),
             'title' => $request->titleEdit,
@@ -61,15 +60,14 @@ class MenuController extends Controller
             'icon' => $request->iconEdit,
             'parent_id' => $request->parent_edit,
             'contact' => $request->contact_edit,
-            'status' => $request->status,
-            'user_id' => Auth::user()->id,
+            'status' => $request->status
         ]);
         return back();
     }
     
     public function delete($id){
-        $menu = Menu::find($id);
-        $menu->delete();
+        $admin = Auth::user()->where('role', 1)->first();
+        $admin->menus()->whereId($id)->delete();
         return back();
     }
     

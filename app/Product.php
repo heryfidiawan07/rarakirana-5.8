@@ -9,35 +9,35 @@ class Product extends Model
     protected $fillable = ['user_id','etalase_id','title','slug','first_price','discount','price','weight','description','type','comment','status','sticky',];
 
     public function etalase(){
-        return $this->belongsTo('App\Etalase');
+        return $this->belongsTo(Etalase::class);
     }
     
     public function tags(){
-        return $this->morphToMany('App\Tag','tagable');
+        return $this->morphToMany(Tag::class, 'tagable');
     }
 
     public function pictures(){
-        return $this->hasMany('App\Picture');
+        return $this->hasMany(Picture::class);
     }
     
     public function user(){
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
     
     public function comments(){
-        return $this->morphMany('App\Comment','commentable');
+        return $this->morphMany(Comment::class, 'commentable');
     }
     
     public function reviews(){
-        return $this->hasMany('App\Review');
+        return $this->hasMany(Review::class);
     }
 
     public function messages(){
-        return $this->morphMany('App\Message','messageable');
+        return $this->morphMany(Message::class, 'messageable');
     }
 
     public function delivery(){
-        return $this->hasMany('App\OrderDetail');
+        return $this->hasMany(OrderDetail::class);
     }
     
 }

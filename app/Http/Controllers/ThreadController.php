@@ -20,7 +20,7 @@ class ThreadController extends Controller
     }
     
     public function store(Request $request){
-        $data = request()->validate([
+        $this->validate($request, [
             'title' => 'required|unique:forums|max:255',
             'category_id' => 'required',
             'description' => 'required',
@@ -42,7 +42,7 @@ class ThreadController extends Controller
     }
     
     public function update(Request $request, $slug){
-        $data = request()->validate([
+        $this->validate($request, [
             'title' => 'required|max:255',
             'category_id' => 'required',
             'description' => 'required',

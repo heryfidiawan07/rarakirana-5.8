@@ -9,19 +9,19 @@ class Tag extends Model
     protected $fillable = ['name', 'user_id', 'slug', 'title', 'description', 'icon', 'status_menu',];
 
     public function posts(){
-        return $this->morphedByMany('App\Post','tagable');
+        return $this->morphedByMany(Post::class, 'tagable');
     }
 
     public function products(){
-        return $this->morphedByMany('App\Product','tagable');
+        return $this->morphedByMany(Product::class, 'tagable');
     }
 
     public function forums(){
-        return $this->morphedByMany('App\Forum','tagable');
+        return $this->morphedByMany(Forum::class, 'tagable');
     }
     
     public function user(){
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
     
 }

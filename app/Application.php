@@ -9,6 +9,6 @@ class Application extends Model
     protected $fillable = ['user_id','img','name','title','description','telp','hp','email','address','author','company'];
 
     public function user(){
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 }

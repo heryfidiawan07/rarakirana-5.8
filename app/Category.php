@@ -11,23 +11,23 @@ class Category extends Model
     ];
 
     public function parent(){
-        return $this->belongsTo('App\Category','parent_id');
+        return $this->belongsTo(Category::class, 'parent_id');
     }
     
     public function childs(){
-        return $this->hasMany('App\Category','parent_id');
+        return $this->hasMany(Category::class, 'parent_id');
     }
     
     public function user(){
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
     
     public function menu(){
-        return $this->belongsTo('App\Menu');
+        return $this->belongsTo(Menu::class);
     }
 
     public function forums(){
-        return $this->hasMany('App\Forum');
+        return $this->hasMany(Forum::class);
     }
     
 }

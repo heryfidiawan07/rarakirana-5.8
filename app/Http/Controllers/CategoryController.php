@@ -21,7 +21,7 @@ class CategoryController extends Controller
     }
 
     public function store(Request $request){
-        $request->validate([
+        $this->validate($request, [
             'name' => 'required|unique:categories',
             'menu_id' => 'required',
             'parent_id' => 'required',
@@ -46,7 +46,7 @@ class CategoryController extends Controller
         // if ($cekSlug) {
         //     return back()->withErrors('Category name already exists !');
         // }
-        $request->validate([
+        $this->validate($request, [
             'nameEdit' => 'required',
             'menu_edit' => 'required',
             'parent_edit' => 'required',

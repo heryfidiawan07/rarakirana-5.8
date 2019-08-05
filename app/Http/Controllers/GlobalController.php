@@ -66,25 +66,25 @@ class GlobalController extends Controller
     }
     
     public function search(Request $request){
-        $posts    = Post::where('title','like','%'.$request->search.'%')->paginate(6);
-        $products = Product::where('title','like','%'.$request->search.'%')->paginate(5);
-        $threads  = Forum::where('title','like','%'.$request->search.'%')->paginate(6);
+        $posts    = Post::where('title','like','%'.$request->search.'%')->where('status',1)->paginate(6);
+        $products = Product::where('title','like','%'.$request->search.'%')->where('status',1)->paginate(5);
+        $threads  = Forum::where('title','like','%'.$request->search.'%')->where('status',1)->paginate(6);
         $key      = $request->search;
         return view('search.global', compact('products','posts','threads','key'));
     }
 
     public function searchPosts($key){
-        $posts = Post::where('title','like','%'.$key.'%')->paginate(20);
+        $posts = Post::where('title','like','%'.$key.'%')->where('status',1)->paginate(20);
         return view('search.posts', compact('posts'));
     }
 
     public function searchProducts($key){
-        $products = Product::where('title','like','%'.$key.'%')->paginate(20);
+        $products = Product::where('title','like','%'.$key.'%')->where('status',1)->paginate(20);
         return view('search.products', compact('products'));
     }
     
     public function searchThreads($key){
-        $threads = Forum::where('title','like','%'.$key.'%')->paginate(20);
+        $threads = Forum::where('title','like','%'.$key.'%')->where('status',1)->paginate(20);
         return view('search.threads', compact('threads'));
     }
 

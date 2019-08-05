@@ -106,9 +106,9 @@ class CartController extends Controller
 
     public function cost($addId, $kurir){
         $address = Address::whereId($addId)->first();
-        $oldCart  = Session::get('cart');
-        $cart     = new Cart($oldCart);
-        $cost = RajaOngkir::Cost([
+        $oldCart = Session::get('cart');
+        $cart    = new Cart($oldCart);
+        $cost    = RajaOngkir::Cost([
             'origin'        => 177, // id kota asal
             'destination'   => $address->kab_id, // id kota tujuan
             'weight'        => $cart->totalWeight, // berat satuan gram

@@ -18,14 +18,14 @@ class AccountController extends Controller
     }
     
     public function store(Request $request){
-        $data = request()->validate([
+        $this->validate($request, [
             'bank' => 'required|min:3',
             'name' => 'required|min:5',
             'no_rek' => 'required|min:7',
             'status' => 'required',
         ]);
         Account::create([
-           'bank' => $request->bank,
+            'bank' => $request->bank,
             'name' => $request->name,
             'no_rek' => $request->no_rek,
             'status' => $request->status, 
@@ -35,7 +35,7 @@ class AccountController extends Controller
     }
 
     public function update(Request $request, $id){
-        $data = request()->validate([
+        $this->validate($request, [
             'bankEdit' => 'required|min:3',
             'nameEdit' => 'required|min:5',
             'no_rekEdit' => 'required|min:7',

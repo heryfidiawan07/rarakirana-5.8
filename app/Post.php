@@ -9,19 +9,19 @@ class Post extends Model
     protected $fillable = ['user_id','menu_id','title','slug','description','img','comment','status','sticky',];
 
     public function user(){
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
     
     public function menu(){
-        return $this->belongsTo('App\Menu');
+        return $this->belongsTo(Menu::class);
     }
     
     public function tags(){
-        return $this->morphToMany('App\Tag','tagable');
+        return $this->morphToMany(Tag::class, 'tagable');
     }
 
     public function comments(){
-        return $this->morphMany('App\Comment','commentable');
+        return $this->morphMany(Comment::class, 'commentable');
     }
     
 }

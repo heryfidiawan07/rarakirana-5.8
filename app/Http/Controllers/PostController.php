@@ -77,7 +77,7 @@ class PostController extends Controller
 	}
 	
     public function store(Request $request){
-        $data = request()->validate([
+        $this->validate($request, [
             'title' => 'required|unique:posts|max:255',
             'menu_id' => 'required',
             'description' => 'required',
@@ -112,10 +112,10 @@ class PostController extends Controller
             'user_id' => Auth::user()->id,
         ]);
         if (!empty($img)) {
-            $img     = Image::make($path)->resize(null, 630, function ($constraint) {
+            $img   = Image::make($path)->resize(null, 630, function ($constraint) {
                             $constraint->aspectRatio();
                         });
-            $thumb    = Image::make($path)->resize(null, 300, function ($constraint) {
+            $thumb = Image::make($path)->resize(null, 300, function ($constraint) {
                             $constraint->aspectRatio();
                         });
             $thumb->save(public_path("posts/thumb/". $imgName));
@@ -145,7 +145,7 @@ class PostController extends Controller
     }
     
     public function update(Request $request, $id){
-        $data = request()->validate([
+        $this->validate($request, [
             'title' => 'required|max:255',
             'menu_id' => 'required',
             'description' => 'required',

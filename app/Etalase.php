@@ -11,27 +11,27 @@ class Etalase extends Model
     ];
 
     public function parent(){
-        return $this->belongsTo('App\Etalase','parent_id');
+        return $this->belongsTo(Etalase::class, 'parent_id');
     }
     
     public function childs(){
-        return $this->hasMany('App\Etalase','parent_id');
+        return $this->hasMany(Etalase::class, 'parent_id');
     }
     
     public function user(){
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
     
     public function menu(){
-        return $this->belongsTo('App\Menu');
+        return $this->belongsTo(Menu::class);
     }
     
     public function products(){
         // return $this->hasMany('App\Product');
         if ( $this->childs()->count()){
-            return $this->hasManyThrough('App\Product', 'App\Etalase', 'parent_id');
+            return $this->hasManyThrough(Product::class, Etalase::class, 'parent_id');
         }else{
-            return $this->hasMany('App\Product');
+            return $this->hasMany(Product::class);
         }
     }
     

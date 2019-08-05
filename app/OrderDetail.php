@@ -9,11 +9,11 @@ class OrderDetail extends Model
     protected $fillable = ['order_id','product_id','qty'];
 
     public function order(){
-        return $this->belongsTo('App\Order');
+        return $this->belongsTo(Order::class);
     }
     
     public function product(){
-        return $this->belongsTo('App\Product');
+        return $this->belongsTo(Product::class);
     }
     
 }

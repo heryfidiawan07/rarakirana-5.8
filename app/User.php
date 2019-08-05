@@ -51,24 +51,28 @@ class User extends Authenticatable implements MustVerifyEmail
         return false;
     }
 
+    public function menus() {
+        return $this->hasMany(Menu::class);
+    }
+
     public function addresses(){
-        return $this->hasMany('App\Address');
+        return $this->hasMany(Address::class);
     }
     
     public function orders(){
-        return $this->hasMany('App\Order');
+        return $this->hasMany(Order::class);
     }
     
     public function messages(){
-        return $this->morphMany('App\Message','messageable');
+        return $this->morphMany(Message::class, 'messageable');
     }
     
     public function biodata(){
-        return $this->hasOne('App\Biodata');
+        return $this->hasOne(Biodata::class);
     }
     
     public function threads(){
-        return $this->hasMany('App\Forum');
+        return $this->hasMany(Forum::class);
     }
     
 }

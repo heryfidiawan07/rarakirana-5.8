@@ -21,10 +21,10 @@ class AdminOrder extends Controller
     }
     
     public function index(){
-        $status = new Order;
+        $status      = new Order;
         $orderStatus = $status->orderStatus();
         $payStatus   = $status->payStatus();
-        $orders = Order::all();
+        $orders      = Order::all();
         return view('admin.orders.index', compact('orders','orderStatus','payStatus'));
     }
     

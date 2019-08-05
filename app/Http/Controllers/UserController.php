@@ -101,7 +101,7 @@ class UserController extends Controller
     }
     
     public function uploadImg(Request $request, $slug){
-        $data = request()->validate([
+        $this->validate($request, [
             'img' => 'required|mimes:jpeg,jpg,bmp,png',
         ]);
         $user = User::whereSlug($slug)->first();
@@ -133,7 +133,7 @@ class UserController extends Controller
     }
 
     public function description(Request $request, $slug){
-        $request->validate([
+        $this->validate($request, [
             'description' => 'required|max:255',
         ]);
         $user = User::whereSlug($slug)->first();
@@ -153,7 +153,7 @@ class UserController extends Controller
     }
     
     public function updateName(Request $request, $slug){
-        $request->validate([
+        $this->validate($request, [
             'name' => 'required|min:3|max:50',
         ]);
         $user = User::whereSlug($slug)->first();

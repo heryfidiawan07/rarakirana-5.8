@@ -21,7 +21,7 @@ class OrderController extends Controller
     }
     
     public function checkout(Request $request){
-        $data = request()->validate([
+        $this->validate($request, [
             'address_id' => 'required',
             'note' => 'required|min:3|max:100',
             'kurir' => 'required',

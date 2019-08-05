@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Menu extends Model
 {
     protected $fillable = [
-        'parent_id', 'user_id', 'name', 'slug', 'title', 'description', 'status', 'setting', 'icon','contact'
+        'parent_id', 'name', 'slug', 'title', 'description', 'status', 'setting', 'icon', 'contact'
     ];
 
     public function roles(){
@@ -15,35 +15,35 @@ class Menu extends Model
     }
 
     public function user(){
-    	return $this->belongsTo('App\User');
+    	return $this->belongsTo(User::class);
     }
 
     public function childs(){
-        return $this->hasMany('App\Menu', 'parent_id');
+        return $this->hasMany(Menu::class, 'parent_id');
     }
     
     public function parent(){
-        return $this->belongsTo('App\Menu','parent_id');
+        return $this->belongsTo(Menu::class,'parent_id');
     }
     
     public function etalases(){
-        return $this->hasMany('App\Etalase');
+        return $this->hasMany(Etalase::class);
     }
     
     public function categories(){
-        return $this->hasMany('App\Category');
+        return $this->hasMany(Category::class);
     }
 
     public function posts(){
-        return $this->hasMany('App\Post');
+        return $this->hasMany(Post::class);
     }
 
     public function products(){
-        return $this->hasManyThrough('App\Product','App\Etalase');
+        return $this->hasManyThrough(Product::class, Etalase::class);
     }
 
     public function forums(){
-        return $this->hasManyThrough('App\Forum','App\Category');
+        return $this->hasManyThrough(Forum::class, Category::class);
     }
     
 }

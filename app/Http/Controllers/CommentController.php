@@ -22,10 +22,8 @@ class CommentController extends Controller
         ]);
         $post = Post::whereSlug($slug)->first();
         if ($post) {
-            Comment::create([
+            $post->comments()->create([
                 'user_id' => Auth::user()->id,
-                'commentable_id' => $post->id,
-                'commentable_type' => 'App\Post',
                 'description' => Purifier::clean($request->description),
             ]);
             return back();
@@ -40,10 +38,8 @@ class CommentController extends Controller
         ]);
         $product = Product::whereSlug($slug)->first();
         if ($product) {
-            Comment::create([
+            $product->comments()->create([
                 'user_id' => Auth::user()->id,
-                'commentable_id' => $product->id,
-                'commentable_type' => 'App\Product',
                 'description' => Purifier::clean($request->description),
             ]);
             return back();
