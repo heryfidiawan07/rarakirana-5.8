@@ -30,8 +30,8 @@ class CreateProductsTable extends Migration
             $table->tinyInteger('sticky')->default(0);
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('etalase_id')->references('id')->on('etalases');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('etalase_id')->references('id')->on('etalases')->onDelete('cascade');
         });
     }
 

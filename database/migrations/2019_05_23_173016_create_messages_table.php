@@ -24,7 +24,7 @@ class CreateMessagesTable extends Migration
             $table->tinyInteger('status')->default(1);// 0 Delete / Hidden
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onDelete('cascade');
         });
     }
 
