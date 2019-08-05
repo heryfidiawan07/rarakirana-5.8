@@ -18,17 +18,26 @@ class GlobalController extends Controller
         $menu    = Menu::whereSlug($slug)->first();
         if ($menu) {
             if ($menu->setting==0) {
-                $posts = $menu->posts()->orderBy('sticky','DESC')->latest()->paginate(10);
+                $posts = $menu->posts()->whereStatus(1)
+            			->whereHas('menu', function ($query) {
+	                        $query->where('status', 1);
+	                    })->orderBy('sticky','DESC')->paginate(10);
                 if ($posts->count() == 1) {
                     return redirect("/read/post/{$posts[0]->slug}");
                 }else{
                     return view('posts.index', compact('menu','posts'));
                 }
             }elseif ($menu->setting==1) {
-                $products = $menu->products()->orderBy('sticky','DESC')->latest()->paginate(9);
+                $products = $menu->products()->whereStatus(1)
+			                ->whereHas('etalase', function ($query) {
+		                        $query->where('status', 1);
+		                    })->orderBy('sticky','DESC')->paginate(9);
                 return view('products.index', compact('menu','products'));
             }elseif ($menu->setting==2) {
-                $threads = $menu->forums()->latest()->paginate(10);
+                $threads = $menu->forums()
+                			->whereHas('category', function ($query) {
+		                        $query->where('status', 1);
+		                    })->latest()->paginate(10);
                 return view('threads.index', compact('menu','threads'));
             }
         }else{
@@ -39,11 +48,20 @@ class GlobalController extends Controller
     public function tag($slug){
         $tag = Tag::whereSlug($slug)->first();
         if ($tag) {
-            $posts    = $tag->posts()->orderBy('sticky','DESC')->latest()->paginate(10);
-            // $products = $tag->products()->paginate(8);
-            // $threads  = $tag->forums()->paginate(10);
-            // return view('tags.index', compact('tag','posts','products','threads'));
-            return view('tags.index', compact('tag','posts'));
+            $posts    = $tag->posts()->whereStatus(1)
+            			->whereHas('menu', function ($query) {
+	                        $query->where('status', 1);
+	                    })->paginate(10);
+            $products = $tag->products()->whereStatus(1)
+            			->whereHas('etalase', function ($query) {
+	                        $query->where('status', 1);
+	                    })->paginate(8);
+            $threads  = $tag->forums()->whereStatus(1)
+            			->whereHas('category', function ($query) {
+	                        $query->where('status', 1);
+	                    })->paginate(10);
+            return view('tags.index', compact('tag','posts','products','threads'));
+            // return view('tags.index', compact('tag','posts'));
         }
         return redirect('/');
     }
@@ -66,25 +84,43 @@ class GlobalController extends Controller
     }
     
     public function search(Request $request){
-        $posts    = Post::where('title','like','%'.$request->search.'%')->where('status',1)->paginate(6);
-        $products = Product::where('title','like','%'.$request->search.'%')->where('status',1)->paginate(5);
-        $threads  = Forum::where('title','like','%'.$request->search.'%')->where('status',1)->paginate(6);
+        $posts    = Post::where('title','like','%'.$request->search.'%')->where('status',1)
+        			->whereHas('menu', function ($query) {
+                        $query->where('status', 1);
+                    })->paginate(6);
+        $products = Product::where('title','like','%'.$request->search.'%')->where('status',1)
+        			->whereHas('etalase', function ($query) {
+                        $query->where('status', 1);
+                    })->paginate(5);
+        $threads  = Forum::where('title','like','%'.$request->search.'%')->where('status',1)
+        			->whereHas('category', function ($query) {
+                        $query->where('status', 1);
+                    })->paginate(6);
         $key      = $request->search;
         return view('search.global', compact('products','posts','threads','key'));
     }
 
     public function searchPosts($key){
-        $posts = Post::where('title','like','%'.$key.'%')->where('status',1)->paginate(20);
+        $posts = Post::where('title','like','%'.$key.'%')->where('status',1)
+        		->whereHas('menu', function ($query) {
+                        $query->where('status', 1);
+                    })->paginate(20);
         return view('search.posts', compact('posts'));
     }
 
     public function searchProducts($key){
-        $products = Product::where('title','like','%'.$key.'%')->where('status',1)->paginate(20);
+        $products = Product::where('title','like','%'.$key.'%')->where('status',1)
+        			->whereHas('etalase', function ($query) {
+                        $query->where('status', 1);
+                    })->paginate(20);
         return view('search.products', compact('products'));
     }
     
     public function searchThreads($key){
-        $threads = Forum::where('title','like','%'.$key.'%')->where('status',1)->paginate(20);
+        $threads = Forum::where('title','like','%'.$key.'%')->where('status',1)
+        			->whereHas('category', function ($query) {
+                        $query->where('status', 1);
+                    })->paginate(20);
         return view('search.threads', compact('threads'));
     }
 

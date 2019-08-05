@@ -6,6 +6,7 @@ use File;
 use Auth;
 use Image;
 use Purifier;
+use App\Tag;
 use App\Menu;
 use App\Etalase;
 use App\Product;
@@ -31,8 +32,9 @@ class ProductController extends Controller
     
     public function create(){
         $etalases = Etalase::all();
+        $tags  	  = Tag::all();
         if ($etalases->count()) {
-            return view('admin.products.create', compact('etalases'));
+            return view('admin.products.create', compact('etalases','tags'));
         }else {
             return back();
         }
@@ -95,14 +97,19 @@ class ProductController extends Controller
                 $picture->product_id = $product->id;
                 $picture->save();
             }
+            $tags = $request->tags;
+	        if ($tags) {
+	            $product->tags()->attach($tags);
+	        }
         }
         return redirect('/admin/products');
     }
     
     public function edit(Request $request, $id){
-        $product = Product::find($id);
+        $product  = Product::find($id);
         $etalases = Etalase::all();
-        return view('admin.products.edit', compact('product','etalases'));
+        $tags     = Tag::all();
+        return view('admin.products.edit', compact('product','etalases','tags'));
     }
     
     public function update(Request $request, $id){
@@ -167,6 +174,10 @@ class ProductController extends Controller
                     $picture->save();
                 }
             }
+	        $tags = $request->tags;
+	        if ($tags) {
+	            $product->tags()->sync($tags);
+	        }
         }
         return redirect('/admin/products');
     }

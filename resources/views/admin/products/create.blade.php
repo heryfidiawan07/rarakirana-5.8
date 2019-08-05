@@ -114,6 +114,16 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <label for="categories">Tags <a href="/admin/tags" class="text-link">Create Tag</a></label>
+                    <div class="alert alert-info" id="tag-alert-info">
+                        @foreach ($tags as $tag)
+                            <div class="checkbox checkbox_{{$tag->id}}">
+                                <label class="label-tags"><input type="checkbox" name="tags[]" value="{{$tag->id}}"> {{$tag->name}} </label>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="form-group">
                     <button class="btn btn-primary btn-sm"><i class="fas fa-paper-plane"></i> Publish</button>
                 </div>
             </div>

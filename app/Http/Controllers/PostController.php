@@ -123,13 +123,7 @@ class PostController extends Controller
         }
         $tags = $request->tags;
         if ($tags) {
-            for ($i=0; $i < count($tags); $i++) { 
-                $tagable = new Tagable;
-                $tagable->tag_id       = $tags[$i];
-                $tagable->tagable_id   = $post->id;
-                $tagable->tagable_type = 'App\Post';
-                $tagable->save();
-            }
+            $post->tags()->attach($tags);
         }
         return redirect('/admin/posts');
     }
@@ -198,7 +192,10 @@ class PostController extends Controller
             $thumb->save(public_path("posts/thumb/". $imgName));
             $img->save(public_path("posts/img/". $imgName));
         }
-        $post->with(['tags'])->find($post->id)->tags()->sync($request->tags);
+        $tags = $request->tags;
+        if ($tags) {
+        	$post->tags()->sync($tags);
+        }
         return redirect('/admin/posts');
     }
     

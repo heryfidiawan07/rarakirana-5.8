@@ -90,7 +90,7 @@
                     @endif
                 </div>
                 <div class="form-group">
-                    <label for="categories">Tags <a href="/admin/tags">Create Tag</a></label>
+                    <label for="categories">Tags <a href="/admin/tags" class="text-link">Create Tag</a></label>
                     <div class="alert alert-info" id="tag-alert-info">
                         @foreach ($tags as $tag)
                             <div class="checkbox checkbox_{{$tag->id}}">

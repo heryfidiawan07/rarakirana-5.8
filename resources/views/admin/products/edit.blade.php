@@ -139,6 +139,21 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <label for="tags-alert-info">Tags</label>
+                    <div class="alert alert-info" id="tag-alert-info">
+                        @foreach ($tags as $tag)
+                            <div class="checkbox checkbox_{{$tag->id}}">
+                                <label class="label-tags"><input type="checkbox" name="tags[]" value="{{$tag->id}}" @foreach($product->tags as $postag)
+                                        @if ($tag->id == $postag->id)
+                                            checked 
+                                        @endif
+                                    @endforeach
+                                > {{$tag->name}} </label>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="form-group">
                     <button class="btn btn-primary btn-sm"><i class="fas fa-paper-plane"></i> Update</button>
                 </div>
             </div>

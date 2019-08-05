@@ -7,7 +7,7 @@
         <i class="fas fa-arrow-right"></i>
     </div>
     <div class="sidebar-header">
-        <h3 id="sidebar-name">{{ config('app.name') }}</h3>
+        <h3 id="sidebar-name"><a href="/admin">{{ config('app.name') }}</a></h3>
     </div>
     <ul class="list-unstyled components">
         <li class="active">

@@ -17,7 +17,7 @@ class Post extends Model
     }
     
     public function tags(){
-        return $this->morphToMany(Tag::class, 'tagable');
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 
     public function comments(){

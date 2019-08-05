@@ -35,7 +35,7 @@
 
         <div class="col-sm-8 col-md-8 col-lg-9">
             <div class="row">
-                @foreach ($threads->where('category.status',1)->where('status',1) as $thread)
+                @foreach ($threads as $thread)
                     @include('threads.content-index')
                 @endforeach
                 <div class="col-md-12">
